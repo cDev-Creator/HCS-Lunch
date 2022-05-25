@@ -1,9 +1,8 @@
 <?php
 $mysqli = new mysqli('localhost','root','','students');
-$resultSet = $mysqli->query("SELECT firstName FROM names");
+$resultSet = $mysqli->query("SELECT firstName, lastName, grade FROM names");
 
 /* $resultSet = $mysqli->query("SELECT lastName FROM names"); */
-
 
 ?>
 
@@ -12,8 +11,10 @@ $resultSet = $mysqli->query("SELECT firstName FROM names");
 while($rows = $resultSet->fetch_assoc())
 {
     $first_name = $rows['firstName'];
-    /* $lastName = $rows['lastName']; */
-    echo "<option value='$first_name'>$first_name</option>";
+    $last_name = $rows['lastName'];
+    $grade = $rows['grade'];
+    echo "<option value='$first_name $last_name $grade'> $first_name $last_name $grade</option>";
+    
     /* echo "<option value='$lastName'>$lastName</option>"; */
 }
 
