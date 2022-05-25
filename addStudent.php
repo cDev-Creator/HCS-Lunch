@@ -20,7 +20,7 @@ if (mysqli_connect_errno()) {
     die("Connection error: " . mysqli_connect_error());
 }           
         
-$sql = "INSERT INTO message (firstName, lastName)
+$sql = "INSERT INTO names (firstName, lastName)
         VALUES (?, ?)";
 
 $stmt = mysqli_stmt_init($conn);
