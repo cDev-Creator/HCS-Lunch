@@ -4,16 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/css/main.css">
     <title>Document</title>
 
 </head>
 
 <body>
-    <h1>HCS Lunch</h1>
-    <h2><a href="addNew.html">New Student</a></h2>
-    <h2><a href="OrderLunch/orderLunch.php">Order Lunch</a></h2>
+    <div class="container">
+        <h1>HCS Lunch</h1>
+        <div class="options">
+            <button><h2><a href="addNew.html">New Student</a></h2></button>
+            <button id="orderLunchBtn"><h2>Order Lunch</a></h2></body>
+        </div>
+     
+        <div class="modal-bg">
+            
+            <form class="modal-content">
+                <div class="closeBtn" id="closeBtn">+</div>
 
+                <div>
+                    <label for="staffID">Staff ID:</label>
+                    <input type="number" id="staffID" name="staffID">
+                </div>
+        
+                <div>
+                    <label for="class">Class:</label>
+                    <select name="class">
+                        <option value="2 Day Preschool">2 Day Preschool</option>
+                        <option value="3 Day Preschool">3 Day Preschool</option>
+                        <option value="1st Grade">1st Grade</option> 
+                        <option value="2nd Grade">2nd Grade</option>  
+                        <option value="3rd Grade">3rd Grade</option>  
+                        <option value="4th Grade">4th Grade</option>  
+                        <option value="5th Grade">5th Grade</option>  
+                        <option value="6th Grade">6th Grade</option>  
+                        <option value="7th Grade">7th Grade</option>  
+                        <option value="8th Grade">8th Grade</option>     
+                    </select>
+                </div>
+
+                <div>
+                    <button id="submitbtn" onclick="window.location.href='OrderLunch/orderLunch.php'">Ok</button>
+                </div>
+            </div>
+        </div>  
+    </div>
+ 
+    <script src="HomePage/modal.js"></script>   
 </body>
-
-
 </html>
+
