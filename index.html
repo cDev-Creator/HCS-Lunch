@@ -19,12 +19,12 @@
      
         <div class="modal-bg">
             
-            <form class="modal-content">
+            <form action="OrderLunch/orderLunch.php" id="form" class="modal-content">
                 <div class="closeBtn" id="closeBtn">+</div>
 
                 <div>
                     <label for="staffID">Staff ID:</label>
-                    <input type="number" id="staffID" name="staffID">
+                    <input type="number" id="staffID" name="staffID" required>
                 </div>
         
                 <div>
@@ -44,9 +44,10 @@
                 </div>
 
                 <div>
-                    <button id="submitbtn" onclick="window.location.href='OrderLunch/orderLunch.php'">Ok</button>
+                    <button type="submit" id="submitbtn">Ok</button>
                 </div>
-            </div>
+
+            </form>
         </div>  
     </div>
  
