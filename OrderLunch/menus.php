@@ -14,6 +14,7 @@ echo"</br>";
 //CLEAN UP REPETITIVE CODE
 echo "Menu:";
 switch ($weekday) {
+
 case "Monday":
     ?>
     <?php
@@ -44,7 +45,7 @@ case "Tuesday":
     $resultSet = $mysqli->query("SELECT item, price FROM arbys");
     ?>
 
-    <select name="menuItems">
+   <select name="menuItems">
     <?php
     while($rows = $resultSet->fetch_assoc())
     {
@@ -57,6 +58,7 @@ case "Tuesday":
     <?php
     }
     break;
+
 case "Wednesday":
     ?>
     <?php
@@ -71,7 +73,7 @@ case "Wednesday":
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        echo "<option id='menuItems' value='$item'> $item</option>";
+        echo "<option id='menuItems' value='$item'> $item</option>"; 
     }
 
     ?>
@@ -79,6 +81,8 @@ case "Wednesday":
     <?php
     }
     break;
+
+// THIS IS THE WORKING DAY!!!!!
 case "Thursday":
     ?>
     <?php
@@ -87,19 +91,32 @@ case "Thursday":
     $resultSet = $mysqli->query("SELECT item, price FROM chickfila");
     ?>
 
-    <select name="menuItems">
+    <select name="menuItems" onchange="menuPrice(this.value)" >
+    <option value='' selected='selected'>select</option>;
     <?php
     while($rows = $resultSet->fetch_assoc())
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        echo "<option id='menuItems' value='$item'> $item</option>";
+
+        echo "<option id='menuItems' value='$price'> $item</option>";
+
+      
+
+
     }
     ?>
+    <script> 
+        function menuPrice(val) {
+            console.log(val);
+            /* document.write("<input type='text' value='val'>val</input>"); */
+        }
+    </script>
     </select>
     <?php
     }
     break;
+
 case "Friday":
     ?>
     <?php
@@ -125,3 +142,4 @@ case "Friday":
 default:
     echo "School is not in session!";
 }
+
