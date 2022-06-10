@@ -6,13 +6,14 @@ echo "Date: ";
 echo "$mydate[month] $mydate[mday], $mydate[year]";
 echo"</br>";
 echo "Day of the week : ";
-$weekday = "Thursday";
+$weekday = "$mydate[weekday]";
 echo $weekday;
 echo"</br>";
 echo"</br>";
 
 //CLEAN UP REPETITIVE CODE
 echo "Menu:";
+
 switch ($weekday) {
 
 case "Monday":
@@ -23,24 +24,16 @@ case "Monday":
     $resultSet = $mysqli->query("SELECT item, price FROM 54pizza");
     ?>
 
-    <select name="menuItems" onchange="menuPrice(this.value)">
+    <select name="menuItems">
     <option value='' selected='selected'>select</option>;
     <?php
     while($rows = $resultSet->fetch_assoc())
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        echo "<option id='menuItems' value='$price'> $item</option>";
+        echo "<option id='menuItems' value='$item'> $item - $price</option>";
     }
     ?>
-        <script> 
-        const price = document.createElement("p");
-        function menuPrice(val) {
-            price.innerText = "Price: " + val;
-            document.body.appendChild(price);
-        }
-        price.innerText = '';
-    </script>
     </select>
     <?php
     }
@@ -60,7 +53,7 @@ case "Tuesday":
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        echo "<option id='menuItems' value='$item'> $item</option>";
+        echo "<option id='menuItems' value='$item'> $item - $price</option>";
     }
     ?>
     </select>
@@ -82,7 +75,7 @@ case "Wednesday":
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        echo "<option id='menuItems' value='$item'> $item</option>"; 
+        echo "<option id='menuItems' value='$item'> $item - $price</option>"; 
     }
 
     ?>
@@ -100,29 +93,17 @@ case "Thursday":
     $resultSet = $mysqli->query("SELECT item, price FROM chickfila");
     ?>
 
-    <select name="menuItems" onchange="menuPrice(this.value)" >
+    <select name="menuItems">
     <option value='' selected='selected'>select</option>;
     <?php
     while($rows = $resultSet->fetch_assoc())
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        
-        echo "<option id='menuItems' value='$item' >$item $price</option>";  
+        echo "<option id='menuItems' value='$item' >$item - $price</option>";  
     }
-
     ?>
-    <script> 
-        const price = document.createElement("p");
-        function menuPrice(rat) {
-            <?php echo "var rat ='$price';";?>
-            console.log(rat);
 
-            price.innerText = "Price: " + rat;
-            document.body.appendChild(price);
-        }
-        price.innerText = '';
-    </script>
     </select>
     <?php
     }
@@ -136,31 +117,63 @@ case "Friday":
     $resultSet = $mysqli->query("SELECT item, price FROM greatharvest");
     ?>
 
-    <select name="menuItems" onchange="menuPrice(this.value)" >
+    <select name="menuItems">
     <option value='' selected='selected'>select</option>;
     <?php
     while($rows = $resultSet->fetch_assoc())
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        echo "<option id='menuItems' value='$price'> $item</option>";
-    }
+        $price * 2;
+        echo "<option id='menuItems' value='$item'> $item - $price</option>";
 
-    ?>
-    <script> 
-        const price = document.createElement("p");
-        function menuPrice(val) {
-            price.innerText = "Price: " + val;
-            document.body.appendChild(price);
-        }
-        price.innerText = '';
-    </script>
-    
-    </select>
-    <?php
     }
-    break;
-default:
-    echo "School is not in session!";
-}
+    ?>
+    </select>
+
+    <form  onsubmit="populateTable(); return false;">
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" id="quantity" min="1" max="20" required>
+
+    <button type="submit" id="submitbtn">Ok</button>
+    </form>
+
+    <h1>Order's</h1>
+    <table border="1" id="orderTable">
+        <tr>
+            <td>Quantity</td>
+        </tr>
+    </table>
+
+    <?php
+ /*    if(isset($_POST['quantity'])); {
+        $quantity = $_POST['quantity'];
+        echo $quantity;
+    } */
+    ?>
+
+    <script>
+        function populateTable(){
+            console.log('working');
+            let table = document.getElementById("orderTable")
+            let row = table.insertRow();
+            let cell1 = row.insertCell();
+            cell1.innerHTML = document.getElementById("quantity").value;
+        }
+
+    </script>
+
+
+
+    
+
+
+
+    <?php
+        }
+        break;
+    default:
+        echo "School is not in session!";
+    }
+    ?>
 
