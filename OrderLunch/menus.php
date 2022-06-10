@@ -6,7 +6,7 @@ echo "Date: ";
 echo "$mydate[month] $mydate[mday], $mydate[year]";
 echo"</br>";
 echo "Day of the week : ";
-$weekday = "$mydate[weekday]";
+$weekday = "Thursday";
 echo $weekday;
 echo"</br>";
 echo"</br>";
@@ -23,15 +23,24 @@ case "Monday":
     $resultSet = $mysqli->query("SELECT item, price FROM 54pizza");
     ?>
 
-    <select name="menuItems">
+    <select name="menuItems" onchange="menuPrice(this.value)">
+    <option value='' selected='selected'>select</option>;
     <?php
     while($rows = $resultSet->fetch_assoc())
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        echo "<option id='menuItems' value='$item'> $item</option>";
+        echo "<option id='menuItems' value='$price'> $item</option>";
     }
     ?>
+        <script> 
+        const price = document.createElement("p");
+        function menuPrice(val) {
+            price.innerText = "Price: " + val;
+            document.body.appendChild(price);
+        }
+        price.innerText = '';
+    </script>
     </select>
     <?php
     }
@@ -98,19 +107,21 @@ case "Thursday":
     {
         $item = $rows['item'];
         $price = $rows['price'];
-
-        echo "<option id='menuItems' value='$price'> $item</option>";
-
-      
-
-
+        
+        echo "<option id='menuItems' value='$item' >$item $price</option>";  
     }
+
     ?>
     <script> 
-        function menuPrice(val) {
-            console.log(val);
-            /* document.write("<input type='text' value='val'>val</input>"); */
+        const price = document.createElement("p");
+        function menuPrice(rat) {
+            <?php echo "var rat ='$price';";?>
+            console.log(rat);
+
+            price.innerText = "Price: " + rat;
+            document.body.appendChild(price);
         }
+        price.innerText = '';
     </script>
     </select>
     <?php
@@ -125,16 +136,26 @@ case "Friday":
     $resultSet = $mysqli->query("SELECT item, price FROM greatharvest");
     ?>
 
-    <select name="menuItems">
+    <select name="menuItems" onchange="menuPrice(this.value)" >
+    <option value='' selected='selected'>select</option>;
     <?php
     while($rows = $resultSet->fetch_assoc())
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        echo "<option id='menuItems' value='$item'> $item</option>";
+        echo "<option id='menuItems' value='$price'> $item</option>";
     }
 
     ?>
+    <script> 
+        const price = document.createElement("p");
+        function menuPrice(val) {
+            price.innerText = "Price: " + val;
+            document.body.appendChild(price);
+        }
+        price.innerText = '';
+    </script>
+    
     </select>
     <?php
     }
