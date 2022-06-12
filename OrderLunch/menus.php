@@ -6,7 +6,7 @@ echo "Date: ";
 echo "$mydate[month] $mydate[mday], $mydate[year]";
 echo"</br>";
 echo "Day of the week : ";
-$weekday = "$mydate[weekday]";
+$weekday = "Friday";
 echo $weekday;
 echo"</br>";
 echo"</br>";
@@ -84,7 +84,6 @@ case "Wednesday":
     }
     break;
 
-// THIS IS THE WORKING DAY!!!!!
 case "Thursday":
     ?>
     <?php
@@ -109,6 +108,7 @@ case "Thursday":
     }
     break;
 
+///////////////////////////////// THIS IS THE WORKING DAY/////////////////////////////////
 case "Friday":
     ?>
     <?php
@@ -117,7 +117,7 @@ case "Friday":
     $resultSet = $mysqli->query("SELECT item, price FROM greatharvest");
     ?>
 
-    <select name="menuItems">
+    <select name="menuItems" id="menuItems">
     <option value='' selected='selected'>select</option>;
     <?php
     while($rows = $resultSet->fetch_assoc())
@@ -138,10 +138,23 @@ case "Friday":
     <button type="submit" id="submitbtn">Ok</button>
     </form>
 
-    <h1>Order's</h1>
+
+
+
+
+
+
+
+
+
+
+    <h1>Orders</h1>
     <table border="1" id="orderTable">
         <tr>
+            <td>Student Name</td>
+            <td>Menu Item</td>
             <td>Quantity</td>
+            <td>Price</td>
         </tr>
     </table>
 
@@ -154,26 +167,25 @@ case "Friday":
 
     <script>
         function populateTable(){
-            console.log('working');
             let table = document.getElementById("orderTable")
             let row = table.insertRow();
             let cell1 = row.insertCell();
-            cell1.innerHTML = document.getElementById("quantity").value;
+            let cell2 = row.insertCell();
+            let cell3 = row.insertCell();
+            let cell4 = row.insertCell();
+
+            cell1.innerHTML = document.getElementById("students").value;
+            cell2.innerHTML = document.getElementById("menuItems").value;
+            cell3.innerHTML = document.getElementById("quantity").value;
+            /* cell4.innerHTML = document.getElementById("").value; */  
         }
-
     </script>
-
-
-
-    
-
-
 
     <?php
         }
         break;
     default:
-        echo "School is not in session!";
+        echo " School is not in session!";
     }
     ?>
 
