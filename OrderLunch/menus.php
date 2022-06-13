@@ -1,4 +1,9 @@
 <?php
+include('menuPrice.php')
+?>
+
+
+<?php
 define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
 $mydate=getdate(date("U"));
@@ -116,36 +121,64 @@ case "Friday":
     $mysqli = new mysqli('localhost','root','','menus');
     $resultSet = $mysqli->query("SELECT item, price FROM greatharvest");
     ?>
+    <form method="POST"> 
 
-    <select name="menuItems" id="menuItems">
+    
+    <select name="menuItems" id="menuItems" onchange="menuItem(this.value)">
     <option value='' selected='selected'>select</option>;
     <?php
     while($rows = $resultSet->fetch_assoc())
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        $price * 2;
         echo "<option id='menuItems' value='$item'> $item - $price</option>";
 
     }
     ?>
+
+    <label for="price">Price:</label>
+    <input type="number" step="0.01" name="price" id="price" required>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" step="0.01" name="quantity" id="quantity" required>
+    <button type="submit" name="submit" id="submitBtn">Submit</button>
+
+
+</form>
+
+     <script> 
+        const name = document.createElement("p");
+        name.id = "menu";
+        var cat;
+        function menuItem(val) {
+            name.innerText = val;
+            document.body.appendChild(name);
+            this.value = name.innerText;
+
+            cat = this.value
+            return cat;
+        }
+        name.innerText = '';
+    </script>
     </select>
 
-    <form  onsubmit="populateTable(); return false;">
-    <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" id="quantity" min="1" max="20" required>
+<?php
 
-    <button type="submit" id="submitbtn">Ok</button>
-    </form>
+if (isset($_POST['price'])){
+///////////////////////////////IS THIS NEEDED? TEST TO SEE IF SIMPLE MULTIPLIER WILL WORK/////////////////////////////////////
+    $price  = $_POST['price'];
+    $quantity = $_POST['quantity'];
+    $priceNoCur  = preg_replace( '/&.*?;/', '', $price ); 
+    $priceNoCurDot = preg_replace( '/,/', '.', $priceNoCur);  
+    $priceFinalDot = floatval($priceNoCurDot) * $quantity;
+    echo "Total Cost: ",$priceFinalDot; 
+    echo"</br>";
+}
 
-
-
-
-
-
-
-
-
+else{
+    echo '';
+}
+?>
 
 
     <h1>Orders</h1>
@@ -158,27 +191,41 @@ case "Friday":
         </tr>
     </table>
 
-    <?php
- /*    if(isset($_POST['quantity'])); {
-        $quantity = $_POST['quantity'];
-        echo $quantity;
-    } */
-    ?>
+<script>
+   
 
-    <script>
-        function populateTable(){
-            let table = document.getElementById("orderTable")
-            let row = table.insertRow();
-            let cell1 = row.insertCell();
-            let cell2 = row.insertCell();
-            let cell3 = row.insertCell();
-            let cell4 = row.insertCell();
+</script>
 
-            cell1.innerHTML = document.getElementById("students").value;
-            cell2.innerHTML = document.getElementById("menuItems").value;
-            cell3.innerHTML = document.getElementById("quantity").value;
-            /* cell4.innerHTML = document.getElementById("").value; */  
-        }
+
+<script>
+
+    function rat() { 
+        console.log('rat');
+    }
+
+    function populateTable(){
+        var totalCost = "<?= $priceFinalDot ?>";
+        console.log (totalCost);
+
+        let table = document.getElementById("orderTable")
+        let row = table.insertRow();
+        let cell1 = row.insertCell();
+        let cell2 = row.insertCell();
+        let cell3 = row.insertCell();
+        let cell4 = row.insertCell();
+
+        cell1.innerHTML = document.getElementById("students").value;
+        cell2.innerHTML = document.getElementById("menuItems").value;
+        cell3.innerHTML = document.getElementById("quantity").value;
+        cell4.innerHTML = totalCost;
+    }
+
+
+    
+
+
+
+
     </script>
 
     <?php
