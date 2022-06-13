@@ -123,34 +123,55 @@ case "Friday":
     ?>
     <form method="POST"> 
 
-    
-    <select name="menuItems" id="menuItems" onchange="menuItem(this.value)">
+    <select name="menuItems" id="menuItems" onchange="menuItem(this.value)" class="dropdown_change">
     <option value='' selected='selected'>select</option>;
     <?php
     while($rows = $resultSet->fetch_assoc())
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        echo "<option id='menuItems' value='$item'> $item - $price</option>";
 
+
+   echo "<option id='menuSelection' value='$item' data-value='$price'> $item - $price</option>";      
+
+/*     echo "<option id='menuItems' value='$item'> $item - $price</option>";   
+ */    
     }
     ?>
+    <script>
+         var priceValue;
+        function rat() {
+            var elem = document.getElementById('menuSelection');
+            priceValue = elem.getAttribute('data-value');
+            priceInput = document.getElementById('priceInput');
+            console.log(`Value: ${priceValue}`);
 
-    <label for="price">Price:</label>
-    <input type="number" step="0.01" name="price" id="price" required>
+            if(priceInput == null) {
+                priceInput.value = "";
+            }
+            else { priceInput.value = priceValue; }
+        }
+
+        rat();
+    </script>
+
+    <input id="priceInput" type="number" step="0.01"/>
+    
+    <!-- <label for="price">Price:</label>
+    <input type="number" step="0.01" name="price" id="price" placeholder="asas" required> -->
 
     <label for="quantity">Quantity:</label>
     <input type="number" step="0.01" name="quantity" id="quantity" required>
-    <button type="submit" name="submit" id="submitBtn">Submit</button>
-
-
-</form>
+    <!-- <button type="submit" name="submit" id="submitBtn">Total</button> -->
+    
+    </form>
 
      <script> 
         const name = document.createElement("p");
         name.id = "menu";
         var cat;
         function menuItem(val) {
+            rat();
             name.innerText = val;
             document.body.appendChild(name);
             this.value = name.innerText;
@@ -163,9 +184,10 @@ case "Friday":
     </select>
 
 <?php
-
-if (isset($_POST['price'])){
+/* 
+if (isset($_POST['quantity'])){
 ///////////////////////////////IS THIS NEEDED? TEST TO SEE IF SIMPLE MULTIPLIER WILL WORK/////////////////////////////////////
+
     $price  = $_POST['price'];
     $quantity = $_POST['quantity'];
     $priceNoCur  = preg_replace( '/&.*?;/', '', $price ); 
@@ -177,7 +199,7 @@ if (isset($_POST['price'])){
 
 else{
     echo '';
-}
+} */
 ?>
 
 
@@ -199,13 +221,11 @@ else{
 
 <script>
 
-    function rat() { 
-        console.log('rat');
-    }
 
     function populateTable(){
-        var totalCost = "<?= $priceFinalDot ?>";
-        console.log (totalCost);
+        /* var totalCost = "<?= $priceFinalDot ?>";
+        console.log (totalCost); */
+
 
         let table = document.getElementById("orderTable")
         let row = table.insertRow();
@@ -217,14 +237,13 @@ else{
         cell1.innerHTML = document.getElementById("students").value;
         cell2.innerHTML = document.getElementById("menuItems").value;
         cell3.innerHTML = document.getElementById("quantity").value;
-        cell4.innerHTML = totalCost;
+        /* cell4.innerHTML = totalCost; */
+
+        let x = document.getElementById("quantity").value;
+        let y = document.getElementById("priceInput").value
+        cell4.innerHTML = x*y;
+        console.log(x*y);
     }
-
-
-    
-
-
-
 
     </script>
 
@@ -235,4 +254,3 @@ else{
         echo " School is not in session!";
     }
     ?>
-
