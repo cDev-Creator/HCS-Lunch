@@ -131,13 +131,10 @@ case "Friday":
         $item = $rows['item'];
         $price = $rows['price'];
         echo "<option id='menuSelection' value='$item~$price'> $item - $price</option>";  
-        
     }
     ?>
     
-    <label for="quantity">Quantity:</label>
-    <input type="number" step="0.01" name="quantity" id="quantity" required>
-   
+    <input type="number" name="quantity" id="quantity" placeholder="Quantity" required>
     </form>
 
     <!-------------------- ONLY CALLED FOR TESTING NOT CRUCIAL TO PROGRAM (ONCHANGE) ----------------->
@@ -164,8 +161,10 @@ case "Friday":
     </select>
 
     <h1>Orders</h1>
+
     <table border="1" id="orderTable">
         <tr>
+            <td>Grade</td>
             <td>Student Name</td>
             <td>Menu Item</td>
             <td>Quantity</td>
@@ -174,7 +173,6 @@ case "Friday":
     </table>
 
 <script>
-   
     function populateTable(){
  
         let table = document.getElementById("orderTable")
@@ -183,23 +181,31 @@ case "Friday":
         let cell2 = row.insertCell();
         let cell3 = row.insertCell();
         let cell4 = row.insertCell();
+        let cell5 = row.insertCell();
 
-        cell1.innerHTML = document.getElementById("students").value;
+        var grade = document.getElementById("students").value;
+        grade = grade.split('~')[1];
+        cell1.innerHTML = grade;
+
+        student = document.getElementById("students").value;
+        var student = student.split("~",1);
+        cell2.innerHTML = student;
 
         var menuItemValue = document.getElementById("menuItems").value;
         var item = menuItemValue.split("~",1);
-        cell2.innerHTML = item;
+        cell3.innerHTML = item;
 
-        cell3.innerHTML = document.getElementById("quantity").value;
-
-
+        cell4.innerHTML = document.getElementById("quantity").value;
+       
         var quantity = document.getElementById("quantity").value;
-
         var price = menuItemValue.split('~')[1];
         var totalCost = price * quantity;
         let totalCostDecimal = totalCost.toFixed(2);
+        cell5.innerHTML = totalCostDecimal;
 
-        cell4.innerHTML = totalCostDecimal;
+
+
+
     }
 
     </script>
