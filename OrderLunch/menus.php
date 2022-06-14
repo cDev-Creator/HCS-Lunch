@@ -122,86 +122,46 @@ case "Friday":
     $resultSet = $mysqli->query("SELECT item, price FROM greatharvest");
     ?>
     <form method="POST"> 
-
     <select name="menuItems" id="menuItems" onchange="menuItem(this.value)" class="dropdown_change">
     <option value='' selected='selected'>select</option>;
+
     <?php
     while($rows = $resultSet->fetch_assoc())
     {
         $item = $rows['item'];
         $price = $rows['price'];
-
-
-   echo "<option id='menuSelection' value='$item' data-value='$price'> $item - $price</option>";      
-
-/*     echo "<option id='menuItems' value='$item'> $item - $price</option>";   
- */    
+        echo "<option id='menuSelection' value='$item~$price'> $item - $price</option>";  
+        
     }
     ?>
-    <script>
-         var priceValue;
-        function rat() {
-            var elem = document.getElementById('menuSelection');
-            priceValue = elem.getAttribute('data-value');
-            priceInput = document.getElementById('priceInput');
-            console.log(`Value: ${priceValue}`);
-
-            if(priceInput == null) {
-                priceInput.value = "";
-            }
-            else { priceInput.value = priceValue; }
-        }
-
-        rat();
-    </script>
-
-    <input id="priceInput" type="number" step="0.01"/>
     
-    <!-- <label for="price">Price:</label>
-    <input type="number" step="0.01" name="price" id="price" placeholder="asas" required> -->
-
     <label for="quantity">Quantity:</label>
     <input type="number" step="0.01" name="quantity" id="quantity" required>
-    <!-- <button type="submit" name="submit" id="submitBtn">Total</button> -->
-    
+   
     </form>
+
+    <!-------------------- ONLY CALLED FOR TESTING NOT CRUCIAL TO PROGRAM (ONCHANGE) ----------------->
 
      <script> 
         const name = document.createElement("p");
-        name.id = "menu";
-        var cat;
         function menuItem(val) {
-            rat();
             name.innerText = val;
             document.body.appendChild(name);
             this.value = name.innerText;
 
-            cat = this.value
-            return cat;
+            var item = this.value;
+            var itemToal = item.split("~",1);
+            console.log(itemToal);
+
+
+            var dead = item.split('~')[1];
+            console.log(dead);
+        
+            return item;
         }
         name.innerText = '';
     </script>
     </select>
-
-<?php
-/* 
-if (isset($_POST['quantity'])){
-///////////////////////////////IS THIS NEEDED? TEST TO SEE IF SIMPLE MULTIPLIER WILL WORK/////////////////////////////////////
-
-    $price  = $_POST['price'];
-    $quantity = $_POST['quantity'];
-    $priceNoCur  = preg_replace( '/&.*?;/', '', $price ); 
-    $priceNoCurDot = preg_replace( '/,/', '.', $priceNoCur);  
-    $priceFinalDot = floatval($priceNoCurDot) * $quantity;
-    echo "Total Cost: ",$priceFinalDot; 
-    echo"</br>";
-}
-
-else{
-    echo '';
-} */
-?>
-
 
     <h1>Orders</h1>
     <table border="1" id="orderTable">
@@ -215,18 +175,8 @@ else{
 
 <script>
    
-
-</script>
-
-
-<script>
-
-
     function populateTable(){
-        /* var totalCost = "<?= $priceFinalDot ?>";
-        console.log (totalCost); */
-
-
+ 
         let table = document.getElementById("orderTable")
         let row = table.insertRow();
         let cell1 = row.insertCell();
@@ -235,14 +185,21 @@ else{
         let cell4 = row.insertCell();
 
         cell1.innerHTML = document.getElementById("students").value;
-        cell2.innerHTML = document.getElementById("menuItems").value;
-        cell3.innerHTML = document.getElementById("quantity").value;
-        /* cell4.innerHTML = totalCost; */
 
-        let x = document.getElementById("quantity").value;
-        let y = document.getElementById("priceInput").value
-        cell4.innerHTML = x*y;
-        console.log(x*y);
+        var menuItemValue = document.getElementById("menuItems").value;
+        var item = menuItemValue.split("~",1);
+        cell2.innerHTML = item;
+
+        cell3.innerHTML = document.getElementById("quantity").value;
+
+
+        var quantity = document.getElementById("quantity").value;
+
+        var price = menuItemValue.split('~')[1];
+        var totalCost = price * quantity;
+        let totalCostDecimal = totalCost.toFixed(2);
+
+        cell4.innerHTML = totalCostDecimal;
     }
 
     </script>
