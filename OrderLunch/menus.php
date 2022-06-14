@@ -183,33 +183,37 @@ case "Friday":
         let cell4 = row.insertCell();
         let cell5 = row.insertCell();
 
-        var grade = document.getElementById("students").value;
+        let grade = document.getElementById("students").value;
         grade = grade.split('~')[1];
         cell1.innerHTML = grade;
 
-        student = document.getElementById("students").value;
-        var student = student.split("~",1);
+        let student = document.getElementById("students").value;
+        student = student.split("~",1);
         cell2.innerHTML = student;
 
-        var menuItemValue = document.getElementById("menuItems").value;
-        var item = menuItemValue.split("~",1);
+        let menuItemValue = document.getElementById("menuItems").value;
+        let item = menuItemValue.split("~",1);
         cell3.innerHTML = item;
 
         cell4.innerHTML = document.getElementById("quantity").value;
        
-        var quantity = document.getElementById("quantity").value;
-        var price = menuItemValue.split('~')[1];
-        var totalCost = price * quantity;
+        let quantity = document.getElementById("quantity").value;
+        let price = menuItemValue.split('~')[1];
+        let totalCost = price * quantity;
         let totalCostDecimal = totalCost.toFixed(2);
         cell5.innerHTML = totalCostDecimal;
-
-
-
-
     }
-
     </script>
-
+    
+    <!----------------------------------------- DELETE CLASS ORDER -------------------------------------->
+    <button id="clearClassOrder">Clear Class Order</button>
+    <script>
+        let table = document.getElementById("orderTable")
+        let clearBtn = document.getElementById("clearClassOrder")
+        .addEventListener('click', function() { 
+            for(var i = 1;i<table.rows.length;){table.deleteRow(i);}
+        });
+    </script>
     <?php
         }
         break;
