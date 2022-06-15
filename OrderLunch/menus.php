@@ -169,6 +169,7 @@ case "Friday":
             <td>Menu Item</td>
             <td>Quantity</td>
             <td>Price</td>
+            
         </tr>
     </table>
 
@@ -182,6 +183,7 @@ case "Friday":
         let cell3 = row.insertCell();
         let cell4 = row.insertCell();
         let cell5 = row.insertCell();
+        let cell6 = row.insertCell();
 
         let grade = document.getElementById("students").value;
         grade = grade.split('~')[1];
@@ -202,18 +204,40 @@ case "Friday":
         let totalCost = price * quantity;
         let totalCostDecimal = totalCost.toFixed(2);
         cell5.innerHTML = totalCostDecimal;
+
+        cell6.innerHTML = `<a id='delete' onClick="onDelete(this)">Delete</a>`;
     }
     </script>
-    
-    <!----------------------------------------- DELETE CLASS ORDER -------------------------------------->
-    <button id="clearClassOrder">Clear Class Order</button>
+
+    <!----------------------------------------- DELETE CLASS AND INDIVIDUAL ORDER -------------------------------------->
+    <button id="clearClassOrder">Clear All</button>
     <script>
         let table = document.getElementById("orderTable")
         let clearBtn = document.getElementById("clearClassOrder")
         .addEventListener('click', function() { 
-            for(var i = 1;i<table.rows.length;){table.deleteRow(i);}
+            if (confirm('Are you sure you want to clear all orders?')) {
+                for(var i = 1;i<table.rows.length;){table.deleteRow(i);}
+            }
         });
+
+        function onDelete(td) {
+        if (confirm('Are you sure you want to delete this order?')) {
+        row = td.parentElement.parentElement;
+        document.getElementById("orderTable").deleteRow(row.rowIndex);
+    }
+}
+           
     </script>
+
+    <style>
+        #delete {
+            color: red;
+            cursor: pointer;
+        }
+        tr:nth-child(even),table.list thead>tr { background-color: #dddddd; }
+    
+    </style>
+
     <?php
         }
         break;
