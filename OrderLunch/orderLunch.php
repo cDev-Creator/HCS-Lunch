@@ -27,7 +27,7 @@ $mysqli = new mysqli('localhost','root','','students');
 $resultSet = $mysqli->query("SELECT firstName, lastName, grade FROM names");
 ?>
 
-<select name="students">
+<select name="students" id="allStudents">
 <option value='' selected='selected'>select</option>;
 <?php
 while($rows = $resultSet->fetch_assoc())
@@ -53,7 +53,7 @@ echo "Students in ".$grade.":";
 $mysqli = new mysqli('localhost','root','','students');
 $resultSet = $mysqli->query("SELECT firstName, lastName, grade FROM names");
 $grade = $_GET['grade'];
-$result = $mysqli->query("SELECT * FROM names WHERE grade='$grade'");
+$result = $mysqli->query("SELECT * FROM names WHERE grade='$grade' order by firstName ASC ");
 
 /* $resultSet = $mysqli->query("SELECT lastName FROM names"); */
 ?>
@@ -68,8 +68,10 @@ while($rows = $result->fetch_assoc())
 {
     $first_name = $rows['firstName'];
     $last_name = $rows['lastName'];
+    $grade = $rows['grade'];
 
-    echo "<option value='$first_name $last_name' id='name'> $first_name $last_name</option>";
+    echo "<option value='$first_name $last_name~$grade' id='name'> $first_name $last_name</option>";
+
 }
 
 ?>
