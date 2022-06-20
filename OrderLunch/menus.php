@@ -2,7 +2,6 @@
 include('menuPrice.php')
 ?>
 
-
 <?php
 define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
@@ -11,6 +10,7 @@ echo "Date: ";
 echo "$mydate[month] $mydate[mday], $mydate[year]";
 echo"</br>";
 echo "Day of the week : ";
+/* $weekday = "$mydate[weekday]"; */
 $weekday = "Friday";
 echo $weekday;
 echo"</br>";
@@ -185,13 +185,30 @@ case "Friday":
         let cell5 = row.insertCell();
         let cell6 = row.insertCell();
 
-        let grade = document.getElementById("students").value;
-        grade = grade.split('~')[1];
-        cell1.innerHTML = grade;
+        let gradeStudents = document.getElementById("students");
+        let allStudents = document.getElementById("allStudents");
+       
 
-        let student = document.getElementById("students").value;
-        student = student.split("~",1);
-        cell2.innerHTML = student;
+        if(gradeStudents.value == '') {
+            let grade = allStudents.value;
+            grade = grade.split('~')[1];
+            cell1.innerHTML = grade;
+
+            let student = allStudents.value;
+            student = student.split("~",1);
+            cell2.innerHTML = student;
+        }
+
+        else if(allStudents.value == '') {
+            let grade = gradeStudents.value;
+            grade = grade.split('~')[1];
+            cell1.innerHTML = grade;
+
+            let student = gradeStudents.value;
+            student = student.split("~",1);
+            cell2.innerHTML = student;
+        }
+        
 
         let menuItemValue = document.getElementById("menuItems").value;
         let item = menuItemValue.split("~",1);
@@ -207,6 +224,7 @@ case "Friday":
 
         cell6.innerHTML = `<a id='delete' onClick="onDelete(this)">Delete</a>`;
     }
+   
     </script>
 
     <!----------------------------------------- DELETE CLASS AND INDIVIDUAL ORDER -------------------------------------->
@@ -235,7 +253,6 @@ case "Friday":
             cursor: pointer;
         }
         tr:nth-child(even),table.list thead>tr { background-color: #dddddd; }
-    
     </style>
 
     <?php
