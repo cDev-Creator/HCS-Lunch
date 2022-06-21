@@ -110,7 +110,7 @@ case "Thursday":
 
     </select>
     <?php
-    }
+    } 
     break;
 
 ///////////////////////////////// THIS IS THE WORKING DAY/////////////////////////////////
@@ -122,7 +122,7 @@ case "Friday":
     $resultSet = $mysqli->query("SELECT item, price FROM greatharvest");
     ?>
     <form method="POST"> 
-    <select name="menuItems" id="menuItems" onchange="menuItem(this.value)" class="dropdown_change">
+    <select name="menuItems" id="menuItems" class="dropdown_change">
     <option value='' selected='selected'>select</option>;
 
     <?php
@@ -131,37 +131,20 @@ case "Friday":
         $item = $rows['item'];
         $price = $rows['price'];
         echo "<option id='menuSelection' value='$item~$price'> $item - $price</option>";  
+
+        
     }
     ?>
     
-    <input type="number" name="quantity" id="quantity" placeholder="Quantity" required>
+    <input type="number" name="quantity" id="quantity" placeholder="Quantity" required/>
     </form>
 
     <!-------------------- ONLY CALLED FOR TESTING NOT CRUCIAL TO PROGRAM (ONCHANGE) ----------------->
 
-     <script> 
-        const name = document.createElement("p");
-        function menuItem(val) {
-            name.innerText = val;
-            document.body.appendChild(name);
-            this.value = name.innerText;
-
-            var item = this.value;
-            var itemToal = item.split("~",1);
-            console.log(itemToal);
-
-
-            var dead = item.split('~')[1];
-            console.log(dead);
-        
-            return item;
-        }
-        name.innerText = '';
-    </script>
     </select>
-
     <h1>Orders</h1>
 
+    <form name="order-table-form" id="orderTableForm" action="orderForm.php" method="POST">
     <table border="1" id="orderTable">
         <tr>
             <td>Grade</td>
@@ -169,9 +152,13 @@ case "Friday":
             <td>Menu Item</td>
             <td>Quantity</td>
             <td>Price</td>
+            <td>Total Cash</td>
             
         </tr>
     </table>
+    <button type="submit" name="submit">Submit</button>
+    </form>
+
 
 <script>
     function populateTable(){
@@ -184,6 +171,7 @@ case "Friday":
         let cell4 = row.insertCell();
         let cell5 = row.insertCell();
         let cell6 = row.insertCell();
+        let cell7 = row.insertCell();
 
         let gradeStudents = document.getElementById("students");
         let allStudents = document.getElementById("allStudents");
@@ -208,11 +196,18 @@ case "Friday":
             student = student.split("~",1);
             cell2.innerHTML = student;
         }
-        
 
+        else if(allStudents.value !== '' && allStudents.value !== '') {
+            alert("Please only select one student.")
+        }
+        
         let menuItemValue = document.getElementById("menuItems").value;
         let item = menuItemValue.split("~",1);
         cell3.innerHTML = item;
+
+
+        cell3.classList.add("menuItem");
+
 
         cell4.innerHTML = document.getElementById("quantity").value;
        
@@ -220,9 +215,19 @@ case "Friday":
         let price = menuItemValue.split('~')[1];
         let totalCost = price * quantity;
         let totalCostDecimal = totalCost.toFixed(2);
+       
         cell5.innerHTML = totalCostDecimal;
 
-        cell6.innerHTML = `<a id='delete' onClick="onDelete(this)">Delete</a>`;
+        table = document.getElementById("orderTable"), cost = 0;
+        for(var i = 1; i < table.rows.length; i++)
+            {
+                cost = cost + parseFloat(table.rows[i].cells[4].innerHTML);
+            }    
+        let classCostDecimal = cost.toFixed(2)
+        cell6.innerHTML = classCostDecimal;
+        
+        cell7.innerHTML = `<a id='delete' onClick="onDelete(this)">Delete</a>`;
+
     }
    
     </script>
@@ -262,3 +267,4 @@ case "Friday":
         echo " School is not in session!";
     }
     ?>
+<!-----------------------------------------SHOW HTML TABLE DATA-------------------------------------->
