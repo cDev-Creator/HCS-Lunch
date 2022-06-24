@@ -145,7 +145,7 @@ case "Friday":
     </select>
     <h1>Orders</h1>
 
-    <form method="post" name="order-table-form" id="orderTableForm" action="orderForm.php">
+    <form method="post" name="order-table-form" id="orderTableForm" action="orderForm.php" onsubmit="return rar()">
 
        <!-------------------- USE HIDDEN TO GET VALUES ----------------->
     <input type="text" name="classTotal" id="classTotal" hidden required/>
@@ -160,10 +160,43 @@ case "Friday":
             <td>Total Cash</td>
         </tr>
     </table>
-    <button type="submit" name="submit">Submit</button>
+    <button type="submit" name="submit" id="submitMainTable">Submit</button>
     </form>
 
+    <button id="testBtn">testBtn</button>
+
 <script>
+
+
+
+/* let arra = [];
+
+    document.getElementById("testBtn").addEventListener('click', function(){
+        let quantity = document.getElementById("quantity").value;       
+      
+        var orderedItem = document.getElementsByClassName("orderedItem");
+        len = orderedItem.length;
+
+        for (var i = 0; i < len; i++) {
+            arra.push(orderedItem[i].innerHTML);
+        }
+
+        if(quantity > 1) {
+            let lastItemInArr = arra[arra.length - 1];
+            console.log(lastItemInArr);
+            for (let i = 1; i < quantity ; i++) {
+                arra.push(lastItemInArr);
+            }
+        }
+        console.log(arra);
+        
+        function getOccurrence(array, value) {
+            return array.filter((v) => (v === value)).length;
+        }
+        console.log(getOccurrence(arra, 'Turkey Cobb')); 
+    })
+ */
+
 
     function populateTable(){
         let table = document.getElementById("orderTable")
@@ -208,36 +241,52 @@ case "Friday":
         cell3.innerHTML = item;
         cell3.classList.add("orderedItem");
    
+let menuItems = [];
+let quantities = [];
 
-
-let quantity = document.getElementById("quantity").value;       
-let arra = [];
 var orderedItem = document.getElementsByClassName("orderedItem");
-for (var i = 0, len = orderedItem.length; i < len; i++) {
-    arra.push(orderedItem[i].innerHTML);
+var itemQuantity = document.getElementsByClassName("itemQuantity");
+len = orderedItem.length;
+len1 = itemQuantity.length;
+
+
+for (var i = 0; i < len; i++) {
+    menuItems.push(orderedItem[i].innerHTML);
 }
 
+for (var i = 0; i < len1; i++) {
+    quantities.push(itemQuantity[i].innerHTML);
+}
+const result = menuItems.map((item,index) => {return [item,quantities[index]]})
 
-if(quantity > 1) {
-    let test = arra[arra.length - 1];
-    console.log(test);
+
+
+
+/* if(quantity > 1) {
+    let lastItemInArr = menuItems[menuItems.length - 1];
+    console.log(lastItemInArr);
     for (let i = 1; i < quantity ; i++) {
-        arra.push(test);
+        menuItems.push(lastItemInArr);
     }
-    console.log(arra);
-}
+} */
 
+
+console.log(result);
+
+
+/* console.log(menuItems);
+console.log(quantities); */
 
 
 function getOccurrence(array, value) {
     return array.filter((v) => (v === value)).length;
 }
-console.log(getOccurrence(arra, 'Turkey Cobb')); 
+console.log(getOccurrence(menuItems, 'Turkey Cobb')); 
 
 
         cell4.innerHTML = document.getElementById("quantity").value;
-        /* quantity = document.getElementById("quantity").value; */
-
+        cell4.classList.add("itemQuantity");
+        let quantity = document.getElementById("quantity").value;   
 
         let price = menuItemValue.split('~')[1];
         let totalCost = price * quantity;
