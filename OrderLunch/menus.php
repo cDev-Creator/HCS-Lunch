@@ -1,6 +1,7 @@
 <?php
-include('menuPrice.php')
+include('menuPrice.php');
 ?>
+
 
 <?php
 define('TIMEZONE', 'America/Chicago');
@@ -119,7 +120,7 @@ case "Friday":
     <?php
     if($weekday == "Friday") {
     $mysqli = new mysqli('localhost','root','','menus');
-    $resultSet = $mysqli->query("SELECT item, price FROM greatharvest");
+    $resultSet = $mysqli->query("SELECT item, price FROM greatharvest order by item ASC");
     ?>
     <form method="POST"> 
     <select name="menuItems" id="menuItems" class="dropdown_change">
@@ -144,7 +145,11 @@ case "Friday":
     </select>
     <h1>Orders</h1>
 
-    <form name="order-table-form" id="orderTableForm" action="orderForm.php" method="POST">
+    <form method="post" name="order-table-form" id="orderTableForm" action="orderForm.php">
+
+       <!-------------------- USE HIDDEN TO GET VALUES ----------------->
+    <input type="text" name="classTotal" id="classTotal" hidden required/>
+
     <table border="1" id="orderTable">
         <tr>
             <td>Grade</td>
@@ -153,16 +158,14 @@ case "Friday":
             <td>Quantity</td>
             <td>Price</td>
             <td>Total Cash</td>
-            
         </tr>
     </table>
     <button type="submit" name="submit">Submit</button>
     </form>
 
-
 <script>
+
     function populateTable(){
- 
         let table = document.getElementById("orderTable")
         let row = table.insertRow();
         let cell1 = row.insertCell();
@@ -176,7 +179,6 @@ case "Friday":
         let gradeStudents = document.getElementById("students");
         let allStudents = document.getElementById("allStudents");
        
-
         if(gradeStudents.value == '') {
             let grade = allStudents.value;
             grade = grade.split('~')[1];
@@ -204,19 +206,45 @@ case "Friday":
         let menuItemValue = document.getElementById("menuItems").value;
         let item = menuItemValue.split("~",1);
         cell3.innerHTML = item;
+        cell3.classList.add("orderedItem");
+   
 
 
-        cell3.classList.add("menuItem");
+let quantity = document.getElementById("quantity").value;       
+let arra = [];
+var orderedItem = document.getElementsByClassName("orderedItem");
+for (var i = 0, len = orderedItem.length; i < len; i++) {
+    arra.push(orderedItem[i].innerHTML);
+}
+
+
+if(quantity > 1) {
+    let test = arra[arra.length - 1];
+    console.log(test);
+    for (let i = 1; i < quantity ; i++) {
+        arra.push(test);
+    }
+    console.log(arra);
+}
+
+
+
+function getOccurrence(array, value) {
+    return array.filter((v) => (v === value)).length;
+}
+console.log(getOccurrence(arra, 'Turkey Cobb')); 
 
 
         cell4.innerHTML = document.getElementById("quantity").value;
-       
-        let quantity = document.getElementById("quantity").value;
+        /* quantity = document.getElementById("quantity").value; */
+
+
         let price = menuItemValue.split('~')[1];
         let totalCost = price * quantity;
         let totalCostDecimal = totalCost.toFixed(2);
        
         cell5.innerHTML = totalCostDecimal;
+
 
         table = document.getElementById("orderTable"), cost = 0;
         for(var i = 1; i < table.rows.length; i++)
@@ -225,10 +253,13 @@ case "Friday":
             }    
         let classCostDecimal = cost.toFixed(2)
         cell6.innerHTML = classCostDecimal;
+
+        document.getElementById("classTotal").value = classCostDecimal;
         
         cell7.innerHTML = `<a id='delete' onClick="onDelete(this)">Delete</a>`;
-
     }
+
+  
    
     </script>
 
@@ -247,9 +278,9 @@ case "Friday":
         if (confirm('Are you sure you want to delete this order?')) {
         row = td.parentElement.parentElement;
         document.getElementById("orderTable").deleteRow(row.rowIndex);
+
     }
-}
-           
+} 
     </script>
 
     <style>
