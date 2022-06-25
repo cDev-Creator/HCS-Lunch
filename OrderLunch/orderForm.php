@@ -3,9 +3,6 @@ $classTotal = $_POST['classTotal'];
 echo "Total Cash: ".$classTotal;
 echo "</br>";
 
-
-
-
 $menuItem1 = $_POST['menuItem1'];
 $menuItem2 = $_POST['menuItem2'];
 $menuItem3 = $_POST['menuItem3'];
@@ -29,8 +26,6 @@ echo "$mydate[month] $mydate[mday], $mydate[year]";
 echo "</br>";
 echo "</br>";
 echo "</br>";
-
- 
 ?>
 
 <!DOCTYPE html>
@@ -64,34 +59,33 @@ echo "</br>";
 
     <tr>
         <td>Office Staff</td>  
-  
     </tr>
-    <tr>
+
+    <tr id="twoDay" >
         <td>2 Day Preschool</td>
     </tr>
 
-    <tr>
+    <tr id="threeDay">
         <td>3 Day Preschool</td>
     </tr>
 
-
-    <tr>
+    <tr id="first">
         <td>1st Grade</td>
     </tr>
 
-    <tr>
+    <tr id="second">
         <td>2nd Grade</td>
     </tr>
 
-    <tr>
+    <tr id="third" >
         <td>3rd Grade</td>
     </tr>
 
-    <tr>
+    <tr id="fourth">
         <td>5th Grade</td>
     </tr>
 
-    <tr>
+    <tr id="fifth">
         <td>1st Shift Total</td>
     </tr>
 
@@ -99,7 +93,7 @@ echo "</br>";
         <td align="center" colspan="20">2nd Shift</td>
     </tr>
 
-    <tr>
+    <tr id="sixth">
         <td>6th Grade</td>
     </tr>
 
@@ -141,112 +135,96 @@ echo "</br>";
         
         switch(gradeVar) {
 
-            case "2 Day Preschool": {
-
+            case "02 Day Preschool": {
+                let grade  = document.getElementById("twoDay");
+                insertOrders(grade);
             }
             break;
 
-            case "2 Day Preschool": {
-                
+            case "03 Day Preschool": {
+                let grade  = document.getElementById("threeDay");
+                insertOrders(grade);
             }
             break;
 
             case "1st Grade": {
-                
+                let grade  = document.getElementById("first");
+                insertOrders(grade); 
             }
             break;
 
             case "2nd Grade": {
-                
+                let grade  = document.getElementById("second");
+                insertOrders(grade); 
             }
             break;
 
             case "3rd Grade": {
-                
+                let grade  = document.getElementById("third");
+                insertOrders(grade); 
             }
             break;
 
             case "4th Grade": {
-                
+                let grade  = document.getElementById("fourth");
+                insertOrders(grade); 
             }
             break;
 
             case "5th Grade": {
-                
+                let grade  = document.getElementById("fifth");
+                insertOrders(grade); 
             }
             break;
 
             case "6th Grade": {
-                
+                let grade  = document.getElementById("sixth");
+                insertOrders(grade); 
             }
             break;
 
             case "7th Grade": {
-                let seventh  = document.getElementById("seventh");
-                let item1 = seventh.insertCell(-1);
-                let item2 = seventh.insertCell(2);
-                let item3 = seventh.insertCell(3);
-                let item4 = seventh.insertCell(4);
-                let item5 = seventh.insertCell(5);
-                let item6 = seventh.insertCell(6);
-                let item7 = seventh.insertCell(7);
-                let item8 = seventh.insertCell(8);
-
-                let item1Val =  <?php echo $menuItem1;?>;
-                let item2Val =  <?php echo $menuItem2;?>;
-                let item3Val =  <?php echo $menuItem3;?>;
-                let item4Val =  <?php echo $menuItem4;?>;
-                let item5Val =  <?php echo $menuItem5;?>;
-                let item6Val =  <?php echo $menuItem6;?>;
-                let item7Val =  <?php echo $menuItem7;?>;
-                let item8Val =  <?php echo $menuItem8;?>;
-                
-                item1.innerHTML = item1Val;
-                item2.innerHTML = item2Val;
-                item3.innerHTML = item3Val;
-                item4.innerHTML = item4Val;
-                item5.innerHTML = item5Val;
-                item6.innerHTML = item6Val;
-                item7.innerHTML = item7Val;
-                item8.innerHTML = item8Val;
+                let grade  = document.getElementById("seventh");
+                insertOrders(grade);
             }
             break;
 
             case "8th Grade": {
-                let eighth  = document.getElementById("eighth");
-                let item1 = eighth.insertCell(-1);
-                let item2 = eighth.insertCell(2);
-                let item3 = eighth.insertCell(3);
-                let item4 = eighth.insertCell(4);
-                let item5 = eighth.insertCell(5);
-                let item6 = eighth.insertCell(6);
-                let item7 = eighth.insertCell(7);
-                let item8 = eighth.insertCell(8);
-
-                let item1Val =  <?php echo $menuItem1;?>;
-                let item2Val =  <?php echo $menuItem2;?>;
-                let item3Val =  <?php echo $menuItem3;?>;
-                let item4Val =  <?php echo $menuItem4;?>;
-                let item5Val =  <?php echo $menuItem5;?>;
-                let item6Val =  <?php echo $menuItem6;?>;
-                let item7Val =  <?php echo $menuItem7;?>;
-                let item8Val =  <?php echo $menuItem8;?>;
-                
-                item1.innerHTML = item1Val;
-                item2.innerHTML = item2Val;
-                item3.innerHTML = item3Val;
-                item4.innerHTML = item4Val;
-                item5.innerHTML = item5Val;
-                item6.innerHTML = item6Val;
-                item7.innerHTML = item7Val;
-                item8.innerHTML = item8Val;
+                let grade  = document.getElementById("eighth");
+                insertOrders(grade);
             }
             break;
-         default:
-        
-        
         }
-             
+
+        function insertOrders(grade) {
+            let item1 = grade.insertCell(-1);
+            let item2 = grade.insertCell(2);
+            let item3 = grade.insertCell(3);
+            let item4 = grade.insertCell(4);
+            let item5 = grade.insertCell(5);
+            let item6 = grade.insertCell(6);
+            let item7 = grade.insertCell(7);
+            let item8 = grade.insertCell(8);
+
+            let item1Val =  <?php echo $menuItem1;?>;
+            let item2Val =  <?php echo $menuItem2;?>;
+            let item3Val =  <?php echo $menuItem3;?>;
+            let item4Val =  <?php echo $menuItem4;?>;
+            let item5Val =  <?php echo $menuItem5;?>;
+            let item6Val =  <?php echo $menuItem6;?>;
+            let item7Val =  <?php echo $menuItem7;?>;
+            let item8Val =  <?php echo $menuItem8;?>;
+                
+            item1.innerHTML = item1Val;
+            item2.innerHTML = item2Val;
+            item3.innerHTML = item3Val;
+            item4.innerHTML = item4Val;
+            item5.innerHTML = item5Val;
+            item6.innerHTML = item6Val;
+            item7.innerHTML = item7Val;
+            item8.innerHTML = item8Val;
+        }
+   
     </script>
 
 
