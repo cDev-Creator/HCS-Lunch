@@ -1,5 +1,5 @@
 <?php
-/* include('menuPrice.php'); */
+include('menuPrice.php');
 ?>
 
 
@@ -120,7 +120,7 @@ case "Friday":
     <?php
     if($weekday == "Friday") {
     $mysqli = new mysqli('localhost','root','','menus');
-    $resultSet = $mysqli->query("SELECT item, ID, price FROM greatharvest order by item ASC");
+    $resultSet = $mysqli->query("SELECT item, price FROM greatharvest order by item ASC");
     ?>
     <form method="POST"> 
     <select name="menuItems" id="menuItems" class="dropdown_change">
@@ -131,9 +131,8 @@ case "Friday":
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        $ID = $rows['ID'];
 
-        echo "<option id='menuSelection' value='$item~$price'> $item - $price - $ID</option>";  
+        echo "<option id='menuSelection' class='menuSelection' value='$item~$price'> $item - $price</option>";  
 
     }
     ?>
@@ -214,14 +213,6 @@ let menuItemsArr = [];
         cell3.innerHTML = item;
         cell3.classList.add("orderedItem")
 
-        if(item == "Tomato soup"){
-            console.log("rat")
-
-        
-        }
-
-
-    
 
         cell4.innerHTML = document.getElementById("quantity").value;
 
@@ -248,17 +239,41 @@ let menuItemsArr = [];
         cell7.innerHTML = `<a id='delete' onClick="onDelete(this)">Delete</a>`;
 
   
+        var menuItem = item.toString();
         for(var count = 0; count < quantity; count++){
-            var menuItem = item.toString();
+         menuItem = item.toString();
+           /*  console.log(menuItem); */
             menuItemsArr.push(menuItem);
         }
-        console.log(menuItemsArr);
+        
+ /*        console.log("Ordered Items:");
+        console.log(menuItemsArr); */
+       
+        let menuItemsDropdown = document.querySelectorAll(".menuSelection");
+        let dayOfWeekMenu = []
 
+        for (let i=0, element; element = menuItemsDropdown[i]; i++) {
+            let menuItems = element.value;
+            menuItems = menuItems.split("~",1);
+            menuItems = menuItems.toString();
+            dayOfWeekMenu.push(menuItems);
+        }
 
+/*         console.log("Day of week menu:");
+        console.log(dayOfWeekMenu); */
+      
         function getOccurrence(array, value) {
         return array.filter((v) => (v === value)).length;
         }
-        console.log(getOccurrence(menuItemsArr, 'Turkey Cobb'));   
+
+        console.log(`${dayOfWeekMenu[0]}`, getOccurrence(menuItemsArr, dayOfWeekMenu[0]));
+        console.log(`${dayOfWeekMenu[1]}`, getOccurrence(menuItemsArr, dayOfWeekMenu[1]));   
+        console.log(`${dayOfWeekMenu[2]}`, getOccurrence(menuItemsArr, dayOfWeekMenu[2]));   
+        console.log(`${dayOfWeekMenu[3]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[3]));   
+        console.log(`${dayOfWeekMenu[4]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[4]));   
+        console.log(`${dayOfWeekMenu[5]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[5]));   
+        console.log(`${dayOfWeekMenu[6]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[6]));   
+        console.log(`${dayOfWeekMenu[7]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[7]));   
     }
       
     
@@ -302,6 +317,3 @@ let menuItemsArr = [];
     ?>
 <!-----------------------------------------SHOW HTML TABLE DATA-------------------------------------->
 
-<?php
-include('menuPrice.php');
-?>
