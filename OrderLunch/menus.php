@@ -150,6 +150,15 @@ case "Friday":
        <!-------------------- USE HIDDEN TO GET VALUES ----------------->
     <input type="text" name="classTotal" id="classTotal" hidden required/>
 
+    <input type="text" name="menuItem1" id="menuItem1" hidden required/>
+    <input type="text" name="menuItem2" id="menuItem2" hidden required/>
+    <input type="text" name="menuItem3" id="menuItem3" hidden required/>
+    <input type="text" name="menuItem4" id="menuItem4" hidden required/>
+    <input type="text" name="menuItem5" id="menuItem5" hidden required/>
+    <input type="text" name="menuItem6" id="menuItem6" hidden required/>
+    <input type="text" name="menuItem7" id="menuItem7" hidden required/>
+    <input type="text" name="menuItem8" id="menuItem8" hidden required/>
+
     <table border="1" id="orderTable">
         <tr>
             <td>Grade</td>
@@ -245,20 +254,30 @@ let menuItemsArr = [];
            /*  console.log(menuItem); */
             menuItemsArr.push(menuItem);
         }
-        
+
+
+       ///////////////////////////*  NOT WORKING YET BUT RIGHT START FOR DELETE *//////////////////////
+        document.getElementById('delete').addEventListener("click", function() {
+            let rats = cell4.innerHTML-cell4.innerHTML;
+            console.log(rats);
+        });
+
+
+
+
+
+
  /*        console.log("Ordered Items:");
         console.log(menuItemsArr); */
        
         let menuItemsDropdown = document.querySelectorAll(".menuSelection");
         let dayOfWeekMenu = []
-
         for (let i=0, element; element = menuItemsDropdown[i]; i++) {
             let menuItems = element.value;
             menuItems = menuItems.split("~",1);
             menuItems = menuItems.toString();
             dayOfWeekMenu.push(menuItems);
         }
-
 /*         console.log("Day of week menu:");
         console.log(dayOfWeekMenu); */
       
@@ -273,7 +292,26 @@ let menuItemsArr = [];
         console.log(`${dayOfWeekMenu[4]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[4]));   
         console.log(`${dayOfWeekMenu[5]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[5]));   
         console.log(`${dayOfWeekMenu[6]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[6]));   
-        console.log(`${dayOfWeekMenu[7]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[7]));   
+        console.log(`${dayOfWeekMenu[7]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[7]));  
+        
+        let menuItem1 = getOccurrence(menuItemsArr, dayOfWeekMenu[0])
+        let menuItem2 = getOccurrence(menuItemsArr, dayOfWeekMenu[1])
+        let menuItem3 = getOccurrence(menuItemsArr, dayOfWeekMenu[2])
+        let menuItem4 = getOccurrence(menuItemsArr, dayOfWeekMenu[3])
+        let menuItem5 = getOccurrence(menuItemsArr, dayOfWeekMenu[4])
+        let menuItem6 = getOccurrence(menuItemsArr, dayOfWeekMenu[5])
+        let menuItem7 = getOccurrence(menuItemsArr, dayOfWeekMenu[6])
+        let menuItem8 = getOccurrence(menuItemsArr, dayOfWeekMenu[7])
+
+        document.getElementById("menuItem1").value = menuItem1;
+        document.getElementById("menuItem2").value = menuItem2;
+        document.getElementById("menuItem3").value = menuItem3;
+        document.getElementById("menuItem4").value = menuItem4;
+        document.getElementById("menuItem5").value = menuItem5;
+        document.getElementById("menuItem6").value = menuItem6;
+        document.getElementById("menuItem7").value = menuItem7;
+        document.getElementById("menuItem8").value = menuItem8;
+
     }
       
     
