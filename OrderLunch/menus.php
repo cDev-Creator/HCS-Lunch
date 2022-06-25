@@ -1,5 +1,5 @@
 <?php
-include('menuPrice.php');
+/* include('menuPrice.php'); */
 ?>
 
 
@@ -120,7 +120,7 @@ case "Friday":
     <?php
     if($weekday == "Friday") {
     $mysqli = new mysqli('localhost','root','','menus');
-    $resultSet = $mysqli->query("SELECT item, price FROM greatharvest order by item ASC");
+    $resultSet = $mysqli->query("SELECT item, ID, price FROM greatharvest order by item ASC");
     ?>
     <form method="POST"> 
     <select name="menuItems" id="menuItems" class="dropdown_change">
@@ -131,9 +131,10 @@ case "Friday":
     {
         $item = $rows['item'];
         $price = $rows['price'];
-        echo "<option id='menuSelection' value='$item~$price'> $item - $price</option>";  
+        $ID = $rows['ID'];
 
-        
+        echo "<option id='menuSelection' value='$item~$price'> $item - $price - $ID</option>";  
+
     }
     ?>
     
@@ -145,7 +146,7 @@ case "Friday":
     </select>
     <h1>Orders</h1>
 
-    <form method="post" name="order-table-form" id="orderTableForm" action="orderForm.php" onsubmit="return rar()">
+    <form method="post" name="order-table-form" id="orderTableForm" method="GET" action="orderForm.php">
 
        <!-------------------- USE HIDDEN TO GET VALUES ----------------->
     <input type="text" name="classTotal" id="classTotal" hidden required/>
@@ -160,43 +161,15 @@ case "Friday":
             <td>Total Cash</td>
         </tr>
     </table>
+ 
     <button type="submit" name="submit" id="submitMainTable">Submit</button>
     </form>
 
-    <button id="testBtn">testBtn</button>
+   
 
 <script>
 
-
-
-/* let arra = [];
-
-    document.getElementById("testBtn").addEventListener('click', function(){
-        let quantity = document.getElementById("quantity").value;       
-      
-        var orderedItem = document.getElementsByClassName("orderedItem");
-        len = orderedItem.length;
-
-        for (var i = 0; i < len; i++) {
-            arra.push(orderedItem[i].innerHTML);
-        }
-
-        if(quantity > 1) {
-            let lastItemInArr = arra[arra.length - 1];
-            console.log(lastItemInArr);
-            for (let i = 1; i < quantity ; i++) {
-                arra.push(lastItemInArr);
-            }
-        }
-        console.log(arra);
-        
-        function getOccurrence(array, value) {
-            return array.filter((v) => (v === value)).length;
-        }
-        console.log(getOccurrence(arra, 'Turkey Cobb')); 
-    })
- */
-
+let menuItemsArr = [];
 
     function populateTable(){
         let table = document.getElementById("orderTable")
@@ -239,52 +212,19 @@ case "Friday":
         let menuItemValue = document.getElementById("menuItems").value;
         let item = menuItemValue.split("~",1);
         cell3.innerHTML = item;
-        cell3.classList.add("orderedItem");
-   
-let menuItems = [];
-let quantities = [];
+        cell3.classList.add("orderedItem")
 
-var orderedItem = document.getElementsByClassName("orderedItem");
-var itemQuantity = document.getElementsByClassName("itemQuantity");
-len = orderedItem.length;
-len1 = itemQuantity.length;
+        if(item == "Tomato soup"){
+            console.log("rat")
+
+        
+        }
 
 
-for (var i = 0; i < len; i++) {
-    menuItems.push(orderedItem[i].innerHTML);
-}
-
-for (var i = 0; i < len1; i++) {
-    quantities.push(itemQuantity[i].innerHTML);
-}
-const result = menuItems.map((item,index) => {return [item,quantities[index]]})
-
-
-
-
-/* if(quantity > 1) {
-    let lastItemInArr = menuItems[menuItems.length - 1];
-    console.log(lastItemInArr);
-    for (let i = 1; i < quantity ; i++) {
-        menuItems.push(lastItemInArr);
-    }
-} */
-
-
-console.log(result);
-
-
-/* console.log(menuItems);
-console.log(quantities); */
-
-
-function getOccurrence(array, value) {
-    return array.filter((v) => (v === value)).length;
-}
-console.log(getOccurrence(menuItems, 'Turkey Cobb')); 
-
+    
 
         cell4.innerHTML = document.getElementById("quantity").value;
+
         cell4.classList.add("itemQuantity");
         let quantity = document.getElementById("quantity").value;   
 
@@ -306,9 +246,22 @@ console.log(getOccurrence(menuItems, 'Turkey Cobb'));
         document.getElementById("classTotal").value = classCostDecimal;
         
         cell7.innerHTML = `<a id='delete' onClick="onDelete(this)">Delete</a>`;
-    }
 
   
+        for(var count = 0; count < quantity; count++){
+            var menuItem = item.toString();
+            menuItemsArr.push(menuItem);
+        }
+        console.log(menuItemsArr);
+
+
+        function getOccurrence(array, value) {
+        return array.filter((v) => (v === value)).length;
+        }
+        console.log(getOccurrence(menuItemsArr, 'Turkey Cobb'));   
+    }
+      
+    
    
     </script>
 
@@ -348,3 +301,7 @@ console.log(getOccurrence(menuItems, 'Turkey Cobb'));
     }
     ?>
 <!-----------------------------------------SHOW HTML TABLE DATA-------------------------------------->
+
+<?php
+include('menuPrice.php');
+?>
