@@ -1,6 +1,17 @@
 <?php
 include('menuPrice.php');
+$grade = $_GET['grade'];
+echo "Grade: ".$grade;
+echo "<br>"
 ?>
+
+<script>
+    var gradeVar = <?php echo json_encode($grade); ?>;
+    window.onload = function() {
+        localStorage.setItem("gradeVar",gradeVar);
+    }
+
+</script>
 
 
 <?php
@@ -12,6 +23,7 @@ echo "$mydate[month] $mydate[mday], $mydate[year]";
 echo"</br>";
 echo "Day of the week : ";
 /* $weekday = "$mydate[weekday]"; */
+
 $weekday = "Friday";
 echo $weekday;
 echo"</br>";
@@ -19,109 +31,37 @@ echo"</br>";
 
 //CLEAN UP REPETITIVE CODE
 echo "Menu:";
-
-switch ($weekday) {
-
-case "Monday":
-    ?>
-    <?php
-    if($weekday == "Monday") {
+?>
+    
+    <?php 
     $mysqli = new mysqli('localhost','root','','menus');
-    $resultSet = $mysqli->query("SELECT item, price FROM 54pizza");
-    ?>
+     ////////////////////////// GO BACK AND MAKE ARRAY DYNAMICALLY CREATED INSTEAD OF HARD CODED/////////////////////////////////////////
+    $restaurants = array("54pizza", "arbys", "ritzys", "chickfila", "greatharvest");
 
-    <select name="menuItems">
-    <option value='' selected='selected'>select</option>;
-    <?php
-    while($rows = $resultSet->fetch_assoc())
-    {
-        $item = $rows['item'];
-        $price = $rows['price'];
-        echo "<option id='menuItems' value='$item'> $item - $price</option>";
+    
+    if($weekday == 'Monday' ){
+        $restaurant = $restaurants[0];
     }
-    ?>
-    </select>
-    <?php
+    else if($weekday == 'Tuesday' ){
+        $restaurant = $restaurants[1];
     }
-    break;
-
-case "Tuesday":
-    ?>
-    <?php
-    if($weekday == "Tuesday") {
-    $mysqli = new mysqli('localhost','root','','menus');
-    $resultSet = $mysqli->query("SELECT item, price FROM arbys");
-    ?>
-
-   <select name="menuItems">
-    <?php
-    while($rows = $resultSet->fetch_assoc())
-    {
-        $item = $rows['item'];
-        $price = $rows['price'];
-        echo "<option id='menuItems' value='$item'> $item - $price</option>";
+    else if($weekday == 'Wednesday' ){
+        $restaurant = $restaurants[2];
     }
-    ?>
-    </select>
-    <?php
+    else if($weekday == 'Thursday' ){
+        $restaurant = $restaurants[3];
     }
-    break;
-
-case "Wednesday":
-    ?>
-    <?php
-    if($weekday == "Wednesday") {
-    $mysqli = new mysqli('localhost','root','','menus');
-    $resultSet = $mysqli->query("SELECT item, price FROM ritzys");
-    ?>
-
-    <select name="menuItems">
-    <?php
-    while($rows = $resultSet->fetch_assoc())
-    {
-        $item = $rows['item'];
-        $price = $rows['price'];
-        echo "<option id='menuItems' value='$item'> $item - $price</option>"; 
+    else if($weekday == 'Friday' ){
+        $restaurant = $restaurants[4];
     }
-
-    ?>
-    </select>
-    <?php
+    else {
+        echo "School is not in session!";
     }
-    break;
+    
+    $resultSet = $mysqli->query("SELECT item, price FROM $restaurant order by item ASC");
 
-case "Thursday":
-    ?>
-    <?php
-    if($weekday == "Thursday") {
-    $mysqli = new mysqli('localhost','root','','menus');
-    $resultSet = $mysqli->query("SELECT item, price FROM chickfila");
     ?>
 
-    <select name="menuItems">
-    <option value='' selected='selected'>select</option>;
-    <?php
-    while($rows = $resultSet->fetch_assoc())
-    {
-        $item = $rows['item'];
-        $price = $rows['price'];
-        echo "<option id='menuItems' value='$item' >$item - $price</option>";  
-    }
-    ?>
-
-    </select>
-    <?php
-    } 
-    break;
-
-///////////////////////////////// THIS IS THE WORKING DAY/////////////////////////////////
-case "Friday":
-    ?>
-    <?php
-    if($weekday == "Friday") {
-    $mysqli = new mysqli('localhost','root','','menus');
-    $resultSet = $mysqli->query("SELECT item, price FROM greatharvest order by item ASC");
-    ?>
     <form method="POST"> 
     <select name="menuItems" id="menuItems" class="dropdown_change">
     <option value='' selected='selected'>select</option>;
@@ -176,6 +116,7 @@ case "Friday":
    
 
 <script>
+
 
 let menuItemsArr = [];
 
@@ -336,6 +277,7 @@ let menuItemsArr = [];
 
     }
 } 
+
     </script>
 
     <style>
@@ -346,12 +288,4 @@ let menuItemsArr = [];
         tr:nth-child(even),table.list thead>tr { background-color: #dddddd; }
     </style>
 
-    <?php
-        }
-        break;
-    default:
-        echo " School is not in session!";
-    }
-    ?>
-<!-----------------------------------------SHOW HTML TABLE DATA-------------------------------------->
-
+   
