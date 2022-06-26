@@ -1,3 +1,4 @@
+
 <?php 
 $classTotal = $_POST['classTotal'];
 echo "Total Cash: ".$classTotal;
@@ -12,14 +13,15 @@ $menuItem6 = $_POST['menuItem6'];
 $menuItem7 = $_POST['menuItem7'];
 $menuItem8 = $_POST['menuItem8'];
 
+$restaurant = $_POST['restaurants'];
+echo $restaurant ,' Orders';
 
 $mysqli = new mysqli('localhost','root','','menus');
-$resultSet = $mysqli->query("SELECT item FROM greatharvest order by item ASC");
+$resultSet = $mysqli->query("SELECT item, price FROM $restaurant order by item ASC");
 
 define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
 $mydate=getdate(date("U"));
-echo "Great Harvest Order";
 echo "</br>";
 echo "for ";
 echo "$mydate[month] $mydate[mday], $mydate[year]";
@@ -52,6 +54,7 @@ echo "</br>";
         echo "<td>" . $row["item"] . "</td>";
     }?>
     </tr>
+
 
     <tr>
         <td align="center" colspan="20">1st Shift</td>

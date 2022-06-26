@@ -13,7 +13,6 @@ echo "<br>"
 
 </script>
 
-
 <?php
 define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
@@ -24,7 +23,7 @@ echo"</br>";
 echo "Day of the week : ";
 /* $weekday = "$mydate[weekday]"; */
 
-$weekday = "Friday";
+$weekday = "Monday";
 echo $weekday;
 echo"</br>";
 echo"</br>";
@@ -32,13 +31,11 @@ echo"</br>";
 //CLEAN UP REPETITIVE CODE
 echo "Menu:";
 ?>
-    
     <?php 
     $mysqli = new mysqli('localhost','root','','menus');
      ////////////////////////// GO BACK AND MAKE ARRAY DYNAMICALLY CREATED INSTEAD OF HARD CODED/////////////////////////////////////////
     $restaurants = array("54pizza", "arbys", "ritzys", "chickfila", "greatharvest");
 
-    
     if($weekday == 'Monday' ){
         $restaurant = $restaurants[0];
     }
@@ -99,6 +96,8 @@ echo "Menu:";
     <input type="text" name="menuItem7" id="menuItem7" hidden required/>
     <input type="text" name="menuItem8" id="menuItem8" hidden required/>
 
+    <input type="text" name="restaurants" id="restaurants" hidden required/>
+
     <table border="1" id="orderTable">
         <tr>
             <td>Grade</td>
@@ -113,11 +112,15 @@ echo "Menu:";
     <button type="submit" name="submit" id="submitMainTable">Submit</button>
     </form>
 
-   
 
 <script>
+    let restaurants = "<?php echo $restaurant?>";
+    console.log(restaurants);
+    document.getElementById("restaurants").value = restaurants;
+</script>   
 
 
+<script>
 let menuItemsArr = [];
 
     function populateTable(){
@@ -252,7 +255,6 @@ let menuItemsArr = [];
         document.getElementById("menuItem6").value = menuItem6;
         document.getElementById("menuItem7").value = menuItem7;
         document.getElementById("menuItem8").value = menuItem8;
-
     }
       
     
