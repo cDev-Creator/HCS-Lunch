@@ -1,6 +1,6 @@
 <?php
 include('menuPrice.php');
-$grade = $_GET['grade'];
+$grade = $_POST['grade'];
 echo "Grade: ".$grade;
 echo "<br>"
 ?>
@@ -23,7 +23,7 @@ echo"</br>";
 echo "Day of the week : ";
 /* $weekday = "$mydate[weekday]"; */
 
-$weekday = "Monday";
+$weekday = "Friday";
 echo $weekday;
 echo"</br>";
 echo"</br>";
@@ -52,7 +52,7 @@ echo "Menu:";
         $restaurant = $restaurants[4];
     }
     else {
-        echo "School is not in session!";
+        echo 'School is not in session!';
     }
     
     $resultSet = $mysqli->query("SELECT item, price FROM $restaurant order by item ASC");
@@ -82,7 +82,7 @@ echo "Menu:";
     </select>
     <h1>Orders</h1>
 
-    <form method="post" name="order-table-form" id="orderTableForm" method="GET" action="orderForm.php">
+    <form method="post" name="order-table-form" id="orderTableForm" method="POST" action="ordersDB.php">
 
        <!-------------------- USE HIDDEN TO GET VALUES ----------------->
     <input type="text" name="classTotal" id="classTotal" hidden required/>
@@ -96,7 +96,15 @@ echo "Menu:";
     <input type="text" name="menuItem7" id="menuItem7" hidden required/>
     <input type="text" name="menuItem8" id="menuItem8" hidden required/>
 
-    <input type="text" name="restaurants" id="restaurants" hidden required/>
+
+
+    <input type="text" name="names" id="names" hidden required/>
+    <input type="text" name="items" id="items" hidden required/>
+    <input type="text" name="quantities" id="quantities" hidden required/>
+    <input type="text" name="prices" id="prices" hidden required/>
+    
+
+
 
     <table border="1" id="orderTable">
         <tr>
@@ -109,7 +117,7 @@ echo "Menu:";
         </tr>
     </table>
  
-    <button type="submit" name="submit" id="submitMainTable">Submit</button>
+    <button type="submit" name="submitMainTable" id="submitMainTable" action="ordersDB.php">Submit</button>
     </form>
 
 
@@ -118,7 +126,6 @@ echo "Menu:";
     console.log(restaurants);
     document.getElementById("restaurants").value = restaurants;
 </script>   
-
 
 <script>
 let menuItemsArr = [];
@@ -164,12 +171,12 @@ let menuItemsArr = [];
         let menuItemValue = document.getElementById("menuItems").value;
         let item = menuItemValue.split("~",1);
         cell3.innerHTML = item;
-        cell3.classList.add("orderedItem")
+        /* cell3.classList.add("orderedItem") */
 
 
         cell4.innerHTML = document.getElementById("quantity").value;
 
-        cell4.classList.add("itemQuantity");
+        /* cell4.classList.add("itemQuantity"); */
         let quantity = document.getElementById("quantity").value;   
 
         let price = menuItemValue.split('~')[1];
@@ -191,7 +198,6 @@ let menuItemsArr = [];
         
         cell7.innerHTML = `<a id='delete' onClick="onDelete(this)">Delete</a>`;
 
-  
         var menuItem = item.toString();
         for(var count = 0; count < quantity; count++){
          menuItem = item.toString();
@@ -205,10 +211,6 @@ let menuItemsArr = [];
             let rats = cell4.innerHTML-cell4.innerHTML;
             console.log(rats);
         });
-
-
-
-
 
 
  /*        console.log("Ordered Items:");
@@ -229,14 +231,14 @@ let menuItemsArr = [];
         return array.filter((v) => (v === value)).length;
         }
 
-        console.log(`${dayOfWeekMenu[0]}`, getOccurrence(menuItemsArr, dayOfWeekMenu[0]));
+/*         console.log(`${dayOfWeekMenu[0]}`, getOccurrence(menuItemsArr, dayOfWeekMenu[0]));
         console.log(`${dayOfWeekMenu[1]}`, getOccurrence(menuItemsArr, dayOfWeekMenu[1]));   
         console.log(`${dayOfWeekMenu[2]}`, getOccurrence(menuItemsArr, dayOfWeekMenu[2]));   
         console.log(`${dayOfWeekMenu[3]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[3]));   
         console.log(`${dayOfWeekMenu[4]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[4]));   
         console.log(`${dayOfWeekMenu[5]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[5]));   
         console.log(`${dayOfWeekMenu[6]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[6]));   
-        console.log(`${dayOfWeekMenu[7]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[7]));  
+        console.log(`${dayOfWeekMenu[7]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[7]));   */
         
         let menuItem1 = getOccurrence(menuItemsArr, dayOfWeekMenu[0])
         let menuItem2 = getOccurrence(menuItemsArr, dayOfWeekMenu[1])
@@ -255,10 +257,23 @@ let menuItemsArr = [];
         document.getElementById("menuItem6").value = menuItem6;
         document.getElementById("menuItem7").value = menuItem7;
         document.getElementById("menuItem8").value = menuItem8;
+
+
+
+        let names = cell2.innerHTML;
+        document.getElementById("names").value = names;
+
+        let items = cell3.innerHTML;
+        document.getElementById("items").value = items;
+
+        let quantities = cell4.innerHTML;
+        document.getElementById("quantities").value = quantities;
+
+        let prices = cell4.innerHTML;
+        document.getElementById("prices").value = prices;
+
     }
       
-    
-   
     </script>
 
     <!----------------------------------------- DELETE CLASS AND INDIVIDUAL ORDER -------------------------------------->
@@ -289,5 +304,3 @@ let menuItemsArr = [];
         }
         tr:nth-child(even),table.list thead>tr { background-color: #dddddd; }
     </style>
-
-   

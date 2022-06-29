@@ -1,4 +1,6 @@
 <?php
+include 'menuPrice.php';
+
     $host = "localhost";
     $dbname = "orders";
     $username = "root";
@@ -14,9 +16,16 @@
         die("Connection error: " . mysqli_connect_error());
     }    
     
-    $item = $_POST['menuItem1'];
+    $names = $_POST['names'];
+    $items = $_POST['items'];
+
+    $quantities = $_POST['quantities'];
+
+    $prices = $_POST['prices'];
+
+
             
-    $qry = "INSERT INTO `allorders`(`item`) VALUES ('$item')";
+    $qry = "INSERT INTO `allorders`(`name`,`item`,`quantity`,`price`) VALUES ('$names','$items', '$quantities', '$prices')";
 
     $insert = mysqli_query($conn, $qry);
     if(!$insert) {
@@ -31,7 +40,7 @@ echo "Total Cash: ".$classTotal;
 echo "</br>";
 
 
-echo "menuItem1: ".$item;
+echo "menuItem1: ".$items;
 
 
 /* $menuItem2 = $_POST['menuItem2'];
