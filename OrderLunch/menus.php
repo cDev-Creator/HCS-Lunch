@@ -76,15 +76,11 @@ echo "Menu:";
     
     <input type="number" name="quantity" id="quantity" placeholder="Quantity" required/>
     </form>
-
-    <!-------------------- ONLY CALLED FOR TESTING NOT CRUCIAL TO PROGRAM (ONCHANGE) ----------------->
-
     </select>
     <h1>Orders</h1>
 
-    <form method="post" name="order-table-form" id="orderTableForm" method="POST" action="ordersDB.php">
-
-       <!-------------------- USE HIDDEN TO GET VALUES ----------------->
+    <form method="post" name="order-table-form" id="orderTableForm" method="POST">
+    <!-------------------- USE HIDDEN TO GET VALUES ----------------->
     <input type="text" name="classTotal" id="classTotal" hidden required/>
 
     <input type="text" name="menuItem1" id="menuItem1" hidden required/>
@@ -98,6 +94,7 @@ echo "Menu:";
 
 
 
+    <input type="text" name="grades" id="grades" hidden required/>
     <input type="text" name="names" id="names" hidden required/>
     <input type="text" name="items" id="items" hidden required/>
     <input type="text" name="quantities" id="quantities" hidden required/>
@@ -117,7 +114,6 @@ echo "Menu:";
         </tr>
     </table>
  
-    <button type="submit" name="submitMainTable" id="submitMainTable" action="ordersDB.php">Submit</button>
     </form>
 
 
@@ -130,7 +126,9 @@ echo "Menu:";
 <script>
 let menuItemsArr = [];
 
+
     function populateTable(){
+
         let table = document.getElementById("orderTable")
         let row = table.insertRow();
         let cell1 = row.insertCell();
@@ -206,13 +204,6 @@ let menuItemsArr = [];
         }
 
 
-       ///////////////////////////*  NOT WORKING YET BUT RIGHT START FOR DELETE *//////////////////////
-        document.getElementById('delete').addEventListener("click", function() {
-            let rats = cell4.innerHTML-cell4.innerHTML;
-            console.log(rats);
-        });
-
-
  /*        console.log("Ordered Items:");
         console.log(menuItemsArr); */
        
@@ -230,15 +221,6 @@ let menuItemsArr = [];
         function getOccurrence(array, value) {
         return array.filter((v) => (v === value)).length;
         }
-
-/*         console.log(`${dayOfWeekMenu[0]}`, getOccurrence(menuItemsArr, dayOfWeekMenu[0]));
-        console.log(`${dayOfWeekMenu[1]}`, getOccurrence(menuItemsArr, dayOfWeekMenu[1]));   
-        console.log(`${dayOfWeekMenu[2]}`, getOccurrence(menuItemsArr, dayOfWeekMenu[2]));   
-        console.log(`${dayOfWeekMenu[3]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[3]));   
-        console.log(`${dayOfWeekMenu[4]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[4]));   
-        console.log(`${dayOfWeekMenu[5]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[5]));   
-        console.log(`${dayOfWeekMenu[6]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[6]));   
-        console.log(`${dayOfWeekMenu[7]}`,getOccurrence(menuItemsArr, dayOfWeekMenu[7]));   */
         
         let menuItem1 = getOccurrence(menuItemsArr, dayOfWeekMenu[0])
         let menuItem2 = getOccurrence(menuItemsArr, dayOfWeekMenu[1])
@@ -259,6 +241,8 @@ let menuItemsArr = [];
         document.getElementById("menuItem8").value = menuItem8;
 
 
+        let grades = cell1.innerHTML;
+        document.getElementById("grades").value = grades;
 
         let names = cell2.innerHTML;
         document.getElementById("names").value = names;
@@ -269,12 +253,11 @@ let menuItemsArr = [];
         let quantities = cell4.innerHTML;
         document.getElementById("quantities").value = quantities;
 
-        let prices = cell4.innerHTML;
+        let prices = cell5.innerHTML;
         document.getElementById("prices").value = prices;
-
     }
-      
     </script>
+
 
     <!----------------------------------------- DELETE CLASS AND INDIVIDUAL ORDER -------------------------------------->
     <button id="clearClassOrder">Clear All</button>
@@ -291,16 +274,15 @@ let menuItemsArr = [];
         if (confirm('Are you sure you want to delete this order?')) {
         row = td.parentElement.parentElement;
         document.getElementById("orderTable").deleteRow(row.rowIndex);
-
     }
 } 
 
-    </script>
+</script>
 
-    <style>
-        #delete {
-            color: red;
-            cursor: pointer;
-        }
-        tr:nth-child(even),table.list thead>tr { background-color: #dddddd; }
-    </style>
+<style>
+    #delete {
+        color: red;
+        cursor: pointer;
+    }
+    tr:nth-child(even),table.list thead>tr { background-color: #dddddd; }
+</style>
