@@ -16,16 +16,13 @@ include 'menuPrice.php';
         die("Connection error: " . mysqli_connect_error());
     }    
     
+    $grades = $_POST['grades'];
     $names = $_POST['names'];
     $items = $_POST['items'];
-
     $quantities = $_POST['quantities'];
-
     $prices = $_POST['prices'];
 
-
-            
-    $qry = "INSERT INTO `allorders`(`name`,`item`,`quantity`,`price`) VALUES ('$names','$items', '$quantities', '$prices')";
+    $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`) VALUES ('$grades', '$names','$items', '$quantities', '$prices')";
 
     $insert = mysqli_query($conn, $qry);
     if(!$insert) {
@@ -38,27 +35,6 @@ include 'menuPrice.php';
 $classTotal = $_POST['classTotal'];
 echo "Total Cash: ".$classTotal;
 echo "</br>";
-
-
 echo "menuItem1: ".$items;
 
-
-/* $menuItem2 = $_POST['menuItem2'];
-$menuItem3 = $_POST['menuItem3'];
-$menuItem4 = $_POST['menuItem4'];
-$menuItem5 = $_POST['menuItem5'];
-$menuItem6 = $_POST['menuItem6'];
-$menuItem7 = $_POST['menuItem7'];
-$menuItem8 = $_POST['menuItem8']; */
-
-
-
-
-
 ?>
-
-
-
-
-
-
