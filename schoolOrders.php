@@ -59,6 +59,8 @@ echo "Menu:";
     foreach ($list as $value) {
         echo "$value <br>";
     }
+
+    $menuItemsLength = count($list);
     ?>
 
 <!DOCTYPE html> 
@@ -291,7 +293,7 @@ echo "Menu:";
 
 
 
-    function foodQuanity(itemClass) {
+    function foodQuantity(itemClass) {
         var quantity = document.getElementsByClassName(itemClass);
         let sum = 0;
         for (var i = 0; i < quantity.length; i++) {
@@ -302,37 +304,26 @@ echo "Menu:";
         return sum;
     }
 
-    let item0 = foodQuanity('item0');
-    let eighthRow = document.getElementById('eighth')
-    let cell0 = eighthRow.insertCell(1);
-    cell0.innerHTML = item0;
 
-    let item1 = foodQuanity('item1');
-    let cell1 = eighthRow.insertCell(2);
-    cell1.innerHTML = item1;
+    let menuItemsLength = <?php echo $menuItemsLength ?>;
+    console.log(menuItemsLength);
 
-    let item2 = foodQuanity('item2');
-    let cell2 = eighthRow.insertCell(3);
-    cell2.innerHTML = item2;
+    let eighthRow = document.getElementById('eighth');
+    for(let i = 0; i < menuItemsLength; i++) {
+        let itemCount = foodQuantity('item' + i);
+        let cell = eighthRow.insertCell(i + 1);
+        cell.innerHTML = itemCount;
+    }  
 
-    let item3 = foodQuanity('item3');
-    let cell3 = eighthRow.insertCell(4);
-    cell3.innerHTML = item3;
 
-    let item4 = foodQuanity('item4');
-    let cell4 = eighthRow.insertCell(5);
-    cell4.innerHTML = item4;
 
-    let item5 = foodQuanity('item5');
-    let cell5 = eighthRow.insertCell(6);
-    cell5.innerHTML = item5;
 
-    let item6 = foodQuanity('item6');
-    let cell6 = eighthRow.insertCell(7);
-    cell6.innerHTML = item6;
+/*     let seventhRow = document.getElementById('seventh');
+    for(let i = 0; i < menuItemsLength; i++) {
+        let itemCount = foodQuantity('item' + i);
+        let cell = seventhRow.insertCell(i + 1);
+        cell.innerHTML = itemCount;
+    }   */
 
-    let item7 = foodQuanity('item7');
-    let cell7 = eighthRow.insertCell(8);
-    cell7.innerHTML = item7;
 
 </script>
