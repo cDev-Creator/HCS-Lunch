@@ -1,6 +1,8 @@
 <?php
 $mysqli = new mysqli('localhost','root','','orders');
-$result = $mysqli->query("SELECT grade, item, quantity, price FROM allorders ORDER BY grade, item ASC"); 
+$result = $mysqli->query("SELECT grade, item, quantity, price FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, item ASC "); 
+/* $result = $mysqli->query("SELECT grade, item, quantity, price FROM allorders ORDER BY grade, item ASC ");  */
+
 ?>
 
 <!--------------------------------------- REPETIVE CODE FROM MENUS.PHP PUT INTO ONE FILE ---------------------------------------->
@@ -43,17 +45,8 @@ echo "Menu:";
     else {
         echo 'School is not in session!';
     }
-    
+
     $resultSet = $mysqli->query("SELECT item, price FROM $restaurant order by item ASC");
-
-
-
-
-
-
-
-
-
 
     $fetch1 = $mysqli->query("SELECT item FROM $restaurant order by item ASC");
     $list = array();
@@ -66,24 +59,7 @@ echo "Menu:";
     foreach ($list as $value) {
         echo "$value <br>";
     }
-
-
-
-
-
-/*     $counter = 2; 
-    $keys = array_keys($list);
-
-    $needed_entry = $keys[ $counter ];
-    print_r( $list[ $needed_entry ] ); */
     ?>
-
-
-
-
-
-
-
 
 <!DOCTYPE html> 
 <html> 
@@ -174,23 +150,6 @@ echo "Menu:";
 
 
         $arr = []; 
- 
-/*   function tests ($rows,&$list, &$num,&$grade) {
-            if($rows['item'] == $list[$num] && $rows['grade'] == $grade ) {
-                $quantity = $rows['quantity'];
-                echo '<div class="item1" >';
-                array_push($arr, $quantity);
-                echo implode (" ",$arr); 
-            };
-        } 
-
-        $num = 1;
-        $grade = '1st Grade';
-        tests($rows, $list, $num, $grade);
-
-        echo 'Array Index Val: ';
-        echo($list[$num]);
- */
         
 
         $num = 0;
