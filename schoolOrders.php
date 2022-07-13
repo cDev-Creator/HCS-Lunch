@@ -129,50 +129,49 @@ echo "Menu:";
 
         <br>
 
+
 		<?php while($rows = $result->fetch_assoc())
 		{ 
-	
+            $arr = []; 
+            $grade = '8th Grade';
+            if ($grade == '8th Grade') {
+                $gradeID = 'eighth';
+            }
 
-        $arr = []; 
-        $num = 0;
-        $grade = '8th Grade';
-        $className = 'item0';
-        getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-
-       $num = 1;
-       $className = 'item1';
-       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-
-       $num = 2;
-       $className = 'item2';
-       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-
-       $num = 3;
-       $className = 'item3';
-       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-
-       $num = 4;
-       $className = 'item4';
-       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-
-       $num = 5;
-       $className = 'item5';
-       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-
-       $num = 6;
-       $className = 'item6';
-       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-
-       $num = 7;
-       $className = 'item7';
-       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-
+                $num = 0;
+                $className = 'item0';
+                getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+        
+               $num = 1;
+               $className = 'item1';
+               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+        
+               $num = 2;
+               $className = 'item2';
+               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+        
+               $num = 3;
+               $className = 'item3';
+               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+        
+               $num = 4;
+               $className = 'item4';
+               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+        
+               $num = 5;
+               $className = 'item5';
+               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+        
+               $num = 6;
+               $className = 'item6';
+               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+        
+               $num = 7;
+               $className = 'item7';
+               getItemQuantity($rows, $list, $arr,$num,$grade,$className); 
     ?>
 
     <?php 
-     
-
-
 
 /*//////////////////////////////////////////// MONEY SUMMARY BY CLASS ////////////////////////////////*/
         if ($rows['grade'] == '1st Grade'):
@@ -214,7 +213,11 @@ echo "Menu:";
             };
         }
 
+  
+
     ?> 
+
+ 
 
 	</table> 
 
@@ -290,9 +293,6 @@ echo "Menu:";
 
 
 
-
-
-
     function foodQuantity(itemClass) {
         var quantity = document.getElementsByClassName(itemClass);
         let sum = 0;
@@ -306,6 +306,15 @@ echo "Menu:";
 
 
     let menuItemsLength = <?php echo $menuItemsLength ?>;
+
+    let gradeID = <?php echo $gradeID ?>;
+    if(gradeID = 'eighth'){
+        console.log(gradeID);
+    }
+
+
+
+
     console.log(menuItemsLength);
 
     let eighthRow = document.getElementById('eighth');
@@ -316,6 +325,11 @@ echo "Menu:";
     }  
 
 
+       
+
+       
+
+
 
 
 /*     let seventhRow = document.getElementById('seventh');
@@ -323,7 +337,7 @@ echo "Menu:";
         let itemCount = foodQuantity('item' + i);
         let cell = seventhRow.insertCell(i + 1);
         cell.innerHTML = itemCount;
-    }   */
-
+    }  
+ */
 
 </script>
