@@ -129,73 +129,45 @@ echo "Menu:";
 
 		<?php while($rows = $result->fetch_assoc())
 		{ 
-		?> 
-		<tr>
-            <td><?php echo $rows['grade']; ?></td> 
-            <td><?php echo $rows['item']; ?></td> 
-            <td><?php echo $rows['quantity']; ?></td> 
-            <td><?php echo $rows['price']; ?></td>
-
-            <?php $total = $total + floatval($rows["price"]);?>
-            <td><?php echo number_format((float)$total, 2, '.', ''); ?></td>
-       
-		</tr> 
-
-        <?php 
-
-
-
-
-      
-
+	
 
         $arr = []; 
-        
-
         $num = 0;
         $grade = '8th Grade';
         $className = 'item0';
-        rat($rows, $list, $arr,$num,$grade,$className);
+        getItemQuantity($rows, $list, $arr,$num,$grade,$className);
 
        $num = 1;
        $className = 'item1';
+       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
 
-       rat($rows, $list, $arr,$num,$grade,$className);
-
-       
        $num = 2;
        $className = 'item2';
-       rat($rows, $list, $arr,$num,$grade,$className);
+       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
 
-          
        $num = 3;
        $className = 'item3';
-       rat($rows, $list, $arr,$num,$grade,$className);
+       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
 
-          
        $num = 4;
        $className = 'item4';
-       rat($rows, $list, $arr,$num,$grade,$className);
+       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
 
-          
        $num = 5;
        $className = 'item5';
-       rat($rows, $list, $arr,$num,$grade,$className);
+       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
 
-          
        $num = 6;
        $className = 'item6';
-       rat($rows, $list, $arr,$num,$grade,$className);
+       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
 
-          
        $num = 7;
        $className = 'item7';
-       rat($rows, $list, $arr,$num,$grade,$className);
+       getItemQuantity($rows, $list, $arr,$num,$grade,$className);
 
+    ?>
 
-        ?>
-
-        <?php 
+    <?php 
      
 
 
@@ -226,17 +198,11 @@ echo "Menu:";
             $eighthTotal = $eighthTotal + floatval($rows["price"]);
 
         endif;
-
-        
-
-
         ?>
          
 	<?php 
         }
-        
-        
-        function rat($rows, $list, $arr, $num, $grade, $className) {
+        function getItemQuantity($rows, $list, $arr, $num, $grade, $className) {
             if($rows['item'] == $list[$num] && $rows['grade'] == $grade ) {
                 $quantity = $rows['quantity'];
 
