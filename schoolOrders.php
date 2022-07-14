@@ -47,7 +47,6 @@ echo "Menu:";
     }
 
     $resultSet = $mysqli->query("SELECT item, price FROM $restaurant order by item ASC");
-
     $fetch1 = $mysqli->query("SELECT item FROM $restaurant order by item ASC");
     $list = array();
 
@@ -61,7 +60,52 @@ echo "Menu:";
     }
 
     $menuItemsLength = count($list);
+
+function testFunction($rows,$grade,$list,$ID) {
+    $arr = []; 
+    $num = 0;
+    $className = 'item0';
+    getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+
+   $num = 1;
+   $className = 'item1';
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+
+   $num = 2;
+   $className = 'item2';
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+
+   $num = 3;
+   $className = 'item3';
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+
+   $num = 4;
+   $className = 'item4';
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+
+   $num = 5;
+   $className = 'item5';
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+
+   $num = 6;
+   $className = 'item6';
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+
+   $num = 7;
+   $className = 'item7';
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className); 
+
+
+}
     ?>
+
+
+<?php
+
+
+
+?>
+
 
 <!DOCTYPE html> 
 <html> 
@@ -129,47 +173,16 @@ echo "Menu:";
 
         <br>
 
-
-		<?php while($rows = $result->fetch_assoc())
-		{ 
-            $arr = []; 
-            $grade = '8th Grade';
-            if ($grade == '8th Grade') {
-                $gradeID = 'eighth';
-            }
-
-                $num = 0;
-                $className = 'item0';
-                getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-        
-               $num = 1;
-               $className = 'item1';
-               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-        
-               $num = 2;
-               $className = 'item2';
-               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-        
-               $num = 3;
-               $className = 'item3';
-               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-        
-               $num = 4;
-               $className = 'item4';
-               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-        
-               $num = 5;
-               $className = 'item5';
-               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-        
-               $num = 6;
-               $className = 'item6';
-               getItemQuantity($rows, $list, $arr,$num,$grade,$className);
-        
-               $num = 7;
-               $className = 'item7';
-               getItemQuantity($rows, $list, $arr,$num,$grade,$className); 
+        <?php 
+        while($rows = $result->fetch_assoc())
+		{
+            testFunction($rows, '6th Grade', $list, 'sixth');
+            testFunction($rows, '7th Grade', $list, 'seventh');
+            testFunction($rows, '8th Grade', $list, 'eighth');    
+          
+    
     ?>
+
 
     <?php 
 
@@ -206,19 +219,13 @@ echo "Menu:";
         function getItemQuantity($rows, $list, $arr, $num, $grade, $className) {
             if($rows['item'] == $list[$num] && $rows['grade'] == $grade ) {
                 $quantity = $rows['quantity'];
-
                 echo "<div hidden class='{$className}'>";
                 array_push($arr, $quantity);
                 echo implode (" ",$arr); 
             };
         }
-
-  
-
+		
     ?> 
-
- 
-
 	</table> 
 
     <br>
@@ -306,38 +313,20 @@ echo "Menu:";
 
 
     let menuItemsLength = <?php echo $menuItemsLength ?>;
-
-    let gradeID = <?php echo $gradeID ?>;
-    if(gradeID = 'eighth'){
-        console.log(gradeID);
-    }
-
-
-
-
+  
     console.log(menuItemsLength);
+        let eighthRow = document.getElementById('eighth');
+        for(let i = 0; i < menuItemsLength; i++) {
+            let itemCount = foodQuantity('item' + i);
+            let cell = eighthRow.insertCell(i + 1);
+            cell.innerHTML = itemCount;
+        }  
 
-    let eighthRow = document.getElementById('eighth');
-    for(let i = 0; i < menuItemsLength; i++) {
-        let itemCount = foodQuantity('item' + i);
-        let cell = eighthRow.insertCell(i + 1);
-        cell.innerHTML = itemCount;
-    }  
-
-
-       
-
-       
-
-
-
-
-/*     let seventhRow = document.getElementById('seventh');
-    for(let i = 0; i < menuItemsLength; i++) {
-        let itemCount = foodQuantity('item' + i);
-        let cell = seventhRow.insertCell(i + 1);
-        cell.innerHTML = itemCount;
-    }  
- */
-
+        let seventhRow = document.getElementById('seventh');
+        for(let i = 0; i < menuItemsLength; i++) {
+            let itemCount = foodQuantity('item' + i);
+            let cell = seventhRow.insertCell(i + 1);
+            cell.innerHTML = itemCount;
+        }  
+ 
 </script>
