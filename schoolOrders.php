@@ -59,53 +59,52 @@ echo "Menu:";
         echo "$value <br>";
     }
 
-    $menuItemsLength = count($list);
 
-function testFunction($rows,$grade,$list,$ID) {
+
+$menuItemsLength = count($list);
+function addItemsFromDB($rows,$grade,$list,$gradeClass) {
+
     $arr = []; 
     $num = 0;
+
     $className = 'item0';
-    getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+    getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
 
    $num = 1;
    $className = 'item1';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
 
    $num = 2;
    $className = 'item2';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
 
    $num = 3;
    $className = 'item3';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
 
    $num = 4;
    $className = 'item4';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
 
    $num = 5;
    $className = 'item5';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
 
    $num = 6;
    $className = 'item6';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className);
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
 
    $num = 7;
    $className = 'item7';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className); 
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass); 
 
 
 }
+
     ?>
-
-
 <?php
 
-
-
 ?>
-
 
 <!DOCTYPE html> 
 <html> 
@@ -174,17 +173,25 @@ function testFunction($rows,$grade,$list,$ID) {
         <br>
 
         <?php 
+   
         while($rows = $result->fetch_assoc())
 		{
-            testFunction($rows, '6th Grade', $list, 'sixth');
-            testFunction($rows, '7th Grade', $list, 'seventh');
-            testFunction($rows, '8th Grade', $list, 'eighth');    
-          
+            addItemsFromDB($rows, '1st Grade', $list, 'firstGrade');
+            addItemsFromDB($rows, '2nd Grade', $list,'secondGrade');   
+
+            addItemsFromDB($rows, '3rd Grade', $list,'thirdGrade');
+            addItemsFromDB($rows, '4th Grade', $list, 'fourthGrade');
+            addItemsFromDB($rows, '5th Grade', $list,'fifthGrade');   
+
+            addItemsFromDB($rows, '6th Grade', $list,'sixthGrade');
+            addItemsFromDB($rows, '7th Grade', $list, 'seventhGrade');
+            addItemsFromDB($rows, '8th Grade', $list,'eighthGrade');     
     
     ?>
 
 
     <?php 
+
 
 /*//////////////////////////////////////////// MONEY SUMMARY BY CLASS ////////////////////////////////*/
         if ($rows['grade'] == '1st Grade'):
@@ -212,19 +219,25 @@ function testFunction($rows,$grade,$list,$ID) {
             $eighthTotal = $eighthTotal + floatval($rows["price"]);
 
         endif;
+        
+  
         ?>
+         
          
 	<?php 
         }
-        function getItemQuantity($rows, $list, $arr, $num, $grade, $className) {
+      
+        function getItemQuantity($rows, $list, $arr, $num, $grade, $className,$gradeClass) {
             if($rows['item'] == $list[$num] && $rows['grade'] == $grade ) {
                 $quantity = $rows['quantity'];
-                echo "<div hidden class='{$className}'>";
+                echo "<div hidden class='{$className} {$gradeClass}'>";
                 array_push($arr, $quantity);
                 echo implode (" ",$arr); 
             };
         }
-		
+
+   
+      
     ?> 
 	</table> 
 
@@ -300,33 +313,40 @@ function testFunction($rows,$grade,$list,$ID) {
 
 
 
-    function foodQuantity(itemClass) {
-        var quantity = document.getElementsByClassName(itemClass);
+    function foodQuantity(itemClass, gradeClass) {
+        /* var quantity = document.getElementsByClassName(itemClass); */
+        var quantity = document.querySelectorAll(`.${gradeClass}.${itemClass}`)
         let sum = 0;
         for (var i = 0; i < quantity.length; i++) {
             var total = quantity[i].innerText;
             sum += parseInt(total);
         }
-        console.log("Meal 8th:", sum);
         return sum;
     }
 
-
     let menuItemsLength = <?php echo $menuItemsLength ?>;
-  
-    console.log(menuItemsLength);
-        let eighthRow = document.getElementById('eighth');
-        for(let i = 0; i < menuItemsLength; i++) {
-            let itemCount = foodQuantity('item' + i);
-            let cell = eighthRow.insertCell(i + 1);
-            cell.innerHTML = itemCount;
-        }  
+    function addOrdersToRow(grade, gradeClass){
 
-        let seventhRow = document.getElementById('seventh');
+        let gradeRow = document.getElementById(grade);
         for(let i = 0; i < menuItemsLength; i++) {
-            let itemCount = foodQuantity('item' + i);
-            let cell = seventhRow.insertCell(i + 1);
-            cell.innerHTML = itemCount;
+            let itemCount = foodQuantity('item' + i, `${gradeClass}`);
+            console.log(itemCount);
+            let cell = gradeRow.insertCell(i + 1);
+            cell.innerHTML = itemCount;  
         }  
- 
+    }
+
+
+
+    addOrdersToRow('first', 'firstGrade');
+    addOrdersToRow('second', 'secondGrade');
+
+    addOrdersToRow('third', 'thirdGrade');
+    addOrdersToRow('fourth', 'fourthGrade');
+    addOrdersToRow('fifth', 'fifthGrade');
+
+    addOrdersToRow('sixth', 'sixthGrade');
+    addOrdersToRow('seventh', 'seventhGrade');
+    addOrdersToRow('eighth', 'eighthGrade');
+
 </script>
