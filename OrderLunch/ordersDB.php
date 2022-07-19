@@ -1,5 +1,4 @@
 <?php
-include 'menuPrice.php';
 
     $host = "localhost";
     $dbname = "orders";

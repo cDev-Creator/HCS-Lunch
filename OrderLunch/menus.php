@@ -1,32 +1,12 @@
-<?php
-include('menuPrice.php');
-$grade = $_POST['grade'];
-echo "Grade: ".$grade;
-echo "<br>"
-?>
-
-<script>
-    var gradeVar = <?php echo json_encode($grade); ?>;
-    window.onload = function() {
-        localStorage.setItem("gradeVar",gradeVar);
-    }
-
-</script>
 
 <?php
 define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
 $mydate=getdate(date("U"));
-echo "Date: ";
-echo "$mydate[month] $mydate[mday], $mydate[year]";
-echo"</br>";
-echo "Day of the week : ";
-/* $weekday = "$mydate[weekday]"; */
 
+/* $weekday = "$mydate[weekday]"; */
 $weekday = "Friday";
-echo $weekday;
-echo"</br>";
-echo"</br>";
+
 
 //CLEAN UP REPETITIVE CODE
 echo "Menu:";
@@ -83,26 +63,12 @@ echo "Menu:";
     <!-------------------- USE HIDDEN TO GET VALUES ----------------->
     <input type="text" name="classTotal" id="classTotal" hidden required/>
 
-    <input type="text" name="menuItem1" id="menuItem1" hidden required/>
-    <input type="text" name="menuItem2" id="menuItem2" hidden required/>
-    <input type="text" name="menuItem3" id="menuItem3" hidden required/>
-    <input type="text" name="menuItem4" id="menuItem4" hidden required/>
-    <input type="text" name="menuItem5" id="menuItem5" hidden required/>
-    <input type="text" name="menuItem6" id="menuItem6" hidden required/>
-    <input type="text" name="menuItem7" id="menuItem7" hidden required/>
-    <input type="text" name="menuItem8" id="menuItem8" hidden required/>
-
-
-
     <input type="text" name="grades" id="grades" hidden required/>
     <input type="text" name="names" id="names" hidden required/>
     <input type="text" name="items" id="items" hidden required/>
     <input type="text" name="quantities" id="quantities" hidden required/>
     <input type="text" name="prices" id="prices" hidden required/>
     
-
-
-
     <table border="1" id="orderTable">
         <tr>
             <td>Grade</td>
@@ -126,9 +92,7 @@ echo "Menu:";
 <script>
 let menuItemsArr = [];
 
-
     function populateTable(){
-
         let table = document.getElementById("orderTable")
         let row = table.insertRow();
         let cell1 = row.insertCell();
@@ -169,12 +133,11 @@ let menuItemsArr = [];
         let menuItemValue = document.getElementById("menuItems").value;
         let item = menuItemValue.split("~",1);
         cell3.innerHTML = item;
-        /* cell3.classList.add("orderedItem") */
+  
 
 
         cell4.innerHTML = document.getElementById("quantity").value;
 
-        /* cell4.classList.add("itemQuantity"); */
         let quantity = document.getElementById("quantity").value;   
 
         let price = menuItemValue.split('~')[1];
@@ -204,8 +167,7 @@ let menuItemsArr = [];
         }
 
 
- /*        console.log("Ordered Items:");
-        console.log(menuItemsArr); */
+
        
         let menuItemsDropdown = document.querySelectorAll(".menuSelection");
         let dayOfWeekMenu = []
@@ -215,30 +177,17 @@ let menuItemsArr = [];
             menuItems = menuItems.toString();
             dayOfWeekMenu.push(menuItems);
         }
-/*         console.log("Day of week menu:");
-        console.log(dayOfWeekMenu); */
-      
-        function getOccurrence(array, value) {
-        return array.filter((v) => (v === value)).length;
-        }
-        
-        let menuItem1 = getOccurrence(menuItemsArr, dayOfWeekMenu[0])
-        let menuItem2 = getOccurrence(menuItemsArr, dayOfWeekMenu[1])
-        let menuItem3 = getOccurrence(menuItemsArr, dayOfWeekMenu[2])
-        let menuItem4 = getOccurrence(menuItemsArr, dayOfWeekMenu[3])
-        let menuItem5 = getOccurrence(menuItemsArr, dayOfWeekMenu[4])
-        let menuItem6 = getOccurrence(menuItemsArr, dayOfWeekMenu[5])
-        let menuItem7 = getOccurrence(menuItemsArr, dayOfWeekMenu[6])
-        let menuItem8 = getOccurrence(menuItemsArr, dayOfWeekMenu[7])
 
-        document.getElementById("menuItem1").value = menuItem1;
-        document.getElementById("menuItem2").value = menuItem2;
-        document.getElementById("menuItem3").value = menuItem3;
-        document.getElementById("menuItem4").value = menuItem4;
-        document.getElementById("menuItem5").value = menuItem5;
-        document.getElementById("menuItem6").value = menuItem6;
-        document.getElementById("menuItem7").value = menuItem7;
-        document.getElementById("menuItem8").value = menuItem8;
+
+
+
+
+
+
+
+
+
+
 
 
         let grades = cell1.innerHTML;
