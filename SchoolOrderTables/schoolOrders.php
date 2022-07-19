@@ -21,7 +21,7 @@ $weekday = "Friday";
 echo $weekday;
 echo"</br>";
 echo"</br>";
-echo "Menu:";
+
 ?>
     <?php 
     $mysqli = new mysqli('localhost','root','','menus');
@@ -54,10 +54,6 @@ echo "Menu:";
     while($row = mysqli_fetch_assoc($fetch1)){
         $rows = implode(" ",$row);
         array_push($list, $rows);
-    }
-
-    foreach ($list as $value) {
-        echo "$value <br>";
     }
 
 
@@ -109,9 +105,9 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 <!DOCTYPE html> 
 <html> 
 	<body> 
-	<table align="center" border="1px" style="width:1000px; line-height:40px;"> 
+	<table id='mainTable'align="center" border="1px" style="width:1200px; line-height:40px;"> 
 	<tr> 
-		<th colspan="10"><h2>Student Orders</h2></th> 
+		<th colspan="20"><h2>Student Orders</h2></th> 
     <tr>
     <td></td>  
 
@@ -136,10 +132,14 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     </tr>
 
     <tr id="fourth">
-        <td>5th Grade</td>
+        <td>4th Grade</td>
     </tr>
 
     <tr id="fifth">
+        <td>5th Grade</td>
+    </tr>
+
+    <tr id="firstShiftTotal">
         <td>1st Shift Total</td>
     </tr>
 
@@ -157,10 +157,12 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 
     <tr id="eighth">
         <td>8th Grade</td>
+    </tr>
 
+    <tr id="secondShiftTotal">
+        <td>2nd Shift Total</td>
     </tr>
 	
-      
 
         <br>
 
@@ -198,12 +200,14 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 
     <?php 
         require('moneySumByClass.php'); 
+        require('foodSummary.php'); 
     ?>
+
 
 <script>
     function foodQuantity(itemClass, gradeClass) {
-        /* var quantity = document.getElementsByClassName(itemClass); */
         var quantity = document.querySelectorAll(`.${gradeClass}.${itemClass}`)
+
         let sum = 0;
         for (var i = 0; i < quantity.length; i++) {
             var total = quantity[i].innerText;
@@ -218,7 +222,6 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
         let gradeRow = document.getElementById(grade);
         for(let i = 0; i < menuItemsLength; i++) {
             let itemCount = foodQuantity('item' + i, `${gradeClass}`);
-            console.log(itemCount);
             let cell = gradeRow.insertCell(i + 1);
             cell.innerHTML = itemCount;  
         }  
@@ -234,5 +237,60 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     addOrdersToRow('sixth', 'sixthGrade');
     addOrdersToRow('seventh', 'seventhGrade');
     addOrdersToRow('eighth', 'eighthGrade');
+
+
+    var table = document.getElementById("mainTable")
+            
+
+    function addFirstShiftTotals(r1,r2,r3,r4,r5,cell1) {
+        const total = Array();
+            total.push(table.rows[r1].cells[cell1].innerHTML);
+            total.push(table.rows[r2].cells[cell1].innerHTML);
+            total.push(table.rows[r3].cells[cell1].innerHTML);
+            total.push(table.rows[r4].cells[cell1].innerHTML);
+            total.push(table.rows[r5].cells[cell1].innerHTML);
+
+            var arrayOfNumbers = total.map(Number);
+            var sum = 0;
+            for (var i = 0; i < arrayOfNumbers.length; i++) {
+                sum += arrayOfNumbers[i]
+            }
+            const firstTotal = document.getElementById("firstShiftTotal");
+            let cell = firstTotal.insertCell(1);
+            cell.innerHTML = sum;
+    }
+
+    function reverseOrderFirst() {
+        for (var i = menuItemsLength-1; i>=0; i--) {
+            let col = i + 1;
+            addFirstShiftTotals(2,3,4,5,6,col);
+        }
+    }
+    reverseOrderFirst();
+
+
+    function addSecondShiftTotals(r1,r2,r3,cell2) {
+        const total = Array();
+            total.push(table.rows[r1].cells[cell2].innerHTML);
+            total.push(table.rows[r2].cells[cell2].innerHTML);
+            total.push(table.rows[r3].cells[cell2].innerHTML);
+
+            var arrayOfNumbers = total.map(Number);
+            var sum = 0;
+            for (var i = 0; i < arrayOfNumbers.length; i++) {
+                sum += arrayOfNumbers[i]
+            }
+            const secondTotal = document.getElementById("secondShiftTotal");
+            let cell = secondTotal.insertCell(1);
+            cell.innerHTML = sum;
+    }
+
+    function reverseOrderSecond() {
+        for (var i = menuItemsLength-1; i>=0; i--) {
+            let col2 = i + 1;
+            addSecondShiftTotals(9,10,11,col2);
+        }
+    }
+    reverseOrderSecond();
 
 </script>
