@@ -6,6 +6,10 @@ $result = $mysqli->query("SELECT grade, item, quantity, price FROM allorders WHE
 
 ?>
 
+<img src="hcslogo.jpg" alt="HCS Logo" width="200" height="70">
+<br>
+<br>
+
 <!--------------------------------------- REPETIVE CODE FROM MENUS.PHP PUT INTO ONE FILE ---------------------------------------->
 <?php
 define('TIMEZONE', 'America/Chicago');
