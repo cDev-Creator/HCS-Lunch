@@ -82,15 +82,18 @@ while($rows = $result->fetch_assoc())
 <button type="submit" name="submit" id="submitBtn">Submit Test</button>
 </form>
 
+
 <!--AJAX-->
 
 <?php
 require('menus.php');
-require('orderTickets.php');
+require('classOrderTable.php');
 ?>
 
  <script>
     $(document).ready(function() {
+ 
+        
         $("#lunch-form").submit(function(e) {
             e.preventDefault();
             $.ajax( {
@@ -100,6 +103,7 @@ require('orderTickets.php');
                 dataType: "text",
                 success: function() {
                     $("#lunch-form")[0].reset();
+                    location.reload();
                 }
             });
         });
