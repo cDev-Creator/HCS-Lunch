@@ -1,56 +1,26 @@
 <?php
 $mysqli = new mysqli('localhost','root','','orders');
-
-$result = $mysqli->query("SELECT ID, grade, name, item, quantity, price FROM allorders ORDER BY grade,name ASC"); 
-
-
+$result = $mysqli->query("SELECT grade, name, item, quantity FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, name ASC"); 
 ?>
 
-
 <!DOCTYPE html> 
+
+<link rel="stylesheet" href="test.css">
 <html> 
 	<body> 
-	<table align="center" border="1px" style="width:600px; line-height:40px;"> 
-	<tr> 
-		<th colspan="7"><h2>Student Orders</h2></th> 
-		</tr> 
-			<th> ID </th> 
-            <th> Grade </th> 
-			<th> Name </th> 
-			<th> Item </th> 
-			<th> Quantity </th> 
-            <th> Price </th> 
-            <th> Total </th> 
-		</tr> 
-		
-        <?php $total = 0;?>
-        <?php echo substr_count("Hello world. The world is nice","world"); ?>
-
+        <h1>Lunch Tickets</h1>
+	<div id="lunchTickets"> 
 		<?php while($rows = $result->fetch_assoc())
 		{ 
 		?> 
-		<tr>
-            <td><?php echo $rows['ID']; ?></td> 
-            <td><?php echo $rows['grade']; ?></td> 
-            <td><?php echo $rows['name']; ?></td> 
-            <td><?php echo $rows['item']; ?></td> 
-            <td><?php echo $rows['quantity']; ?></td> 
-            <td><?php echo $rows['price']; ?></td>
-
-            <?php $total = $total + floatval($rows["price"]);?>
-          
-           
-
-
-            <td><?php echo number_format((float)$total, 2, '.', ''); ?></td>
-		</tr> 
        
-            
+        <div class='ticket'><?php echo '</br>', $rows['grade'], '</br>', $rows['name'], '</br>', '</br>', '</br>', '</br>', $rows['item'], ' ── ', $rows['quantity'];?></div>
 	<?php 
     
         } 
     ?> 
-
+    </div>
+    <input type="button" value="Print Tickets" onClick="window.print()">
 	</table> 
 	</body> 
 	</html>

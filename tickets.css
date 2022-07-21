@@ -1,0 +1,14 @@
+#lunchTickets {
+    display: grid;
+    grid-template-columns: auto auto auto;
+ 
+}
+
+.ticket {
+    text-align: center;
+    border: 3px solid black;
+    height: 200px;
+    width: 200px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
