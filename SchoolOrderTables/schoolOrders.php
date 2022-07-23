@@ -99,6 +99,10 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
    $className = 'item7';
    getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass); 
 
+   $num = 8;
+   $className = 'item8';
+   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass); 
+
 }
 
     ?>
@@ -245,7 +249,6 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 
     var table = document.getElementById("mainTable")
             
-
     function addFirstShiftTotals(r1,r2,r3,r4,r5,cell1) {
         const total = Array();
             total.push(table.rows[r1].cells[cell1].innerHTML);
@@ -258,10 +261,14 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
             var sum = 0;
             for (var i = 0; i < arrayOfNumbers.length; i++) {
                 sum += arrayOfNumbers[i]
+
+             
             }
             const firstTotal = document.getElementById("firstShiftTotal");
             let cell = firstTotal.insertCell(1);
             cell.innerHTML = sum;
+
+         
     }
 
     function reverseOrderFirst() {
@@ -287,6 +294,8 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
             const secondTotal = document.getElementById("secondShiftTotal");
             let cell = secondTotal.insertCell(1);
             cell.innerHTML = sum;
+
+            
     }
 
     function reverseOrderSecond() {
@@ -296,5 +305,29 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
         }
     }
     reverseOrderSecond();
+
+
+
+   /////////////////////////////*  FOR FOOD SUMMARY TABLE *////////////////////
+    let menuItemSchoolQuantitiesArr = Array();
+    function menuItemSchoolQuantities() {
+        for (var i=1; i <= menuItemsLength; i++) {
+        let firstShiftTotals =table.rows[7].cells[i].innerHTML;
+        let secondShiftTotals = table.rows[12].cells[i].innerHTML;
+        let firstShiftTotalsInt = parseInt(firstShiftTotals);
+        let secondShiftTotalsInt = parseInt(secondShiftTotals);
+
+        let totals = firstShiftTotalsInt + secondShiftTotalsInt;
+        menuItemSchoolQuantitiesArr.push(totals);
+        }
+    }
+    menuItemSchoolQuantities()
+
+var td2 = document.querySelectorAll('.td2');
+for(var i=0; i<td2.length;i++){
+  td2[i].textContent = menuItemSchoolQuantitiesArr[i];
+}
+
+
 
 </script>
