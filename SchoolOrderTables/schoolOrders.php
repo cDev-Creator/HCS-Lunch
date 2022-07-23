@@ -307,8 +307,8 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     reverseOrderSecond();
 
 
-
-   /////////////////////////////*  FOR FOOD SUMMARY TABLE *////////////////////
+////////////////////////////////*  FOR FOOD SUMMARY TABLE */////////////////////////
+  
     let menuItemSchoolQuantitiesArr = Array();
     function menuItemSchoolQuantities() {
         for (var i=1; i <= menuItemsLength; i++) {
@@ -328,6 +328,41 @@ for(var i=0; i<td2.length;i++){
   td2[i].textContent = menuItemSchoolQuantitiesArr[i];
 }
 
+/////////////////////////////////////* AMOUNT OF MONEY PER ITEM *//////////////////////////
 
+function menuItemSchoolTotals(){
+    quantityArr = Array();
+    for(var i=0; i<td2.length;i++){
+    let quantity = td2[i].textContent;
+    let quantityInt = parseInt(quantity);
+    quantityArr.push(quantityInt);
+    }
 
+    let priceArr = Array();
+    var td3 = document.querySelectorAll('.td3');
+    for(var i=0; i<td3.length;i++){
+        let prices = td3[i].textContent;
+        let pricesFloat = parseFloat(prices);
+        priceArr.push(pricesFloat);
+    }
+
+    let totalCost = [];
+    for(var i = 0; i < totalCost.length; i++) { 
+        totalCost[i] = priceArr[i] * quantityArr[i]; 
+    }
+
+    let totalCostDecimalArr = [];
+    for (let i = 0; i < Math.min(quantityArr.length, priceArr.length); i++) {
+            totalCost[i] = quantityArr[i] * priceArr[i];
+
+            var decimal = totalCost[i].toFixed(2)
+            totalCostDecimalArr.push(decimal)
+        }
+
+    let td4 = document.querySelectorAll('.td4');
+        for(var i=0; i<td4.length;i++){
+        td4[i].textContent = totalCostDecimalArr[i];
+    }
+}
+menuItemSchoolTotals()
 </script>
