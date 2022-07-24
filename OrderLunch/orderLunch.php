@@ -20,14 +20,9 @@ echo "<br/>";
 echo "<br/>";
 ?>
 
-
-
 <!-- STUDENTS FROM OTHER CLASSES  -->
 <?php
 $mysqli = new mysqli('localhost','root','','students');
-/* $grade = $_POST['grade']; */
-
-/* $result = $mysqli->query("SELECT * FROM names WHERE grade='$grade' ORDER BY grade, firstName ASC"); */
 $result = $mysqli->query("SELECT * FROM names ORDER BY grade, firstName ASC"); 
 
 ?>
@@ -90,12 +85,12 @@ require('menus.php');
 require('classOrderTable.php');
 ?>
 
+<p id="successMsg"> <p>
  <script>
     $(document).ready(function() {
- 
-        
         $("#lunch-form").submit(function(e) {
             e.preventDefault();
+
             $.ajax( {
                 url: "ordersDB.php",
                 method: "POST",
@@ -104,8 +99,37 @@ require('classOrderTable.php');
                 success: function() {
                     $("#lunch-form")[0].reset();
                     location.reload();
+                },
+                error: function(){
+                    alert("error")
                 }
             });
         });
     });
+</script>
+
+<script>
+/*     $(document).ready(function() {
+  $("#lunch-form").submit(function(e) {
+    //---------------^---------------
+    e.preventDefault();
+    var classTotal = $('#classTotal').val(),
+    grades = $('#grades').val(),
+    names = $('#names').val(),
+    items = $('#items').val(),
+    quantities = $('#quantities').val();
+    prices = $('#prices').val();
+    $.ajax({
+      type: "POST",
+      url: "ordersDB.php",
+      data: "classTotal=" + classTotal + "&grades=" + grades + "&names=" + names + "&items=" + items + "&quantities=" + quantities + "&prices=" + prices,
+      success: function(html) {
+        $("#lunch-form")[0].reset();
+        location.reload();
+        console.log(html);
+      }
+    });
+    return false;
+  });
+}); */
 </script>

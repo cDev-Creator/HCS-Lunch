@@ -1,4 +1,3 @@
-
 <?php
 define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
@@ -50,26 +49,24 @@ echo "Menu:";
         $price = $rows['price'];
 
         echo "<option id='menuSelection' class='menuSelection' value='$item~$price'> $item - $price</option>";  
-
     }
     ?>
     
     <input type="number" name="quantity" id="quantity" placeholder="Quantity" required/>
     </form>
     </select>
-    <h1>Orders</h1>
+<!--     <h1>Orders</h1> -->
 
-    <form method="post" name="order-table-form" id="orderTableForm" method="POST">
+    <form name="order-table-form" id="orderTableForm" method="POST">
     <!-------------------- USE HIDDEN TO GET VALUES ----------------->
     <input type="text" name="classTotal" id="classTotal" hidden required/>
-
     <input type="text" name="grades" id="grades" hidden required/>
     <input type="text" name="names" id="names" hidden required/>
     <input type="text" name="items" id="items" hidden required/>
     <input type="text" name="quantities" id="quantities" hidden required/>
     <input type="text" name="prices" id="prices" hidden required/>
     
-    <table border="1" id="orderTable">
+    <table border="1" id="orderTable" hidden>
         <tr>
             <td>Grade</td>
             <td>Student Name</td>
@@ -82,12 +79,11 @@ echo "Menu:";
  
     </form>
 
-
-<script>
-    let restaurants = "<?php echo $restaurant?>";
+<!-- <script
+    let restaurants = "<?php /* echo $restaurant */?>";
     console.log(restaurants);
     document.getElementById("restaurants").value = restaurants;
-</script>   
+</script>    -->
 
 <script>
 let menuItemsArr = [];
@@ -125,21 +121,12 @@ let menuItemsArr = [];
             student = student.split("~",1);
             cell2.innerHTML = student;
         }
-
-        else if(allStudents.value !== '' && allStudents.value !== '') {
-            alert("Please only select one student.")
-        }
         
         let menuItemValue = document.getElementById("menuItems").value;
         let item = menuItemValue.split("~",1);
         cell3.innerHTML = item;
-  
-
-
         cell4.innerHTML = document.getElementById("quantity").value;
-
         let quantity = document.getElementById("quantity").value;   
-
         let price = menuItemValue.split('~')[1];
         let totalCost = price * quantity;
         let totalCostDecimal = totalCost.toFixed(2);
@@ -165,9 +152,6 @@ let menuItemsArr = [];
            /*  console.log(menuItem); */
             menuItemsArr.push(menuItem);
         }
-
-
-
        
         let menuItemsDropdown = document.querySelectorAll(".menuSelection");
         let dayOfWeekMenu = []
@@ -177,18 +161,6 @@ let menuItemsArr = [];
             menuItems = menuItems.toString();
             dayOfWeekMenu.push(menuItems);
         }
-
-
-
-
-
-
-
-
-
-
-
-
 
         let grades = cell1.innerHTML;
         document.getElementById("grades").value = grades;
@@ -208,24 +180,6 @@ let menuItemsArr = [];
     </script>
 
 
-    <!----------------------------------------- DELETE CLASS AND INDIVIDUAL ORDER -------------------------------------->
-    <button id="clearClassOrder">Clear All</button>
-    <script>
-        let table = document.getElementById("orderTable")
-        let clearBtn = document.getElementById("clearClassOrder")
-        .addEventListener('click', function() { 
-            if (confirm('Are you sure you want to clear all orders?')) {
-                for(var i = 1;i<table.rows.length;){table.deleteRow(i);}
-            }
-        });
-
-        function onDelete(td) {
-        if (confirm('Are you sure you want to delete this order?')) {
-        row = td.parentElement.parentElement;
-        document.getElementById("orderTable").deleteRow(row.rowIndex);
-    }
-} 
-
 </script>
 
 <style>
@@ -235,3 +189,5 @@ let menuItemsArr = [];
     }
     tr:nth-child(even),table.list thead>tr { background-color: #dddddd; }
 </style>
+
+
