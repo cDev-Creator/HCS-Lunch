@@ -1,3 +1,4 @@
+
 <?php
 
     $host = "localhost";
@@ -10,30 +11,36 @@
                         password: $password,
                         database: $dbname);
      
-
     if (mysqli_connect_errno()) {
         die("Connection error: " . mysqli_connect_error());
     }    
     
-    $grades = $_POST['grades'];
-    $names = $_POST['names'];
-    $items = $_POST['items'];
+
+    
+ /*    $gradesVal = $_POST['grades']; */
+    $namesVal = $_POST['names'];
+    $itemsVal = $_POST['items'];
     $quantities = $_POST['quantities'];
-    $prices = $_POST['prices'];
+    $allNamesVal = $_POST['allNames'];
 
-    $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`) VALUES ('$grades', '$names','$items', '$quantities', '$prices')";
+    $items = explode("-",$itemsVal);
+    $item = array_values($items)[0];
+    $price = array_values($items)[1];
 
-    $insert = mysqli_query($conn, $qry);
-    if(!$insert) {
-        echo "Error";
+    if (empty($_POST['names'])) {
+        $allNames = explode("-",$allNamesVal);
+        $name = array_values($allNames)[0];
+        $grade = array_values($allNames)[1];
     }
-    else {
-        echo "Succsss";
+    else if(empty($_POST['allNames'])) {
+        $names = explode("-",$namesVal);
+        $name = array_values($names)[0];
+        $grade = array_values($names)[1];
     }
+/*     else if (!empty($_POST['allNames']) && ($_POST['names']))  { */
+        $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`) VALUES ('$grade', '$name','$item', '$quantities', '$price')";
+        $insert = mysqli_query($conn, $qry);
+ /*    } */
 
-$classTotal = $_POST['classTotal'];
-echo "Total Cash: ".$classTotal;
-echo "</br>";
-echo "menuItem1: ".$items;
 
 ?>
