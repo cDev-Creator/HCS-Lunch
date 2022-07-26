@@ -15,8 +15,6 @@
         die("Connection error: " . mysqli_connect_error());
     }    
     
-
-    
  /*    $gradesVal = $_POST['grades']; */
     $namesVal = $_POST['names'];
     $itemsVal = $_POST['items'];
@@ -26,6 +24,12 @@
     $items = explode("-",$itemsVal);
     $item = array_values($items)[0];
     $price = array_values($items)[1];
+
+    $prices = $price;
+    $priceFloat = (float)$prices;
+    $quantity = $quantities;
+    $quantitiesFloat = (float)$quantity;
+    echo $mealCost =  number_format($priceFloat * $quantitiesFloat, 2);
 
     if (empty($_POST['names'])) {
         $allNames = explode("-",$allNamesVal);
@@ -37,10 +41,9 @@
         $name = array_values($names)[0];
         $grade = array_values($names)[1];
     }
-/*     else if (!empty($_POST['allNames']) && ($_POST['names']))  { */
-        $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`) VALUES ('$grade', '$name','$item', '$quantities', '$price')";
-        $insert = mysqli_query($conn, $qry);
- /*    } */
-
+    
+    header("location:orderLunch.php");
+    $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`) VALUES ('$grade', '$name','$item', '$quantities', '$mealCost')";
+    $insert = mysqli_query($conn, $qry);
 
 ?>
