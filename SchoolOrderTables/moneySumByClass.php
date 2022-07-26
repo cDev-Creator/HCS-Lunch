@@ -13,6 +13,18 @@
         <td>Class</td> 
         <td>Cash</td> 
     </tr>
+
+    <tr id="officeMoneySum">
+        <td>Office Staff</td>
+    </tr>
+
+    <tr id="twoDayMoneySum">
+        <td>2 Day Preschool</td>
+    </tr>
+
+    <tr id="threeDayMoneySum">
+        <td>3 Day Preschool</td>
+    </tr>
    
     <tr id="firstMoneySum">
         <td>1st Grade</td>
@@ -56,6 +68,9 @@ $mysqli = new mysqli('localhost','root','','orders');
 $result = $mysqli->query("SELECT grade, item, quantity, price FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, item ASC "); 
 
 $total = 0;
+$officeTotal = 0;
+$twoDayTotal = 0;
+$threeDayTotal = 0;
 $firstTotal = 0;
 $secondTotal = 0;
 $thirdTotal = 0;
@@ -67,7 +82,17 @@ $eighthTotal = 0;
 
 
 while($rows = $result->fetch_assoc()) {
-    if ($rows['grade'] == '1st Grade'):
+
+    if ($rows['grade'] == 'Office Staff'):
+        $officeTotal = $officeTotal + floatval($rows["price"]);
+
+    elseif ($rows['grade'] == '02 Day Preschool'):
+        $twoDayTotal = $twoDayTotal + floatval($rows["price"]);
+
+    elseif ($rows['grade'] == '03 Day Preschool'):
+        $threeDayTotal = $threeDayTotal + floatval($rows["price"]);
+
+    elseif ($rows['grade'] == '1st Grade'):
         $firstTotal = $firstTotal + floatval($rows["price"]);
    
     elseif ($rows['grade'] == '2nd Grade'):
@@ -92,7 +117,6 @@ while($rows = $result->fetch_assoc()) {
         $eighthTotal = $eighthTotal + floatval($rows["price"]);
 
     endif;
-
 }
 ?>
 
@@ -101,8 +125,20 @@ while($rows = $result->fetch_assoc()) {
         let moneySum = document.getElementById(gradeMoneySum);
         let classTotal = moneySum.insertCell(1);
         let classTotalVal =  cashTotal;
-        classTotal.innerHTML = classTotalVal;
+
+        let classTotalValDecimal = classTotalVal.toFixed(2);
+        classTotal.innerText = '$'+classTotalValDecimal;
     }
+
+
+    let officeStaff =  <?php echo number_format((float)$officeTotal, 2, '.', ''); ?>;
+    addMoneySummary('officeMoneySum', officeStaff);
+
+    let twoDay =  <?php echo number_format((float)$twoDayTotal, 2, '.', ''); ?>;
+    addMoneySummary('twoDayMoneySum', twoDay);
+
+    let threeDay =  <?php echo number_format((float)$threeDayTotal, 2, '.', ''); ?>;
+    addMoneySummary('threeDayMoneySum', threeDay);
 
     let first =  <?php echo number_format((float)$firstTotal, 2, '.', ''); ?>;
     addMoneySummary('firstMoneySum', first);

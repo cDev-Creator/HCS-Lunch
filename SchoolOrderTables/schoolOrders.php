@@ -126,9 +126,20 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     }?>
     </tr>
 
+    <tr id="officeStaff">
+        <td>Office Staff</td>
+    </tr>
+
+    <tr id="twoDayPk">
+        <td>2 Day Preschool</td>
+    </tr>
+
+    <tr id="threeDayPk">
+        <td>3 Day Preschool</td>
+    </tr>
+
     <tr id="first">
         <td>1st Grade</td>
-        
     </tr>
 
     <tr id="second">
@@ -178,6 +189,12 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
    
         while($rows = $result->fetch_assoc())
 		{
+
+            addItemsFromDB($rows, 'Office Staff', $list, 'office');
+
+            addItemsFromDB($rows, '02 Day Preschool', $list, 'twoDay');
+            addItemsFromDB($rows, '03 Day Preschool', $list,'threeDay');   
+
             addItemsFromDB($rows, '1st Grade', $list, 'firstGrade');
             addItemsFromDB($rows, '2nd Grade', $list,'secondGrade');   
 
@@ -231,9 +248,15 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
         for(let i = 0; i < menuItemsLength; i++) {
             let itemCount = foodQuantity('item' + i, `${gradeClass}`);
             let cell = gradeRow.insertCell(i + 1);
-            cell.innerHTML = itemCount;  
+            cell.innerText = itemCount;  
         }  
     }
+
+
+    addOrdersToRow('officeStaff', 'office');
+
+    addOrdersToRow('twoDayPk', 'twoDay');
+    addOrdersToRow('threeDayPk', 'threeDay');
 
     addOrdersToRow('first', 'firstGrade');
     addOrdersToRow('second', 'secondGrade');
@@ -249,13 +272,16 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 
     var table = document.getElementById("mainTable")
             
-    function addFirstShiftTotals(r1,r2,r3,r4,r5,cell1) {
+    function addFirstShiftTotals(r1,r2,r3,r4,r5,r6,r7,r8,cell1) {
         const total = Array();
-            total.push(table.rows[r1].cells[cell1].innerHTML);
-            total.push(table.rows[r2].cells[cell1].innerHTML);
-            total.push(table.rows[r3].cells[cell1].innerHTML);
-            total.push(table.rows[r4].cells[cell1].innerHTML);
-            total.push(table.rows[r5].cells[cell1].innerHTML);
+            total.push(table.rows[r1].cells[cell1].innerText);
+            total.push(table.rows[r2].cells[cell1].innerText);
+            total.push(table.rows[r3].cells[cell1].innerText);
+            total.push(table.rows[r4].cells[cell1].innerText);
+            total.push(table.rows[r5].cells[cell1].innerText);
+            total.push(table.rows[r6].cells[cell1].innerText);
+            total.push(table.rows[r7].cells[cell1].innerText);
+            total.push(table.rows[r8].cells[cell1].innerText);
 
             var arrayOfNumbers = total.map(Number);
             var sum = 0;
@@ -266,7 +292,7 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
             }
             const firstTotal = document.getElementById("firstShiftTotal");
             let cell = firstTotal.insertCell(1);
-            cell.innerHTML = sum;
+            cell.innerText = sum;
 
          
     }
@@ -274,7 +300,7 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     function reverseOrderFirst() {
         for (var i = menuItemsLength-1; i>=0; i--) {
             let col = i + 1;
-            addFirstShiftTotals(2,3,4,5,6,col);
+            addFirstShiftTotals(2,3,4,5,6,7,8,9,col);
         }
     }
     reverseOrderFirst();
@@ -282,9 +308,9 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 
     function addSecondShiftTotals(r1,r2,r3,cell2) {
         const total = Array();
-            total.push(table.rows[r1].cells[cell2].innerHTML);
-            total.push(table.rows[r2].cells[cell2].innerHTML);
-            total.push(table.rows[r3].cells[cell2].innerHTML);
+            total.push(table.rows[r1].cells[cell2].innerText);
+            total.push(table.rows[r2].cells[cell2].innerText);
+            total.push(table.rows[r3].cells[cell2].innerText);
 
             var arrayOfNumbers = total.map(Number);
             var sum = 0;
@@ -293,15 +319,13 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
             }
             const secondTotal = document.getElementById("secondShiftTotal");
             let cell = secondTotal.insertCell(1);
-            cell.innerHTML = sum;
-
-            
+            cell.innerText = sum;      
     }
 
     function reverseOrderSecond() {
         for (var i = menuItemsLength-1; i>=0; i--) {
             let col2 = i + 1;
-            addSecondShiftTotals(9,10,11,col2);
+            addSecondShiftTotals(12,13,14,col2);
         }
     }
     reverseOrderSecond();
@@ -312,8 +336,8 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     let menuItemSchoolQuantitiesArr = Array();
     function menuItemSchoolQuantities() {
         for (var i=1; i <= menuItemsLength; i++) {
-        let firstShiftTotals =table.rows[7].cells[i].innerHTML;
-        let secondShiftTotals = table.rows[12].cells[i].innerHTML;
+        let firstShiftTotals =table.rows[10].cells[i].innerText;
+        let secondShiftTotals = table.rows[14].cells[i].innerText;
         let firstShiftTotalsInt = parseInt(firstShiftTotals);
         let secondShiftTotalsInt = parseInt(secondShiftTotals);
 
@@ -356,7 +380,7 @@ function menuItemSchoolTotals(){
             totalCost[i] = quantityArr[i] * priceArr[i];
 
             var decimal = totalCost[i].toFixed(2)
-            totalCostDecimalArr.push(decimal)
+            totalCostDecimalArr.push('$'+decimal)
         }
 
     let td4 = document.querySelectorAll('.td4');
