@@ -5,7 +5,7 @@
 </head>
 
 <body>
-<table width="200px" border="1" cellspacing="1" cellpadding="1">
+<table id="moneySumTable" align="center">
     <tr> 
 		<th colspan="10"><h2>Money Summary by Class</h2></th> 
     </tr>
@@ -56,7 +56,10 @@
 
     <tr id="eighthMoneySum">
         <td>8th Grade</td>
+    </tr>
 
+    <tr id="totalMoneySum">
+        <td>Total</td>
     </tr>
     <table>
 </body>
@@ -64,10 +67,10 @@
 </html>
 
 <?php 
-$mysqli = new mysqli('localhost','root','','orders');
+$mysqli = new mysqli('localhost','root','','menus');
 $result = $mysqli->query("SELECT grade, item, quantity, price FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, item ASC "); 
 
-$total = 0;
+$finalTotal = 0;
 $officeTotal = 0;
 $twoDayTotal = 0;
 $threeDayTotal = 0;
@@ -117,6 +120,9 @@ while($rows = $result->fetch_assoc()) {
         $eighthTotal = $eighthTotal + floatval($rows["price"]);
 
     endif;
+
+    $finalTotal = $eighthTotal + $seventhTotal + $sixthTotal + $fifthTotal + $fourthTotal + $thirdTotal
+    + $secondTotal + $firstTotal +  $threeDayTotal + $twoDayTotal + $officeTotal;
 }
 ?>
 
@@ -163,5 +169,8 @@ while($rows = $result->fetch_assoc()) {
 
     let eighth =  <?php echo number_format((float)$eighthTotal, 2, '.', ''); ?>;
     addMoneySummary('eighthMoneySum', eighth);
+
+    let total =  <?php echo number_format((float)$finalTotal, 2, '.', ''); ?>;
+    addMoneySummary('totalMoneySum', total);
 
 </script>
