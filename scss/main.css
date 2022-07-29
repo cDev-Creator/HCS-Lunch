@@ -1,0 +1,156 @@
+:root {
+    --main: #ffffff;
+    --secondary: #aeb1f0;
+    --grey: #f3f3f3;
+    --dark:#333333;
+}
+
+body{
+    background-color:var(--grey);
+	margin:0px;
+	padding:0px;
+	font-family: sans-serif;
+    color: var(--dark);
+}
+
+*{
+	box-sizing: border-box;
+}
+
+.options {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 100px;
+    background: white;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+    border-radius: 20px;
+}
+
+
+.options {
+    display: grid;
+    gap: 20px;
+}
+
+.mainBtns:hover {
+    background-color:#e3e3e3;
+}
+
+a {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+.modal-bg {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--dark);
+    position: absolute;
+    display: none;
+}
+
+.modal-content {
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    gap: 20px;
+    width: 300px;
+    height: 200px;
+    background-color: var(--main);
+    border-radius: 10px;
+    position: relative;
+}
+
+.closeBtn { 
+    position: absolute;
+    top:0;
+    right: 10px;
+    font-size: 35px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+/* log in page */
+#loginContainer {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+}
+
+
+#loginForm {
+    display: grid;
+    justify-content: center;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+#loginForm .txtField{
+    position: relative;
+    border-bottom: 2px solid #dddddd;
+    margin: 30px 0;
+}
+
+.txtField input{
+    width: 100%;
+    padding: 0 5px;
+    height: 30px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+  }
+
+#title {
+    text-align: center;
+    margin-top:50px;
+}
+
+#loginsubmit {
+    width: 100px;
+    height: 50px;
+    place-self: center;
+    font-size: 20px;
+}
+
+#loginsubmit {
+    padding:8px 12px;
+    color: var(--dark);
+    background-color:#eeeeee;
+    border: 1px solid #dddddd;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 15px;
+    outline: none;
+}
+
+#loginsubmit:focus {
+    border:1px solid #bbbbbb;
+}
+
+
+/* classroom select dropdown */
+.dropdown, #submitGradeBtn, .mainBtns{
+    padding:8px 12px;
+    color: var(--dark);
+    background-color:#eeeeee;
+    border: 1px solid #dddddd;
+    cursor: pointer;
+    border-radius: 10px;
+    outline: none;
+}
+
+.dropdown option {
+    background-color:var(--main);
+}

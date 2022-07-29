@@ -1,0 +1,153 @@
+:root {
+    --main: #ffffff;
+    --secondary: #aeb1f0;
+    --grey: #f3f3f3;
+    --dark:#333333;
+}
+body{
+    background-color:rgb(255, 255, 255);
+	margin:0;
+	padding:20px;
+	font-family: sans-serif;
+    color: var(--dark);
+}
+
+*{
+	box-sizing: border-box;
+}
+#deleteBtnForm {
+    padding:0px;
+    margin:0px;
+}
+
+#classOrderTable {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    border-collapse: collapse;
+    justify-content: center;
+}
+
+#classOrderTable tbody:nth-child(even){
+	background-color: var(--grey);
+    color: var(--secondary);
+}
+
+#classOrderTable td {
+    padding:15px 0px;
+    text-align: center;
+    border:1px solid var(--grey);
+    font-size:16px;
+}
+
+#deleteHead  {
+    border-top-right-radius:10px;
+}
+
+#gradeHead  {
+    border-top-left-radius:10px;
+}
+
+
+#classOrderTable th {
+    
+    background-color:var(--secondary);
+    color:var(--main);
+    padding:12px 10px;
+    font-size:18px;
+}
+
+/* Responsive */
+
+@media(max-width:500px) {
+    #classOrderTable {
+        width: 100%;
+    }
+    #classOrderTable thead {
+        display: none;
+    }
+    #classOrderTable, #classOrderTable tbody, #classOrderTable tr ,#classOrderTable  td {
+        display:block;
+        width: 100%
+    }
+    #classOrderTable td, #classOrderTable th {
+        padding:5px 5px;
+    }
+    #classOrderTable tr {
+        margin-bottom:20px;
+    }
+    #classOrderTable td {
+       text-align:right;
+       padding-left:50%;
+       position:relative;
+    }
+   
+    #classOrderTable td::before {
+        content: attr(data-label);
+        position: absolute;
+        left:0;
+        width: 50%;
+        padding-left:10px;
+        font-size:15px;
+        font-weight: bold;
+        text-align:left;
+    }
+
+    #lunch-form {
+        display: grid;
+        grid-template-columns:auto;
+        grid-gap: 20px;
+        justify-content: center;
+    }
+    
+}
+
+/* Dropdowns, buttons, inputfields  */
+
+#lunch-form {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+    justify-content: center;
+}
+
+#submitOrderBtn,#quantities,#logoutBtn,.dropdown  {
+    padding:8px 12px;
+    color: var(--dark);
+    background-color:#eeeeee;
+    border: 1px solid #dddddd;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.dropdown option {
+    background-color:var(--main);
+}
+
+.dropdown:focus,
+.dropdown:hover {
+    outline:none;
+    border:1px solid #bbbbbb;
+}
+
+#quantities{
+    outline:none;
+}
+
+#quantities:focus{
+    border:1px solid #bbbbbb;
+}
+
+#logoutBtn {
+    display: block;
+    width: 100px;
+    margin: auto;
+    margin-top: 30px;
+}
+#logoutBtn a {
+    text-decoration: none;
+    color: var(--dark);
+}

@@ -18,23 +18,18 @@ if(isset($_GET['message'])){
 </head>
 
 <body>
-    <div class="container">
-        <h1>HCS Lunch</h1>
-
-        <form action="login.php" method="POST">
-        <div>
-            <label for="username">username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-
-        <div>
-            <label for="password">password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-
-        <button type="submit" id="submitbtn" name="loginsubmit">Login</button>
+    <div id="loginContainer">
+        <h1 id="title">Lunchroom Login</h1>
+        <form id="loginForm" action="login.php" method="POST">
+            <div class="txtField">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="txtField">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" id="loginsubmit" name="loginsubmit">Login</button>
         </form>
-   
+    </div>
 
 </body>
 </html>

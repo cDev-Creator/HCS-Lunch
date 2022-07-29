@@ -8,9 +8,9 @@
 </head>
 <body>
 <div class="container">
-        <h1>HCS Lunch</h1>
         <div class="options">
-            <button id="orderLunchBtn"><h2>Order Lunch</a></h2></body>
+            <button class="mainBtns" id="orderLunchBtn"><h2>Order Lunch</a></h2></body>
+            <button class="mainBtns"><a href="OrderLunch/logout.php">Logout</a>
         </div>
 
         <div class="modal-bg">
@@ -18,11 +18,10 @@
            <form method='POST' action="OrderLunch/orderLunch.php" id="form" class="modal-content">
 
                 <div class="closeBtn" id="closeBtn">+</div>
-        
+
                 <div>
-                    <label for="grade">Class:</label>
-                    <select name="grade" id="grade" required>
-                        <option value="" selected="selected">--select--</option>  
+                    <select name="grade" id="grade" class="dropdown" required>
+                        <option value="" selected="selected">--Select Class--</option>  
                         <option value="Office Staff">Office Staff</option>  
                         <option value="02 Day Preschool">2 Day Preschool</option>
                         <option value="03 Day Preschool">3 Day Preschool</option>
@@ -38,7 +37,7 @@
                 </div>
 
                 <div>
-                    <button type="submit" id="submitbtn" name="submit">Ok</button>
+                    <button type="submit" id="submitGradeBtn" name="submit">Submit</button>
                 </div>
 
             </form>
