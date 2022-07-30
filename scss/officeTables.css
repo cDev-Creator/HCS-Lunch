@@ -1,0 +1,187 @@
+:root {
+    --main: #ffffff;
+    --secondary: #349b5c;
+    --grey: #f3f3f3;
+    --dark:#333333;
+}
+
+body {
+    background-color: var(--main);
+}
+
+.secondaryTables {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 40px;
+    margin-bottom: 40px;   
+}
+
+#mainTable{
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%; 
+    margin-top: 10px;
+    border-collapse: collapse;
+    justify-content: center;
+    border: 1.5px solid var(--dark);
+    line-height:30px;
+}
+
+#mainTableTitle {
+  margin: 0px;
+  padding: 10px;
+  font-size:25px;
+}
+
+#mainTable tr:nth-child(even){
+	background-color: var(--grey);
+}
+
+#mainTable tr:nth-last-child(1){
+	background-color: var(--secondary);
+}
+
+#mainTable td {
+    padding:3px 0px;
+    text-align: center;
+    border:.5px solid var(--dark);
+    font-size:16px;
+}
+
+#mainTable th{
+    background-color:var(--secondary);
+    color:var(--main);
+    padding:12px 10px;
+    font-size:18px;
+}
+
+#firstShiftTotal, #secondShiftTotal {
+    font-weight: bold;
+    background-color: var(--secondary);
+    color: var(--main);
+}
+
+#moneySumTable {
+    width:200px;
+    border-collapse: collapse;
+    border: 1px solid var(--dark);
+}
+
+#moneySumTitle, #foodSumTitle{
+    padding-top:20px;
+    background-color: var(--secondary);
+    color: var(--main);
+}
+
+#moneySumTable tr:nth-child(even){
+	background-color: var(--grey);
+}
+
+#moneySumTable tr:nth-last-child(1){
+    font-weight: bold;
+    background-color: var(--secondary);
+    color: var(--main);
+}
+
+#moneySumTable td, #foodSummaryTable td, #allStudentsTable td{
+    padding:5px 0px;
+    text-align: left;
+    border:.5px solid var(--dark);
+    font-size:16px;
+    padding-left: 10px;
+}
+
+#foodSummaryTable {
+    width:500px;
+    border-collapse: collapse;
+    border: 1px solid var(--dark);
+}
+
+#foodSummaryTable tr:nth-child(even){
+	background-color: var(--grey);
+}
+
+/* add new students / display all students */
+#allStudentsTable {
+    border: 1px solid var(--dark);
+    width:600px; 
+    line-height:40px;
+    border-collapse: collapse;
+    margin-top:10px;
+    margin-bottom: 50px;
+}
+
+#allStudentsTable th {
+    border: 1px solid var(--dark);
+}
+
+#allStudentsTable td, #allStudentsTable input{
+    text-align: center;
+    margin-right: 10px;
+}
+
+#allStudentsTable tr:nth-child(odd){
+	background-color: var(--grey);
+}
+
+#deleteStudentBtn, #updateStudentBtn, #addNewStudent, #backToHome{
+    padding:8px 12px;
+    color: var(--dark);
+    background-color:#eeeeee;
+    border: 1px solid #dddddd;
+    cursor: pointer;
+    border-radius: 10px;
+    outline: none;
+}
+
+#deleteStudentBtn:hover, #updateStudentBtn:hover, #addNewStudent:hover, #backToHome:hover, #submitNew:hover, #updateData:hover, #cancelBtn:hover {
+    background-color:#e3e3e3;
+}
+
+#addNewStudent a, #backToHome a, #cancelBtn a {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+.btnsAddNew  {
+    display: flex;
+    justify-content: center;
+    gap:10px;
+    padding: 20px;
+}
+
+#addStudent, #updateStudent {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+#addStudent {
+    gap:20px;
+}
+
+#updateStudent input, #updateStudent button, #updateStudent select {
+    margin-left:15px;
+}
+
+#addStudent input,#updateStudent input,#updateStudent select, #submitNew, #updateData, #cancelBtn, .dropdown {
+    padding:30px;
+    padding:8px 12px;
+    color: var(--dark);
+    background-color:#eeeeee;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    outline: none;
+}
+.dropdown, #submitNew, #updateStudent select, #updateData, #cancelBtn {
+    cursor: pointer;
+}
+
+.dropdown option, #updateStudent option{
+    background-color:var(--main);
+}
+
+
+
+/* update student list */
+

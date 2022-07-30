@@ -1,19 +1,25 @@
 <?php
-$mysqli = new mysqli('localhost','root','','students');
+$mysqli = new mysqli('localhost','root','','menus');
 $result = $mysqli->query("SELECT id, firstName, lastName, grade FROM names ORDER BY grade, firstName ASC"); 
+
+
 ?>
 
 <!DOCTYPE html> 
 <html> 
+	<head>
+        <link rel="stylesheet" href="../SCSS/officeTables.css">
+    </head>
+
 	<body> 
-	<table id="s" align="center" border="1px" style="width:600px; line-height:40px;"> 
+	<table id="allStudentsTable" align="center"> 
 	<tr> 
-		<th colspan="7"><h2>Students</h2></th> 
+		<th colspan="7"><h2>Students and Staff</h2></th> 
 		</tr>
             <th> Grade </th> 
             <th> Name </th> 
             <th> Update </th> 
-            <th> Edit </th>
+            <th> Delete </th>
 		</tr> 
 		
         <?php $total = 0;?>
@@ -31,14 +37,14 @@ $result = $mysqli->query("SELECT id, firstName, lastName, grade FROM names ORDER
 			<td> 
 				<form action="updateStudent.php" method="post">
 				<input type="hidden" name="id" value="<?php echo $rows['id'] ?>">
-				<input type="submit" name="update" value="update"> 
+				<input type="submit" id="updateStudentBtn" name="update" value="update"> 
 				</form>
 		    </td>
 
 			<td> 
 				<form action="deleteStudent.php" method="post">
 				<input type="hidden" name="id" value="<?php echo $rows['id'] ?>">
-				<input type="submit" name="delete" value="DELETE"> 
+				<input type="submit" id="deleteStudentBtn" name="delete" value="X"> 
 				</form>
 		    </td>
 

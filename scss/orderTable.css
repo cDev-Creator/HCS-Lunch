@@ -1,6 +1,6 @@
 :root {
     --main: #ffffff;
-    --secondary: #aeb1f0;
+    --secondary: #349b5c;
     --grey: #f3f3f3;
     --dark:#333333;
 }
@@ -18,6 +18,12 @@ body{
 #deleteBtnForm {
     padding:0px;
     margin:0px;
+}
+
+#orderLunchTitle {
+    display:flex;
+    justify-content: center;
+    color: red;
 }
 
 #classOrderTable {
@@ -60,61 +66,22 @@ body{
     font-size:18px;
 }
 
-/* Responsive */
-
-@media(max-width:500px) {
-    #classOrderTable {
-        width: 100%;
-    }
-    #classOrderTable thead {
-        display: none;
-    }
-    #classOrderTable, #classOrderTable tbody, #classOrderTable tr ,#classOrderTable  td {
-        display:block;
-        width: 100%
-    }
-    #classOrderTable td, #classOrderTable th {
-        padding:5px 5px;
-    }
-    #classOrderTable tr {
-        margin-bottom:20px;
-    }
-    #classOrderTable td {
-       text-align:right;
-       padding-left:50%;
-       position:relative;
-    }
-   
-    #classOrderTable td::before {
-        content: attr(data-label);
-        position: absolute;
-        left:0;
-        width: 50%;
-        padding-left:10px;
-        font-size:15px;
-        font-weight: bold;
-        text-align:left;
-    }
-
-    #lunch-form {
-        display: grid;
-        grid-template-columns:auto;
-        grid-gap: 20px;
-        justify-content: center;
-    }
-    
-}
-
 /* Dropdowns, buttons, inputfields  */
 
 #lunch-form {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: auto auto;
     grid-gap: 20px;
     justify-content: center;
 }
 
-#submitOrderBtn,#quantities,#logoutBtn,.dropdown  {
+#submitOrderBtn{
+
+    grid-column: span 2;
+    grid-row: 3 / 3;
+}
+
+#submitOrderBtn,#quantities,#logoutBtn,.dropdown, #deleteStuOrder {
     padding:8px 12px;
     color: var(--dark);
     background-color:#eeeeee;
@@ -131,6 +98,12 @@ body{
 .dropdown:hover {
     outline:none;
     border:1px solid #bbbbbb;
+}
+
+#submitOrderBtn:hover,
+#logoutBtn:hover,
+#deleteStuOrder:hover {
+    background-color:#e3e3e3;
 }
 
 #quantities{
@@ -151,3 +124,70 @@ body{
     text-decoration: none;
     color: var(--dark);
 }
+
+/* Responsive */
+@media(max-width:500px) {
+    #classOrderTable {
+        width: 100%;
+        box-shadow: none;
+    }
+    #classOrderTable thead {
+        display: none;
+    }
+
+    #classOrderTable, #classOrderTable tbody, #classOrderTable tr ,#classOrderTable  td {
+        display:block;
+        width: 100%
+    }
+
+    #classOrderTable tbody tr{
+        margin-bottom: 20px;
+        background-color: var(--grey);
+    }
+
+    #classOrderTable td, #classOrderTable th {
+        padding:5px 5px;
+    }
+   
+    #classOrderTable tr {
+        margin-bottom:20px;
+    }
+    #classOrderTable td {
+       text-align:right;
+       padding-left:50%;
+       position:relative;
+       border:1px solid var(--main);
+    }
+
+    #classOrderTable tbody:nth-child(even){
+        background-color: var(--main);
+        color: var(--dark);
+    }
+   
+    #classOrderTable td::before {
+        content: attr(data-label);
+        position: absolute;
+        left:0;
+        width: 50%;
+        padding-left:10px;
+        font-size:15px;
+        font-weight: bold;
+        text-align:left;
+    }
+
+    #orderLunchTitle {
+        display:none;
+    }
+
+    #lunch-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    
+   
+    
+}
+

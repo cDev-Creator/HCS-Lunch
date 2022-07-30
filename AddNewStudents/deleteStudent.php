@@ -1,6 +1,6 @@
 <?php
 $connection = mysqli_connect("localhost","root","");
-$db = mysqli_select_db($connection, 'students');
+$db = mysqli_select_db($connection, 'menus');
 
 if(isset($_POST['delete']))
 {

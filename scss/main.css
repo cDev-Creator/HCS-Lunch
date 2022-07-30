@@ -1,6 +1,6 @@
 :root {
     --main: #ffffff;
-    --secondary: #aeb1f0;
+    --secondary: #349b5c;
     --grey: #f3f3f3;
     --dark:#333333;
 }
@@ -84,6 +84,7 @@ a {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
+    height: 380px;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
@@ -93,13 +94,13 @@ a {
 #loginForm {
     display: grid;
     justify-content: center;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr .3fr;
 }
 
 #loginForm .txtField{
     position: relative;
     border-bottom: 2px solid #dddddd;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 .txtField input{
@@ -110,7 +111,7 @@ a {
     border: none;
     background: none;
     outline: none;
-  }
+}
 
 #title {
     text-align: center;
@@ -133,15 +134,28 @@ a {
     border-radius: 5px;
     margin-top: 15px;
     outline: none;
+    margin-top: 25px;
 }
 
 #loginsubmit:focus {
     border:1px solid #bbbbbb;
 }
 
+#loginsubmit:hover {
+    background-color:#e3e3e3;
+}
+
+#errorMsg {
+    justify-content: center;
+    align-items: center;
+    color: #ff3333;
+    width: 300px;
+    margin-bottom: 0px;
+}
+
 
 /* classroom select dropdown */
-.dropdown, #submitGradeBtn, .mainBtns{
+.dropdown, #submitGradeBtn, .mainBtns, #printTickets{
     padding:8px 12px;
     color: var(--dark);
     background-color:#eeeeee;
@@ -153,4 +167,26 @@ a {
 
 .dropdown option {
     background-color:var(--main);
+}
+
+/*   order tickets */
+#lunchTickets {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin: 30px;
+
+}
+.ticket {
+    text-align: center;
+    border: 3px solid black;
+    height: 200px;
+    width: 200px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  
+}
+
+#printTickets {
+    margin: 0 auto;
+    display: block;
 }

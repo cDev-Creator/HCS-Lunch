@@ -7,7 +7,7 @@ $grade = $_POST["grade"];
  */
 
 $host = "localhost";
-$dbname = "students";
+$dbname = "menus";
 $username = "root";
 $password = "";
         

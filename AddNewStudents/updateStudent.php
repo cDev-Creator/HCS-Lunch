@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Update Student Information</title>
+    <link rel="stylesheet" href="../SCSS/officeTables.css">
+
 </head>
 <body>
     <?php
     $connection = mysqli_connect("localhost","root","");
-    $db = mysqli_select_db($connection, 'students');
+    $db = mysqli_select_db($connection, 'menus');
 
     $id = $_POST['id'];
 
@@ -21,19 +23,16 @@
         while($row = mysqli_fetch_array($query_run))
         {
             ?>   
-            <h2> PHP - CRUD : Update Data</h2>
-            <form action="" method="post">
+            <form id="updateStudent" action="" method="post">
             <input type="hidden" name="id" value="<?php echo $row['id'] ?>">
             <div class="form-group">
          
             <input type="text" name="firstName" placeholder="First Name" value="<?php echo $row['firstName'] ?>" required>
-           
-            <label for=""> Last Name </label>
             <input type="text" name="lastName" placeholder="Last Name" value="<?php echo $row['lastName'] ?>"  required>
                   
             <select name="grade" required>
             <option value='' selected='selected'>--Grade--</option>;
-            
+            <option value="Office Staff">Office Staff</option>
             <option value="02 Day Preschool">2 Day Preschool</option>
             <option value="03 Day Preschool">3 Day Preschool</option>
             <option value="1st Grade">1st Grade</option> 
@@ -45,11 +44,9 @@
             <option value="7th Grade">7th Grade</option>  
             <option value="8th Grade">8th Grade</option>     
             </select>
-
-                            
-            <button type="submit" name="updates"> Update Data </button>
-
-            <a href="addNew.php"> CANCEL </a>
+       
+            <button id="updateData" type="submit" name="updates"> Update</button>
+            <button id="cancelBtn"><a href="addNew.php">Cancel</a></button>
             </form>
 
             <?php
@@ -64,7 +61,6 @@
                     if($query_run)
                     {
                         header("location:addNew.php");
-                        
                         echo '<script> alert("Data Updated"); </script>';
                     }
                     else
