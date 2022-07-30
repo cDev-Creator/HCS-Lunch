@@ -44,6 +44,11 @@
         header("location:orderLunch.php");
         $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`) VALUES ('$grade', '$name','$item', '$quantities', '$mealCost')";
         $insert = mysqli_query($conn, $qry);
+
+        if(!empty($_POST['allNames'])) {
+            $messages = urlencode("*$name's order added to the $grade table.");
+            header("Location:orderLunch.php?messages=".$messages);
+        }
     }
     else {
         $message = urlencode("*Please only select one person.");

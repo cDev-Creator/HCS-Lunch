@@ -1,8 +1,11 @@
 <?php
 session_start();
 error_reporting(0);
- if(isset($_GET['message'])){
+if(isset($_GET['message'])){
     $message = $_GET['message'];
+}
+if(isset($_GET['messages'])){
+    $messages = $_GET['messages'];
 }
 
 ?>
@@ -24,6 +27,7 @@ $result = $mysqli->query("SELECT * FROM names ORDER BY grade, firstName ASC");
 <h1 id="orderLunchTitle"><?php echo $title?></h1>
 
 <p id="oneStudentMsg"><p>
+<p id="studentToDiffClassMsg"><p>
 
 
 
@@ -123,4 +127,7 @@ require('classOrderTable.php');
 <script> 
     var errorMsg = "<?php echo $message; ?>";
     document.getElementById("oneStudentMsg").innerHTML = errorMsg;
+
+    var newClass = "<?php echo $messages; ?>";
+    document.getElementById("studentToDiffClassMsg").innerHTML = newClass;
 </script>
