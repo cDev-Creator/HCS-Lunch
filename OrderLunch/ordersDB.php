@@ -2,10 +2,9 @@
 <?php
 
     $host = "localhost";
-    $dbname = "orders";
+    $dbname = "menus";
     $username = "root";
-    $password = "";
-            
+    $password = ""; 
     $conn = mysqli_connect(hostname: $host,
                         username: $username,
                         password: $password,
@@ -15,7 +14,6 @@
         die("Connection error: " . mysqli_connect_error());
     }    
     
- /*    $gradesVal = $_POST['grades']; */
     $namesVal = $_POST['names'];
     $itemsVal = $_POST['items'];
     $quantities = $_POST['quantities'];
@@ -42,8 +40,14 @@
         $grade = array_values($names)[1];
     }
     
-    header("location:orderLunch.php");
-    $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`) VALUES ('$grade', '$name','$item', '$quantities', '$mealCost')";
-    $insert = mysqli_query($conn, $qry);
+    if(empty($_POST['names']) || empty($_POST['allNames']))  {
+        header("location:orderLunch.php");
+        $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`) VALUES ('$grade', '$name','$item', '$quantities', '$mealCost')";
+        $insert = mysqli_query($conn, $qry);
+    }
+    else {
+        $message = urlencode("*Please only select one person.");
+        header("Location:orderLunch.php?message=".$message);
+    }
 
 ?>

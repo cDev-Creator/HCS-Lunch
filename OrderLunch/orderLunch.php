@@ -1,35 +1,34 @@
 <?php
 session_start();
-?>
+error_reporting(0);
+ if(isset($_GET['message'])){
+    $message = $_GET['message'];
+}
 
+?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <?php
-$staffID = $_SESSION["staffID"] = $_POST['staffID'] ?? $_SESSION["staffID"];
 $grades = $_SESSION["grade"] = $_POST['grade'] ?? $_SESSION["grade"];
 
-
-$mydate=getdate(date("U"));
-echo "Date: ";
-echo "$mydate[month] $mydate[mday], $mydate[year]";
-echo "<br/>";
-echo "Staff ID: ".$staffID; 
-echo "<br/>";
-echo "Teaching: ".$grades;
-echo "<br/>";
-echo "<br/>";
+$title = "Lunch Orders for ".$grades;
 ?>
 
 <!-- STUDENTS FROM OTHER CLASSES  -->
 <?php
-$mysqli = new mysqli('localhost','root','','students');
+$mysqli = new mysqli('localhost','root','','menus');
 $result = $mysqli->query("SELECT * FROM names ORDER BY grade, firstName ASC"); 
 
 ?>
 
-<form name="lunch-form" id="lunch-form" method="post" action="ordersDB.php"> 
+<h1 id="orderLunchTitle"><?php echo $title?></h1>
 
-<select name="allNames" id="allStudents">
+<p id="oneStudentMsg"><p>
+
+
+
+<form name="lunch-form" id="lunch-form" method="post" action="ordersDB.php"> 
+<select name="allNames" id="allStudents" class="dropdown">
 <option value='' selected='selected'>--All Students--</option>;
 <?php
 while($rows = $result->fetch_assoc())
@@ -45,12 +44,12 @@ while($rows = $result->fetch_assoc())
 <!-- STUDENTS FROM CHOSEN CLASS  -->
 <?php
 
-$mysqli = new mysqli('localhost','root','','students');
+$mysqli = new mysqli('localhost','root','','menus');
 $resultSet = $mysqli->query("SELECT firstName, lastName, grade FROM names");
 
 $result = $mysqli->query("SELECT * FROM names WHERE grade='$grades' order by firstName ASC ");
 ?>
-<select name="names" id="students">
+<select name="names" id="students" class="dropdown">
 <option value='' selected='selected'><?php echo'--'.$grades,' Students--'?></option>;
 <?php
 while($rows = $result->fetch_assoc())
@@ -63,11 +62,8 @@ while($rows = $result->fetch_assoc())
 ?>
 </select>
 
-<br>
-<br>
 
 <?php 
-
 define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
 $mydate=getdate(date("U"));
@@ -101,7 +97,7 @@ $weekday = "Friday";
 
     ?>
 
-    <select name="items" id="menuItems" required>
+    <select name="items" id="menuItems" class="dropdown" required>
     <option value='' selected='selected'>--Menu Items--</option>;
 
   <?php
@@ -110,49 +106,21 @@ $weekday = "Friday";
       $item = $rows['item'];
       $price = $rows['price'];
 
-
-      echo "<option id='menuSelection' class='menuSelection' name='items' value='$item-$price'>$item - $price</option>";  
-        
+      echo "<option id='menuSelection' class='menuSelection' name='items' value='$item-$price'>$item - $price</option>";   
     }
-   
   ?>   
 
+<input type="number" name="quantities" id="quantities" placeholder="Qty" min='1' max='20' required/>
+<button type="submit" name="submit" id="submitOrderBtn">Order</button>
 
-<input type="number" name="quantities" id="quantities" placeholder="Quantity" min='1' max='20' required/>
-<button type="submit" name="submit" id="submitBtn">Submit Test</button>
 </form>
 
-
-<!--AJAX-->
-
 <?php
-/* require('menus.php'); */
-
 require('classOrderTable.php');
-
 ?>
+<button id="logoutBtn"><a href="logout.php">Log Out</a></button>
 
-<p id="successMsg"> <p>
-
-
-
- <script>
-/*     $(document).ready(function() {
-        $("#lunch-form").submit(function(e) {
-            e.preventDefault();
-            $.ajax( {
-                url: "ordersDB.php",
-                method: "POST",
-                data: $("form").serialize(),
-                dataType: "text",
-                success: function() {
-                    $("#lunch-form")[0].reset();
-                    location.reload();
-                },
-                error: function(){
-                    alert("error")
-                }
-            });
-        });
-    }); */
+<script> 
+    var errorMsg = "<?php echo $message; ?>";
+    document.getElementById("oneStudentMsg").innerHTML = errorMsg;
 </script>
