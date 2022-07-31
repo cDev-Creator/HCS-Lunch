@@ -1,30 +1,21 @@
 <?php
-$mysqli = new mysqli('localhost','root','','orders');
+$mysqli = new mysqli('localhost','root','','menus');
 $result = $mysqli->query("SELECT grade, item, quantity, price FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, item ASC "); 
-/* $result = $mysqli->query("SELECT grade, item, quantity, price FROM allorders ORDER BY grade, item ASC ");  */
-
-
+error_reporting(0);
 ?>
+
 
 <img src="hcslogo.jpg" alt="HCS Logo" width="200" height="70">
 <br>
 <br>
 
-<!--------------------------------------- REPETIVE CODE FROM MENUS.PHP PUT INTO ONE FILE ---------------------------------------->
 <?php
 define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
 $mydate=getdate(date("U"));
-echo "Date: ";
-echo "$mydate[month] $mydate[mday], $mydate[year]";
-echo"</br>";
-echo "Day of the week : ";
+$ordersDate = "Orders for $mydate[month] $mydate[mday], $mydate[year]";
 /* $weekday = "$mydate[weekday]"; */
-$weekday = "Friday";
-
-echo $weekday;
-echo"</br>";
-echo"</br>";
+$weekday = "Thursday";
 
 ?>
     <?php 
@@ -60,51 +51,19 @@ echo"</br>";
         array_push($list, $rows);
     }
 
-
-
+    
 $menuItemsLength = count($list);
 
 function addItemsFromDB($rows,$grade,$list,$gradeClass) {
-    
     $arr = []; 
-    $num = 0;
-    $className = 'item0';
-    getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
 
-   $num = 1;
-   $className = 'item1';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
-
-   $num = 2;
-   $className = 'item2';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
-
-   $num = 3;
-   $className = 'item3';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
-
-   $num = 4;
-   $className = 'item4';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
-
-   $num = 5;
-   $className = 'item5';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
-
-   $num = 6;
-   $className = 'item6';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
-
-   $num = 7;
-   $className = 'item7';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass); 
-
-   $num = 8;
-   $className = 'item8';
-   getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass); 
-
+    global $menuItemsLength;
+    for ($x = 0; $x < $menuItemsLength; $x++)  {
+        $num = $x+1;
+        $className = 'item'.$num;
+        getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
+    }
 }
-
     ?>
 <?php
 
@@ -112,20 +71,24 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 
 <!DOCTYPE html> 
 <html> 
+    <head>
+        <link rel="stylesheet" href="../SCSS/officeTables.css">
+    </head>
 	<body> 
-	<table id='mainTable'align="center" border="1px" style="width:1200px; line-height:40px;"> 
+    <div class="allTables">
+	<table id='mainTable'align="center"> 
 	<tr> 
-		<th colspan="20"><h2>Student Orders</h2></th> 
+		<th colspan="20"><h1 id="mainTableTitle"><?php echo $ordersDate?></h1></th> 
     <tr>
     <td></td>  
 
     <?php
     while($row = $resultSet->fetch_assoc())
     {
-        echo "<td><div class='menuItemTblHeader'>" . $row["item"] . "</td>";
+        echo "<td>" . $row["item"] . "</td>";
     }?>
     </tr>
-
+    
     <tr id="officeStaff">
         <td>Office Staff</td>
     </tr>
@@ -181,36 +144,26 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     <tr id="secondShiftTotal">
         <td>2nd Shift Total</td>
     </tr>
-	
-
-        <br>
-
+    
         <?php 
    
         while($rows = $result->fetch_assoc())
 		{
-
             addItemsFromDB($rows, 'Office Staff', $list, 'office');
-
             addItemsFromDB($rows, '02 Day Preschool', $list, 'twoDay');
             addItemsFromDB($rows, '03 Day Preschool', $list,'threeDay');   
-
             addItemsFromDB($rows, '1st Grade', $list, 'firstGrade');
             addItemsFromDB($rows, '2nd Grade', $list,'secondGrade');   
-
             addItemsFromDB($rows, '3rd Grade', $list,'thirdGrade');
             addItemsFromDB($rows, '4th Grade', $list, 'fourthGrade');
             addItemsFromDB($rows, '5th Grade', $list,'fifthGrade');   
-
             addItemsFromDB($rows, '6th Grade', $list,'sixthGrade');
             addItemsFromDB($rows, '7th Grade', $list, 'seventhGrade');
             addItemsFromDB($rows, '8th Grade', $list,'eighthGrade');     
-    
     ?>
  
 	<?php 
         }
-      
         function getItemQuantity($rows, $list, $arr, $num, $grade, $className,$gradeClass) {
             if($rows['item'] == $list[$num] && $rows['grade'] == $grade ) {
                 $quantity = $rows['quantity'];
@@ -223,11 +176,13 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     ?> 
 	</table> 
 
+    <div class="secondaryTables">
     <?php 
         require('moneySumByClass.php'); 
         require('foodSummary.php'); 
     ?>
-
+    </div>
+</div>
 
 <script>
     function foodQuantity(itemClass, gradeClass) {
@@ -252,49 +207,39 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
         }  
     }
 
-
     addOrdersToRow('officeStaff', 'office');
-
     addOrdersToRow('twoDayPk', 'twoDay');
     addOrdersToRow('threeDayPk', 'threeDay');
-
     addOrdersToRow('first', 'firstGrade');
     addOrdersToRow('second', 'secondGrade');
-
     addOrdersToRow('third', 'thirdGrade');
     addOrdersToRow('fourth', 'fourthGrade');
     addOrdersToRow('fifth', 'fifthGrade');
-
     addOrdersToRow('sixth', 'sixthGrade');
     addOrdersToRow('seventh', 'seventhGrade');
     addOrdersToRow('eighth', 'eighthGrade');
-
 
     var table = document.getElementById("mainTable")
             
     function addFirstShiftTotals(r1,r2,r3,r4,r5,r6,r7,r8,cell1) {
         const total = Array();
-            total.push(table.rows[r1].cells[cell1].innerText);
-            total.push(table.rows[r2].cells[cell1].innerText);
-            total.push(table.rows[r3].cells[cell1].innerText);
-            total.push(table.rows[r4].cells[cell1].innerText);
-            total.push(table.rows[r5].cells[cell1].innerText);
-            total.push(table.rows[r6].cells[cell1].innerText);
-            total.push(table.rows[r7].cells[cell1].innerText);
-            total.push(table.rows[r8].cells[cell1].innerText);
+        total.push(table.rows[r1].cells[cell1].innerText);
+        total.push(table.rows[r2].cells[cell1].innerText);
+        total.push(table.rows[r3].cells[cell1].innerText);
+        total.push(table.rows[r4].cells[cell1].innerText);
+        total.push(table.rows[r5].cells[cell1].innerText);
+        total.push(table.rows[r6].cells[cell1].innerText);
+        total.push(table.rows[r7].cells[cell1].innerText);
+        total.push(table.rows[r8].cells[cell1].innerText);
 
-            var arrayOfNumbers = total.map(Number);
-            var sum = 0;
-            for (var i = 0; i < arrayOfNumbers.length; i++) {
-                sum += arrayOfNumbers[i]
-
-             
-            }
-            const firstTotal = document.getElementById("firstShiftTotal");
-            let cell = firstTotal.insertCell(1);
-            cell.innerText = sum;
-
-         
+        var arrayOfNumbers = total.map(Number);
+        var sum = 0;
+        for (var i = 0; i < arrayOfNumbers.length; i++) {
+            sum += arrayOfNumbers[i]
+        }
+        const firstTotal = document.getElementById("firstShiftTotal");
+        let cell = firstTotal.insertCell(1);
+        cell.innerText = sum;   
     }
 
     function reverseOrderFirst() {
@@ -305,21 +250,20 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     }
     reverseOrderFirst();
 
-
     function addSecondShiftTotals(r1,r2,r3,cell2) {
         const total = Array();
-            total.push(table.rows[r1].cells[cell2].innerText);
-            total.push(table.rows[r2].cells[cell2].innerText);
-            total.push(table.rows[r3].cells[cell2].innerText);
+        total.push(table.rows[r1].cells[cell2].innerText);
+        total.push(table.rows[r2].cells[cell2].innerText);
+        total.push(table.rows[r3].cells[cell2].innerText);
 
-            var arrayOfNumbers = total.map(Number);
-            var sum = 0;
-            for (var i = 0; i < arrayOfNumbers.length; i++) {
-                sum += arrayOfNumbers[i]
-            }
-            const secondTotal = document.getElementById("secondShiftTotal");
-            let cell = secondTotal.insertCell(1);
-            cell.innerText = sum;      
+        var arrayOfNumbers = total.map(Number);
+        var sum = 0;
+        for (var i = 0; i < arrayOfNumbers.length; i++) {
+            sum += arrayOfNumbers[i]
+        }
+        const secondTotal = document.getElementById("secondShiftTotal");
+        let cell = secondTotal.insertCell(1);
+        cell.innerText = sum;      
     }
 
     function reverseOrderSecond() {
@@ -337,7 +281,7 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     function menuItemSchoolQuantities() {
         for (var i=1; i <= menuItemsLength; i++) {
         let firstShiftTotals =table.rows[10].cells[i].innerText;
-        let secondShiftTotals = table.rows[14].cells[i].innerText;
+        let secondShiftTotals = table.rows[15].cells[i].innerText;
         let firstShiftTotalsInt = parseInt(firstShiftTotals);
         let secondShiftTotalsInt = parseInt(secondShiftTotals);
 
