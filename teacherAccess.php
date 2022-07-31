@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(isset($_GET['p'])){
+    $p = $_GET['p'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +17,11 @@
 <div class="container">
         <div class="options">
             <button class="mainBtns" id="orderLunchBtn"><h2>Order Lunch</a></h2></body>
-            <button class="mainBtns"><a href="OrderLunch/logout.php">Logout</a>
+            <button class="mainBtns"><h2><a href="OrderLunch/logout.php">Logout</a><h2>
         </div>
 
         <div class="modal-bg">
-            <!-- <form method='POST' action="OrderLunch/orderLunch.php" id="form" class="modal-content"> -->
-           <form method='POST' action="OrderLunch/orderLunch.php" id="form" class="modal-content">
+           <form method='POST' action="OrderLunch/orderLunch.php?p=<?php echo $p ?>" id="form" class="modal-content">
 
                 <div class="closeBtn" id="closeBtn">+</div>
 
@@ -44,8 +50,9 @@
         </div>  
     </div>
 
+
     
 </body>
 </html>   
  
-<script src="HomePage/modal.js"></script>   
+<script src="HomePage/modal.js"></script> 

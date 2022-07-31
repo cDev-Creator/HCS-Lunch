@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 error_reporting(0);
@@ -8,9 +9,14 @@ if(isset($_GET['messages'])){
     $messages = $_GET['messages'];
 }
 
-?>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+if(isset($_GET['p'])){
+    $p = $_GET['p'];
+}
 
+
+?>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
 <?php
 $grades = $_SESSION["grade"] = $_POST['grade'] ?? $_SESSION["grade"];
 
@@ -25,10 +31,8 @@ $result = $mysqli->query("SELECT * FROM names ORDER BY grade, firstName ASC");
 ?>
 
 <h1 id="orderLunchTitle"><?php echo $title?></h1>
-
 <p id="oneStudentMsg"><p>
 <p id="studentToDiffClassMsg"><p>
-
 
 
 <form name="lunch-form" id="lunch-form" method="post" action="ordersDB.php"> 
@@ -72,7 +76,7 @@ define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
 $mydate=getdate(date("U"));
 /* $weekday = "$mydate[weekday]"; */
-$weekday = "Friday";
+$weekday = "Thursday";
 
     $mysqli = new mysqli('localhost','root','','menus');
      ////////////////////////// GO BACK AND MAKE ARRAY DYNAMICALLY CREATED INSTEAD OF HARD CODED/////////////////////////////////////////
@@ -122,12 +126,30 @@ $weekday = "Friday";
 <?php
 require('classOrderTable.php');
 ?>
+
+<button id="goBackBtn" class="backBtn">Go Back</button>
+
+<!-- <button class="backBtn"><a href="../officeStaffAccess.php">Go Back</a></button> -->
 <button id="logoutBtn"><a href="logout.php">Log Out</a></button>
 
 <script> 
-    var errorMsg = "<?php echo $message; ?>";
+    let errorMsg = "<?php echo $message; ?>";
     document.getElementById("oneStudentMsg").innerHTML = errorMsg;
 
-    var newClass = "<?php echo $messages; ?>";
+    let newClass = "<?php echo $messages; ?>";
     document.getElementById("studentToDiffClassMsg").innerHTML = newClass;
+
+    let p = "<?php echo $p; ?>";
+    let goBackBtn = document.getElementById("goBackBtn");
+
+    if(p == 'epBNnTp581Y') {
+        goBackBtn.addEventListener("click", function(){
+        window.location.replace("../officeStaffAccess.php");
+    })
+    }
+    else if(p == 'nHb8fN6m6mY') {
+        goBackBtn.addEventListener("click", function(){
+        window.location.replace("../teacherAccess.php");
+    })
+    }
 </script>

@@ -1,3 +1,9 @@
+<?php
+if(isset($_GET['p'])){
+    $p = $_GET['p'];
+}
+?>
+<script src="https://kit.fontawesome.com/fa7c02709f.js" crossorigin="anonymous"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +18,12 @@
 <div class="container">
 <div class="options">
     <button id="orderLunchBtn" class="mainBtns"><h2>Order Lunch</a></h2></body>
-    <button class="mainBtns"><h2><a href="orderTickets.php">Lunch Tickets</a></h2></button>
     <button class="mainBtns"><h2><a href="SchoolOrderTables/schoolOrders.php">School Orders</a></h2></button> 
+    <button class="mainBtns"><h2><a href="orderTickets.php">Lunch Tickets</a></h2></button>
     <button class="mainBtns"><h2><a href="AddNewStudents/addNew.php">New Student</a></h2></button>
-    <button class="mainBtns"><a href="OrderLunch/logout.php">Logout</a>
+    <button class="logout"><h2><a href="OrderLunch/logout.php">
+    <i class="fa-solid fa-right-from-bracket fa-xl"></i>
+    </a><h2>
 </button>
  
 </div>
@@ -23,7 +31,7 @@
 
     <div class="modal-bg">
             <!-- <form method='POST' action="OrderLunch/orderLunch.php" id="form" class="modal-content"> -->
-        <form method='POST' action="OrderLunch/orderLunch.php" id="form" class="modal-content">
+        <form method='POST' action="OrderLunch/orderLunch.php?p=<?php echo $p ?>" id="form" class="modal-content">
 
             <div class="closeBtn" id="closeBtn">+</div>
         
