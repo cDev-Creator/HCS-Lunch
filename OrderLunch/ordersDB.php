@@ -1,19 +1,9 @@
-
 <?php
+    include("../conn.php");
+    if(isset($_GET['p'])){
+        $p = $_GET['p'];
+    }
 
-    $host = "localhost";
-    $dbname = "menus";
-    $username = "root";
-    $password = ""; 
-    $conn = mysqli_connect(hostname: $host,
-                        username: $username,
-                        password: $password,
-                        database: $dbname);
-     
-    if (mysqli_connect_errno()) {
-        die("Connection error: " . mysqli_connect_error());
-    }    
-    
     $namesVal = $_POST['names'];
     $itemsVal = $_POST['items'];
     $quantities = $_POST['quantities'];
@@ -41,18 +31,18 @@
     }
     
     if(empty($_POST['names']) || empty($_POST['allNames']))  {
-        header("location:orderLunch.php");
+        header("location:orderLunch.php?p=".$p);
         $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`) VALUES ('$grade', '$name','$item', '$quantities', '$mealCost')";
         $insert = mysqli_query($conn, $qry);
 
         if(!empty($_POST['allNames'])) {
-            $messages = urlencode("*$name's order added to the $grade table.");
-            header("Location:orderLunch.php?messages=".$messages);
+            $messages = urlencode("$name's order added to the $grade table.");
+            header("Location:orderLunch.php?messages=".$messages .'&p='.$p);
         }
     }
     else {
         $message = urlencode("*Please only select one person.");
-        header("Location:orderLunch.php?message=".$message);
+        header("Location:orderLunch.php?message=".$message .'&p='.$p);
     }
 
 ?>

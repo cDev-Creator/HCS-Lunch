@@ -1,8 +1,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <?php
-$mysqli = new mysqli('localhost','root','','menus');
-$result = $mysqli->query("SELECT ID, grade, name, item, quantity, price FROM allorders WHERE grade='$grades' AND DATE(dates) = DATE(NOW()) "); 
+include("../conn.php");
+$result = $conn->query("SELECT ID, grade, name, item, quantity, price FROM allorders WHERE grade='$grades' AND DATE(dates) = DATE(NOW()) "); 
 ?>
 
 <!DOCTYPE html> 
@@ -11,10 +11,10 @@ $result = $mysqli->query("SELECT ID, grade, name, item, quantity, price FROM all
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../SCSS/orderTable.css">
+    <link rel="stylesheet" href="../css/orderTable.css">
 </head>
-	<body> 
-
+<script src="https://kit.fontawesome.com/fa7c02709f.js" crossorigin="anonymous"></script>
+<body> 
 	<table id="classOrderTable"> 
 	<thead>
 		</tr> 
@@ -39,13 +39,16 @@ $result = $mysqli->query("SELECT ID, grade, name, item, quantity, price FROM all
             <td data-label='name'><?php echo $rows['name']; ?></td> 
             <td data-label='item'><?php echo $rows['item']; ?></td> 
             <td data-label='quantity'><?php echo $rows['quantity']; ?></td> 
-            <td data-label='price'><?php echo $rows['price']; ?></td>
+            <td data-label='price'><?php echo '$',$rows['price']; ?></td>
             <?php $total = $total + floatval($rows["price"]);?>
-            <td data-label='total'><?php echo number_format((float)$total, 2, '.', ''); ?></td>
-			<td data-label='delete'> 
+            <td data-label='total'><?php echo '$',number_format((float)$total, 2, '.', ''); ?></td>
+			<td data-label='delete' id="deleteOrderLabel"> 
 				<form id="deleteBtnForm"action="deleteProcess.php" method="post">
 				<input type="hidden" name="ID" value="<?php echo $rows['ID'] ?>">
-				<button id="deleteStuOrder" type="submit" name="delete">X</button>
+				<button id="deleteStuOrder" type="submit" name="delete">
+				<i class="fa-solid fa-trash-can fa-lg"></i>
+				<!-- <i class="fa-solid fa-trash-can fa-xl"></i> -->
+				</button>
 				</form>
 		    </td>
 
@@ -57,7 +60,5 @@ $result = $mysqli->query("SELECT ID, grade, name, item, quantity, price FROM all
     ?> 
 	</tbody>
 	</table> 
-
-
-	</body> 
-	</html>
+</body> 
+</html>

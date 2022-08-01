@@ -1,15 +1,11 @@
 <?php
-$mysqli = new mysqli('localhost','root','','menus');
-/* $result = $mysqli->query("SELECT grade, name, item, quantity FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, name ASC"); 
- */
-/* $result = $mysqli->query("SELECT grade, name, item, quantity, COUNT(*) FROM allorders WHERE DATE(dates) = DATE(NOW()) GROUP BY name ORDER BY grade, name ASC");  
- */
-
-$result = $mysqli->query ("SELECT name,grade, GROUP_CONCAT(item, ' ─ ', quantity SEPARATOR '</br>') AS item FROM allorders GROUP BY name");
-
-
-
-
+session_start();
+include("conn.php");
+$result = $conn->query ("SELECT name,grade, GROUP_CONCAT(item, ' — ', quantity SEPARATOR '</br>') AS item 
+FROM allorders WHERE DATE(dates) = DATE(NOW()) GROUP BY name");
+if(!isset($_SESSION['user'])){
+    header("Location:index.php");
+}
 ?>
 
 <!DOCTYPE html> 
@@ -17,7 +13,7 @@ $result = $mysqli->query ("SELECT name,grade, GROUP_CONCAT(item, ' ─ ', quanti
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="SCSS/main.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <html > 
@@ -26,7 +22,7 @@ $result = $mysqli->query ("SELECT name,grade, GROUP_CONCAT(item, ' ─ ', quanti
 		<?php while($rows = $result->fetch_assoc())
 		{ 
 		?> 
-        <div class='ticket'><?php echo '</br>', $rows['grade'],'</br>',  $rows['name'],'</br>', '</br>', '</br>', '</br>', $rows['item'] ?></div>
+        <div class='ticket'><?php echo '</br>','<b>', $rows['grade'],'</br>',  $rows['name'],'</b>', '</br>', '</br>', '</br>', '<div id="orderedItem">', $rows['item'], "</div>" ?></div>
 	<?php 
     } 
     ?> 

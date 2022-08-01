@@ -7,7 +7,7 @@
 <body>
 <table id="moneySumTable" align="center">
     <tr> 
-		<th colspan="10"><h2>Money Summary by Class</h2></th> 
+		<th id="moneySumTitle" colspan="2"><h2>Class Totals</h2></th> 
     </tr>
     <tr>
         <td>Class</td> 
@@ -67,8 +67,8 @@
 </html>
 
 <?php 
-$mysqli = new mysqli('localhost','root','','menus');
-$result = $mysqli->query("SELECT grade, item, quantity, price FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, item ASC "); 
+include("../conn.php");
+$result = $conn->query("SELECT grade, item, quantity, price FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, item ASC "); 
 
 $finalTotal = 0;
 $officeTotal = 0;
@@ -135,7 +135,6 @@ while($rows = $result->fetch_assoc()) {
         let classTotalValDecimal = classTotalVal.toFixed(2);
         classTotal.innerText = '$'+classTotalValDecimal;
     }
-
 
     let officeStaff =  <?php echo number_format((float)$officeTotal, 2, '.', ''); ?>;
     addMoneySummary('officeMoneySum', officeStaff);

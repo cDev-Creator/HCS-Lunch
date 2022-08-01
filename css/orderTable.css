@@ -4,6 +4,11 @@
     --grey: #f3f3f3;
     --dark:#333333;
 }
+
+*{
+	box-sizing: border-box;
+}
+
 body{
     background-color:rgb(255, 255, 255);
 	margin:0;
@@ -12,9 +17,6 @@ body{
     color: var(--dark);
 }
 
-*{
-	box-sizing: border-box;
-}
 #deleteBtnForm {
     padding:0px;
     margin:0px;
@@ -23,7 +25,23 @@ body{
 #orderLunchTitle {
     display:flex;
     justify-content: center;
-    color: red;
+    color: var(--secondary);
+    margin-top:10px;
+    margin-bottom:40px;
+}
+
+#oneStudentMsg, #studentToDiffClassMsg {
+    text-align: center;
+    padding-top:0px;
+    margin-top:0px;
+}
+
+#oneStudentMsg {
+    color:#ff3333;
+}
+
+#studentToDiffClassMsg {
+    color:#349b5b9c;
 }
 
 #classOrderTable {
@@ -76,12 +94,12 @@ body{
 }
 
 #submitOrderBtn{
-
     grid-column: span 2;
     grid-row: 3 / 3;
+    font-size: 20px;
 }
 
-#submitOrderBtn,#quantities,#logoutBtn,.dropdown, #deleteStuOrder {
+#submitOrderBtn,#quantities,#logoutBtn,#backToHome,.dropdown,.backBtn{
     padding:8px 12px;
     color: var(--dark);
     background-color:#eeeeee;
@@ -90,10 +108,32 @@ body{
     border-radius: 5px;
 }
 
+#logoutBtn,.backBtn {
+    border-radius: 50px;
+}
+
+.backBtn a{
+    text-decoration: none;
+    color: var(--dark);
+}
+
+#deleteStuOrder {
+    border: none;
+    background-color:transparent;
+}
+
+.fa-trash-can:hover {
+    cursor: pointer;
+    color: #333333cd;
+}
+
+.fa-trash-can {
+    color: var(--dark);
+}
+
 .dropdown option {
     background-color:var(--main);
 }
-
 .dropdown:focus,
 .dropdown:hover {
     outline:none;
@@ -102,7 +142,7 @@ body{
 
 #submitOrderBtn:hover,
 #logoutBtn:hover,
-#deleteStuOrder:hover {
+.backBtn:hover {
     background-color:#e3e3e3;
 }
 
@@ -114,12 +154,12 @@ body{
     border:1px solid #bbbbbb;
 }
 
-#logoutBtn {
+#logoutBtn,.backBtn {
     display: block;
-    width: 100px;
     margin: auto;
     margin-top: 30px;
 }
+
 #logoutBtn a {
     text-decoration: none;
     color: var(--dark);
@@ -163,6 +203,16 @@ body{
         background-color: var(--main);
         color: var(--dark);
     }
+
+    #deleteOrderLabel{
+       height:30px;
+       display: inline-block;
+       width: 100%;
+    }
+
+    .fa-trash-can {
+        margin-top: 6px;
+    }
    
     #classOrderTable td::before {
         content: attr(data-label);
@@ -184,10 +234,5 @@ body{
         flex-direction: column;
         gap: 20px;
         justify-content: center;
-    }
-
-    
-   
-    
+    }   
 }
-

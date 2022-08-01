@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> Update Student Information</title>
-    <link rel="stylesheet" href="../SCSS/officeTables.css">
+    <link rel="stylesheet" href="../css/officeTables.css">
 
 </head>
 <body>
     <?php
-    $connection = mysqli_connect("localhost","root","");
-    $db = mysqli_select_db($connection, 'menus');
-
+    include("../conn.php");
     $id = $_POST['id'];
-
     $query = "SELECT * FROM names WHERE id='$id' ";
-    $query_run = mysqli_query($connection, $query);
+    $query_run = mysqli_query($conn, $query);
 
     if($query_run)
     {
@@ -57,7 +54,7 @@
                     $grade = $_POST['grade'];
 
                     $query = "UPDATE names SET firstName='$firstName', lastName='$lastName', grade='$grade' WHERE id='$id' ORDER BY grade, firstName";
-                    $query_run = mysqli_query($connection, $query);
+                    $query_run = mysqli_query($conn, $query);
                     if($query_run)
                     {
                         header("location:addNew.php");

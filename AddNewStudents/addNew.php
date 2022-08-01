@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['user'])){
+    header("Location:../index.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,8 +15,8 @@
 
 <body>
 <div class="btnsAddNew">
+    <button id="backToHome"><a href="../HomePage/officeStaffAccess.php?p=epBNsTp581Y">Back</a></button>
     <button id="addNewStudent"><a href='createStudent.php'>Add New</a></button>
-    <button id="backToHome"><a href="../officeStaffAccess.php">back</a></button>
 </div>
 
 </body>

@@ -17,6 +17,12 @@ body {
     margin-bottom: 40px;   
 }
 
+#menuTblHeader, .gradeTd{
+    line-height:1.2;
+}
+
+
+
 #mainTable{
     margin-left: auto;
     margin-right: auto;
@@ -25,7 +31,7 @@ body {
     border-collapse: collapse;
     justify-content: center;
     border: 1.5px solid var(--dark);
-    line-height:30px;
+    line-height:1.5;
 }
 
 #mainTableTitle {
@@ -116,9 +122,23 @@ body {
     border: 1px solid var(--dark);
 }
 
-#allStudentsTable td, #allStudentsTable input{
+#allStudentsTable td, #allStudentsTable button{
     text-align: center;
     margin-right: 10px;
+}
+
+#allStudentsTable button{
+    border: none;
+    background-color:transparent;
+}
+
+.fa-trash-can:hover, .fa-user-pen:hover {
+    cursor: pointer;
+    color: #333333cd;
+}
+
+.fa-trash-can, .fa-user-pen {
+    color: var(--dark);
 }
 
 #allStudentsTable tr:nth-child(odd){
@@ -135,7 +155,7 @@ body {
     outline: none;
 }
 
-#deleteStudentBtn:hover, #updateStudentBtn:hover, #addNewStudent:hover, #backToHome:hover, #submitNew:hover, #updateData:hover, #cancelBtn:hover {
+#addNewStudent:hover, #backToHome:hover, #submitNew:hover, #updateData:hover, #cancelBtn:hover {
     background-color:#e3e3e3;
 }
 

@@ -131,7 +131,7 @@ a {
     background-color:#eeeeee;
     border: 1px solid #dddddd;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 50px;
     margin-top: 15px;
     outline: none;
     margin-top: 25px;
@@ -161,8 +161,22 @@ a {
     background-color:#eeeeee;
     border: 1px solid #dddddd;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 50px;
     outline: none;
+}
+
+.logout {
+    background-color:transparent;
+    border: none;
+}
+
+.fa-right-from-bracket {
+    color: var(--dark);
+}
+
+.fa-right-from-bracket:hover {
+    cursor: pointer;
+    color: #333333cd;
 }
 
 .dropdown option {
@@ -170,23 +184,37 @@ a {
 }
 
 /*   order tickets */
+
 #lunchTickets {
     display: grid;
     grid-template-columns: auto auto auto;
     margin: 30px;
+    overflow: auto;
 
 }
+
 .ticket {
     text-align: center;
     border: 3px solid black;
-    height: 200px;
+    height: 210px;
     width: 200px;
-    margin-bottom: 20px;
+    margin-bottom: 35px;
     flex-wrap: wrap;
-  
+    font-size: 14px;
+}
+
+#orderedItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
 }
 
 #printTickets {
     margin: 0 auto;
     display: block;
+    margin-bottom: 50px;
+}
+#printTickets:hover {
+    background-color:#e3e3e3;
 }

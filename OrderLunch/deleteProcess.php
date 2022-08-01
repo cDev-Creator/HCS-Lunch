@@ -1,12 +1,11 @@
 <?php
-$connection = mysqli_connect("localhost","root","");
-$db = mysqli_select_db($connection, 'menus');
+include("../conn.php");
 
 if(isset($_POST['delete']))
 {
     $ID = $_POST['ID'];
     $query = "DELETE FROM allorders WHERE ID='$ID' ";
-    $query_run = mysqli_query($connection, $query);
+    $query_run = mysqli_query($conn, $query);
 
     if($query_run)
     {

@@ -1,23 +1,22 @@
 <?php
-   $mysqli = new mysqli('localhost','root','','menus');
-   $result = $mysqli->query("SELECT item, price FROM $restaurant order by item ASC"); 
+   include("../conn.php");
+   $result = $conn->query("SELECT item, price FROM $restaurant order by item ASC"); 
 ?>
 
 
 <!DOCTYPE html> 
 <html> 
 	<body> 
-	<table id="foodSummaryTable" align="center" border="1px" style="width:500px; line-height:40px;"> 
+	<table id="foodSummaryTable" align="center"> 
 	<tr> 
-		<th colspan="4"><h2>Food Summary</h2></th> 
+		<th colspan="4" id="foodSumTitle"><h2>Food Summary</h2></th> 
     </tr>
 
     <tr>
         <td>Food Item</td> 
-        <td>Order Quantity</td>  
+        <td>Qty</td>  
         <td>Price</td>
-
-        <td>Amount</td> 
+        <td>Total</td> 
     </tr>
 
 <?php while($rows = $result->fetch_assoc())

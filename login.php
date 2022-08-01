@@ -1,9 +1,9 @@
 <?php 
 session_start();
+include("conn.php");
 $username=$_POST['username'];
 $password=$_POST['password'];
-$rat ='rat';
-$conn = new mysqli('localhost','root','','menus');
+
 if($conn->connect_error){
     die("Error connecting : ".$conn->connect_error);
 } else {
@@ -18,10 +18,8 @@ if($conn->connect_error){
         if ($status === 1) {
         if($data['password'] === $password){
             $_SESSION['user']=$_POST['username'];
-            $p = urlencode("epBNnTp581Y");
-            header("location: officeStaffAccess.php?p=".$p);
-           /*  $message = urlencode("Welcome back " .$_POST['username']);
-            header("location: officeStaffAccess.php?message=".$message); */
+            $p = urlencode("epBNsTp581Y");
+            header("location: HomePage/officeStaffAccess.php?p=".$p);
 
         } else {
             $message = urlencode("*The password you entered is incorrect.");
@@ -31,7 +29,7 @@ if($conn->connect_error){
         } elseif($status === 0) {
             if($data['password'] === $password){
                 $p = urlencode("nHb8fN6m6mY");
-                header("location: teacherAccess.php?p=".$p);
+                header("location: HomePage/teacherAccess.php?p=".$p);
                 $_SESSION['user']=$_POST['username'];
     
             } else {

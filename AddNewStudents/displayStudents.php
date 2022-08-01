@@ -1,14 +1,12 @@
 <?php
-$mysqli = new mysqli('localhost','root','','menus');
-$result = $mysqli->query("SELECT id, firstName, lastName, grade FROM names ORDER BY grade, firstName ASC"); 
-
-
+include("../conn.php");
+$result = $conn->query("SELECT id, firstName, lastName, grade FROM names ORDER BY grade, firstName ASC"); 
 ?>
-
+<script src="https://kit.fontawesome.com/fa7c02709f.js" crossorigin="anonymous"></script>
 <!DOCTYPE html> 
 <html> 
 	<head>
-        <link rel="stylesheet" href="../SCSS/officeTables.css">
+        <link rel="stylesheet" href="../css/officeTables.css">
     </head>
 
 	<body> 
@@ -26,28 +24,29 @@ $result = $mysqli->query("SELECT id, firstName, lastName, grade FROM names ORDER
 		<?php while($rows = $result->fetch_assoc())
 		{ 
 		?> 
-
 		
         <form action="updateStudent.php" method="post">
             <td name='grade'><?php echo $rows['grade']; ?></td> 
             <td><?php echo $rows['firstName']." ".$rows['lastName']; ?>
         </form>
-      
-        
+
 			<td> 
 				<form action="updateStudent.php" method="post">
 				<input type="hidden" name="id" value="<?php echo $rows['id'] ?>">
-				<input type="submit" id="updateStudentBtn" name="update" value="update"> 
+				<button type="submit" id="updateStudentBtn" name="update">
+					<i class="fa-solid fa-user-pen fa-lg"></i>
+				</button> 
 				</form>
 		    </td>
 
 			<td> 
 				<form action="deleteStudent.php" method="post">
 				<input type="hidden" name="id" value="<?php echo $rows['id'] ?>">
-				<input type="submit" id="deleteStudentBtn" name="delete" value="X"> 
+				<button type="submit" id="deleteStudentBtn" name="delete">
+					<i class="fa-solid fa-trash-can fa-lg"></i>
+				</button> 
 				</form>
 		    </td>
-
 		</tr> 
           
 	<?php 
@@ -55,7 +54,5 @@ $result = $mysqli->query("SELECT id, firstName, lastName, grade FROM names ORDER
         } 
     ?> 
 	</table> 
-
-
 	</body> 
 	</html>

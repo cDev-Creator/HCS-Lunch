@@ -1,9 +1,16 @@
 <?php
-$mysqli = new mysqli('localhost','root','','menus');
-$result = $mysqli->query("SELECT grade, item, quantity, price FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, item ASC "); 
+session_start();
+include("../conn.php");
+$result = $conn->query("SELECT grade, item, quantity, price FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, item ASC "); 
 error_reporting(0);
+if(isset($_GET['p'])){
+    $p = $_GET['p'];
+    echo $p;
+}
+if(!isset($_SESSION['user'])){
+    header("Location:../index.php");
+}
 ?>
-
 
 <img src="hcslogo.jpg" alt="HCS Logo" width="200" height="70">
 <br>
@@ -16,10 +23,8 @@ $mydate=getdate(date("U"));
 $ordersDate = "Orders for $mydate[month] $mydate[mday], $mydate[year]";
 /* $weekday = "$mydate[weekday]"; */
 $weekday = "Thursday";
-
 ?>
     <?php 
-    $mysqli = new mysqli('localhost','root','','menus');
      ////////////////////////// GO BACK AND MAKE ARRAY DYNAMICALLY CREATED INSTEAD OF HARD CODED/////////////////////////////////////////
     $restaurants = array("54pizza", "arbys", "ritzys", "chickfila", "greatharvest");
 
@@ -42,8 +47,8 @@ $weekday = "Thursday";
         echo 'School is not in session!';
     }
 
-    $resultSet = $mysqli->query("SELECT item, price FROM $restaurant order by item ASC");
-    $fetch1 = $mysqli->query("SELECT item FROM $restaurant order by item ASC");
+    $resultSet = $conn->query("SELECT item, price FROM $restaurant order by item ASC");
+    $fetch1 = $conn->query("SELECT item FROM $restaurant order by item ASC");
     $list = array();
 
     while($row = mysqli_fetch_assoc($fetch1)){
@@ -51,16 +56,16 @@ $weekday = "Thursday";
         array_push($list, $rows);
     }
 
-    
 $menuItemsLength = count($list);
 
 function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     $arr = []; 
 
     global $menuItemsLength;
-    for ($x = 0; $x < $menuItemsLength; $x++)  {
+    for ($x = -1; $x < $menuItemsLength-1; $x++)  {
         $num = $x+1;
         $className = 'item'.$num;
+        echo $className;
         getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
     }
 }
@@ -72,7 +77,7 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 <!DOCTYPE html> 
 <html> 
     <head>
-        <link rel="stylesheet" href="../SCSS/officeTables.css">
+        <link rel="stylesheet" href="../css/officeTables.css">
     </head>
 	<body> 
     <div class="allTables">
@@ -85,44 +90,44 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     <?php
     while($row = $resultSet->fetch_assoc())
     {
-        echo "<td>" . $row["item"] . "</td>";
+        echo "<td id='menuTblHeader'>" . $row["item"] . "</td>";
     }?>
     </tr>
     
     <tr id="officeStaff">
-        <td>Office Staff</td>
+        <td class="gradeTd">Office Staff</td>
     </tr>
 
     <tr id="twoDayPk">
-        <td>2 Day Preschool</td>
+        <td class="gradeTd">2 Day Preschool</td>
     </tr>
 
     <tr id="threeDayPk">
-        <td>3 Day Preschool</td>
+        <td class="gradeTd">3 Day Preschool</td>
     </tr>
 
     <tr id="first">
-        <td>1st Grade</td>
+        <td class="gradeTd">1st Grade</td>
     </tr>
 
     <tr id="second">
-        <td>2nd Grade</td>
+        <td class="gradeTd">2nd Grade</td>
     </tr>
 
     <tr id="third" >
-        <td>3rd Grade</td>
+        <td class="gradeTd">3rd Grade</td>
     </tr>
 
     <tr id="fourth">
-        <td>4th Grade</td>
+        <td class="gradeTd">4th Grade</td>
     </tr>
 
     <tr id="fifth">
-        <td>5th Grade</td>
+        <td class="gradeTd">5th Grade</td>
     </tr>
 
     <tr id="firstShiftTotal">
-        <td>1st Shift Total</td>
+        <td class="gradeTd">1st Shift Total</td>
     </tr>
 
     <tr>
@@ -130,19 +135,19 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     </tr>
 
     <tr id="sixth">
-        <td>6th Grade</td>
+        <td class="gradeTd">6th Grade</td>
     </tr>
 
     <tr id="seventh">
-        <td>7th Grade</td>
+        <td class="gradeTd">7th Grade</td>
     </tr>
 
     <tr id="eighth">
-        <td>8th Grade</td>
+        <td class="gradeTd">8th Grade</td>
     </tr>
 
     <tr id="secondShiftTotal">
-        <td>2nd Shift Total</td>
+        <td class="gradeTd">2nd Shift Total</td>
     </tr>
     
         <?php 

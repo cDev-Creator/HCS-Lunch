@@ -1,20 +1,8 @@
 <?php
-
+include('../conn.php');
 $firstName = $_POST["firstName"];
 $lastName = $_POST["lastName"];
 $grade = $_POST["grade"];
-/* $priority = filter_input(INPUT_POST, "priority", FILTER_VALIDATE_INT);
- */
-
-$host = "localhost";
-$dbname = "menus";
-$username = "root";
-$password = "";
-        
-$conn = mysqli_connect(hostname: $host,
-                       username: $username,
-                       password: $password,
-                       database: $dbname);
         
 if (mysqli_connect_errno()) {
     die("Connection error: " . mysqli_connect_error());

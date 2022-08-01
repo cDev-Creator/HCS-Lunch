@@ -1,22 +1,21 @@
-
 <?php
 session_start();
 error_reporting(0);
+include("../conn.php");
 if(isset($_GET['message'])){
     $message = $_GET['message'];
 }
 if(isset($_GET['messages'])){
     $messages = $_GET['messages'];
 }
-
 if(isset($_GET['p'])){
     $p = $_GET['p'];
 }
-
-
+if(!isset($_SESSION['user'])){
+    header("Location:../index.php");
+}
 ?>
 
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
 <?php
 $grades = $_SESSION["grade"] = $_POST['grade'] ?? $_SESSION["grade"];
 
@@ -25,9 +24,7 @@ $title = "Lunch Orders for ".$grades;
 
 <!-- STUDENTS FROM OTHER CLASSES  -->
 <?php
-$mysqli = new mysqli('localhost','root','','menus');
-$result = $mysqli->query("SELECT * FROM names ORDER BY grade, firstName ASC"); 
-
+$result = $conn->query("SELECT * FROM names ORDER BY grade, firstName ASC"); 
 ?>
 
 <h1 id="orderLunchTitle"><?php echo $title?></h1>
@@ -35,7 +32,7 @@ $result = $mysqli->query("SELECT * FROM names ORDER BY grade, firstName ASC");
 <p id="studentToDiffClassMsg"><p>
 
 
-<form name="lunch-form" id="lunch-form" method="post" action="ordersDB.php"> 
+<form name="lunch-form" id="lunch-form" method="post" action="ordersDB.php?p=<?php echo $p ?>"> 
 <select name="allNames" id="allStudents" class="dropdown">
 <option value='' selected='selected'>--All Students--</option>;
 <?php
@@ -51,11 +48,8 @@ while($rows = $result->fetch_assoc())
 
 <!-- STUDENTS FROM CHOSEN CLASS  -->
 <?php
-
-$mysqli = new mysqli('localhost','root','','menus');
-$resultSet = $mysqli->query("SELECT firstName, lastName, grade FROM names");
-
-$result = $mysqli->query("SELECT * FROM names WHERE grade='$grades' order by firstName ASC ");
+$resultSet = $conn->query("SELECT firstName, lastName, grade FROM names");
+$result = $conn->query("SELECT * FROM names WHERE grade='$grades' order by firstName ASC ");
 ?>
 <select name="names" id="students" class="dropdown">
 <option value='' selected='selected'><?php echo'--'.$grades,' Students--'?></option>;
@@ -77,8 +71,6 @@ date_default_timezone_set(TIMEZONE);
 $mydate=getdate(date("U"));
 /* $weekday = "$mydate[weekday]"; */
 $weekday = "Thursday";
-
-    $mysqli = new mysqli('localhost','root','','menus');
      ////////////////////////// GO BACK AND MAKE ARRAY DYNAMICALLY CREATED INSTEAD OF HARD CODED/////////////////////////////////////////
     $restaurants = array("54pizza", "arbys", "ritzys", "chickfila", "greatharvest");
 
@@ -101,7 +93,7 @@ $weekday = "Thursday";
         echo 'School is not in session!';
     }
     
-    $results = $mysqli->query("SELECT item, price FROM $restaurant order by item ASC");
+    $results = $conn->query("SELECT item, price FROM $restaurant order by item ASC");
 
     ?>
 
@@ -127,9 +119,7 @@ $weekday = "Thursday";
 require('classOrderTable.php');
 ?>
 
-<button id="goBackBtn" class="backBtn">Go Back</button>
-
-<!-- <button class="backBtn"><a href="../officeStaffAccess.php">Go Back</a></button> -->
+<button id="goBackBtn" class="backBtn"><a id='a'>Go Back</a></button>
 <button id="logoutBtn"><a href="logout.php">Log Out</a></button>
 
 <script> 
@@ -141,15 +131,18 @@ require('classOrderTable.php');
 
     let p = "<?php echo $p; ?>";
     let goBackBtn = document.getElementById("goBackBtn");
+    let a = document.getElementById("a");
 
-    if(p == 'epBNnTp581Y') {
+    if(p == 'epBNsTp581Y') {
         goBackBtn.addEventListener("click", function(){
-        window.location.replace("../officeStaffAccess.php");
+            console.log("asdasdasdasd");
+        a.href = "../HomePage/officeStaffAccess.php?p=epBNsTp581Y"
     })
     }
     else if(p == 'nHb8fN6m6mY') {
         goBackBtn.addEventListener("click", function(){
-        window.location.replace("../teacherAccess.php");
+            console.log("asdasdasdasd");
+        a.href = "../HomePage/teacherAccess.php?p=nHb8fN6m6mY"
     })
     }
 </script>

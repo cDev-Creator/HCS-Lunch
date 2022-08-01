@@ -1,10 +1,8 @@
 <?php
-if(isset($_GET['message'])){
-    $message = $_GET['message'];
-    /* echo "<script>alert('$message');</script>"; */
-    echo $message;
-}
-?>
+    if(isset($_GET['message'])){
+        $message = $_GET['message'];
+    }
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +10,7 @@ if(isset($_GET['message'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="scss/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <title>Document</title>
 
 </head>
@@ -27,9 +25,15 @@ if(isset($_GET['message'])){
             <div class="txtField">
                 <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
+            <div id="errorMsg"></div>  
             <button type="submit" id="loginsubmit" name="loginsubmit">Login</button>
         </form>
     </div>
 
 </body>
 </html>
+
+<script>
+    var errorMsg = "<?php echo $message; ?>";
+    document.getElementById("errorMsg").innerHTML = errorMsg;
+</script>
