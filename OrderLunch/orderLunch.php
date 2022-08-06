@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <?php
 session_start();
 error_reporting(0);
@@ -8,20 +10,27 @@ if(isset($_GET['message'])){
 if(isset($_GET['messages'])){
     $messages = $_GET['messages'];
 }
+
 if(isset($_GET['p'])){
     $p = $_GET['p'];
 }
 if(!isset($_SESSION['user'])){
     header("Location:../index.php");
 }
-?>
 
-<?php
 $grades = $_SESSION["grade"] = $_POST['grade'] ?? $_SESSION["grade"];
-
 $title = "Lunch Orders for ".$grades;
 ?>
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/orderTable.css">
+    <title>Document</title>
+</head>
+<body>
+    
 <!-- STUDENTS FROM OTHER CLASSES  -->
 <?php
 $result = $conn->query("SELECT * FROM names ORDER BY grade, firstName ASC"); 
@@ -69,10 +78,10 @@ while($rows = $result->fetch_assoc())
 define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
 $mydate=getdate(date("U"));
-/* $weekday = "$mydate[weekday]"; */
-$weekday = "Thursday";
+$weekday = "$mydate[weekday]";
+/* $weekday = "Thursday"; */
      ////////////////////////// GO BACK AND MAKE ARRAY DYNAMICALLY CREATED INSTEAD OF HARD CODED/////////////////////////////////////////
-    $restaurants = array("54pizza", "arbys", "ritzys", "chickfila", "greatharvest");
+    $restaurants = array("54pizza", "chickfila", "ritzys", "arbys",  "greatharvest");
 
     if($weekday == 'Monday' ){
         $restaurant = $restaurants[0];
@@ -121,6 +130,11 @@ require('classOrderTable.php');
 
 <button id="goBackBtn" class="backBtn"><a id='a'>Go Back</a></button>
 <button id="logoutBtn"><a href="logout.php">Log Out</a></button>
+
+    
+</body>
+</html>
+
 
 <script> 
     let errorMsg = "<?php echo $message; ?>";

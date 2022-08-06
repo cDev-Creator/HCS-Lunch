@@ -55,7 +55,14 @@ body{
     justify-content: center;
 }
 
-#classOrderTable tbody:nth-child(even){
+
+
+#classOrderTable tr#addedFromOtherClass{
+    background-color:rgba(43, 0, 255, 0.281);
+
+}
+
+#classOrderTable tr:nth-child(even){
 	background-color: var(--grey);
     color: var(--secondary);
 }
@@ -63,7 +70,7 @@ body{
 #classOrderTable td {
     padding:15px 0px;
     text-align: center;
-    border:1px solid var(--grey);
+  /*   border:1px solid var(--grey); */
     font-size:16px;
 }
 
@@ -166,7 +173,20 @@ body{
 }
 
 /* Responsive */
-@media(max-width:500px) {
+@media screen and (max-width: 500px) {
+
+    #lunch-form > * {
+        margin-bottom: 20px;
+    }
+
+    #submitOrderBtn,#quantities,#logoutBtn,#backToHome,.dropdown,.backBtn{
+        padding:10px 10px;
+        font-size: 20px;
+    }
+
+    #oneStudentMsg, #studentToDiffClassMsg {
+        font-size: 18px;
+    }
     #classOrderTable {
         width: 100%;
         box-shadow: none;
@@ -211,7 +231,7 @@ body{
     }
 
     .fa-trash-can {
-        margin-top: 6px;
+        margin-left: 10px;
     }
    
     #classOrderTable td::before {
@@ -235,4 +255,5 @@ body{
         gap: 20px;
         justify-content: center;
     }   
+
 }

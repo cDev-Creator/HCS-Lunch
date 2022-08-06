@@ -1,7 +1,14 @@
 <?php
 session_start();
 include("../conn.php");
-$result = $conn->query("SELECT grade, item, quantity, price FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, item ASC "); 
+define('TIMEZONE', 'America/Chicago');
+date_default_timezone_set(TIMEZONE);
+$mydate=getdate(date("U"));
+$ordersDate = "Orders for $mydate[month] $mydate[mday], $mydate[year]";
+$weekday = "$mydate[weekday]";
+/* $weekday = "Thursday"; */
+$date = date("Y-m-d"); 
+$result = $conn->query("SELECT grade, item, quantity, price FROM allorders WHERE dates = '$date' ORDER BY grade, item ASC "); 
 error_reporting(0);
 if(isset($_GET['p'])){
     $p = $_GET['p'];
@@ -16,17 +23,9 @@ if(!isset($_SESSION['user'])){
 <br>
 <br>
 
-<?php
-define('TIMEZONE', 'America/Chicago');
-date_default_timezone_set(TIMEZONE);
-$mydate=getdate(date("U"));
-$ordersDate = "Orders for $mydate[month] $mydate[mday], $mydate[year]";
-/* $weekday = "$mydate[weekday]"; */
-$weekday = "Thursday";
-?>
     <?php 
      ////////////////////////// GO BACK AND MAKE ARRAY DYNAMICALLY CREATED INSTEAD OF HARD CODED/////////////////////////////////////////
-    $restaurants = array("54pizza", "arbys", "ritzys", "chickfila", "greatharvest");
+     $restaurants = array("54pizza", "chickfila", "ritzys", "arbys",  "greatharvest");
 
     if($weekday == 'Monday' ){
         $restaurant = $restaurants[0];

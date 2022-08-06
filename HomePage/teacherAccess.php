@@ -12,6 +12,7 @@ if(!isset($_SESSION['user'])){
 
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://kit.fontawesome.com/fa7c02709f.js" crossorigin="anonymous"></script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,14 +22,17 @@ if(!isset($_SESSION['user'])){
 <body>
 <div class="container">
         <div class="options">
-            <button class="mainBtns" id="orderLunchBtn"><h2>Order Lunch</a></h2></body>
-            <button class="mainBtns"><h2><a href="../OrderLunch/logout.php">Logout</a><h2>
+            <button class="mainBtns teacherBtn" id="orderLunchBtn"><h2>Order Lunch</a></h2></body>
+            <button class="logout"><h2><a href="../OrderLunch/logout.php">
+            <i class="fa-solid fa-right-from-bracket fa-2xl"></i>
+            </a><h2>
+            </button>
         </div>
 
         <div class="modal-bg">
            <form method='POST' action="../OrderLunch/orderLunch.php?p=<?php echo $p ?>" id="form" class="modal-content">
 
-                <div class="closeBtn" id="closeBtn">+</div>
+                <div class="closeBtn" id="closeBtn"><i class="fa-solid fa-xmark fa-lg"></i></div>
 
                 <div>
                     <select name="grade" id="grade" class="dropdown" required>

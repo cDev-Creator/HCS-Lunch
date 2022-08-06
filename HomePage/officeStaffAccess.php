@@ -29,7 +29,7 @@ if(!isset($_SESSION['user'])){
     <button class="logout"><h2><a href="../OrderLunch/logout.php">
     <i class="fa-solid fa-right-from-bracket fa-xl"></i>
     </a><h2>
-</button>
+    </button>
  
 </div>
 </div>
@@ -38,7 +38,7 @@ if(!isset($_SESSION['user'])){
             <!-- <form method='POST' action="OrderLunch/orderLunch.php" id="form" class="modal-content"> -->
         <form method='POST' action="../OrderLunch/orderLunch.php?p=<?php echo $p?>" id="form" class="modal-content">
 
-            <div class="closeBtn" id="closeBtn">+</div>
+            <div class="closeBtn" id="closeBtn"><i class="fa-solid fa-xmark fa-lg"></i></div>
         
             <div>
     

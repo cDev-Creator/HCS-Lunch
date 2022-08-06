@@ -3,7 +3,9 @@
     --secondary: #349b5c;
     --grey: #f3f3f3;
     --dark:#333333;
+
 }
+
 
 body{
     background-color:var(--grey);
@@ -70,24 +72,42 @@ a {
 
 .closeBtn { 
     position: absolute;
-    top:0;
+    top:15px;
     right: 10px;
-    font-size: 35px;
-    transform: rotate(45deg);
     cursor: pointer;
 }
 
+
 /* log in page */
+
 #loginContainer {
     position: absolute;
     top:50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 380px;
+    width: 450px;
+    height: 430px;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+}
+
+
+.centerImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top {
+    background-color: var(--main);;
+    overflow: hidden;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.05);
+}
+
+#title {
+    text-align: center;
+    margin-top:20px;
 }
 
 
@@ -113,10 +133,7 @@ a {
     outline: none;
 }
 
-#title {
-    text-align: center;
-    margin-top:50px;
-}
+
 
 #loginsubmit {
     width: 100px;
@@ -132,9 +149,9 @@ a {
     border: 1px solid #dddddd;
     cursor: pointer;
     border-radius: 50px;
-    margin-top: 15px;
+   /*  margin-top: 15px; */
     outline: none;
-    margin-top: 25px;
+    margin-top: 10px;
 }
 
 #loginsubmit:focus {
@@ -164,6 +181,12 @@ a {
     border-radius: 50px;
     outline: none;
 }
+
+#orderLunchBtn.mainBtns.teacherBtn {
+    font-size: 15px;
+}
+
+
 
 .logout {
     background-color:transparent;
@@ -217,4 +240,48 @@ a {
 }
 #printTickets:hover {
     background-color:#e3e3e3;
+}
+
+@media screen and (max-width: 500px) {
+
+    #loginContainer {
+        width: 430px;
+    }
+    #lunchTickets {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    #moddal-content {
+        width: 100%;
+    }
+
+    .dropdown, #submitGradeBtn{
+        padding:10px 10px;
+        font-size: 20px;
+    }
+
+    .dropdown {
+        margin-top: 10px;
+        margin-bottom: 50px;
+    }
+
+    #orderLunchBtn {
+        font-size: 18px;
+        width: 140px;
+    }
+
+    .mainBtns {
+        font-size:15px;
+        padding:5px 10px;
+        margin-bottom: 10px;
+        width:210px;
+    }
+
+    .fa-right-from-bracket{
+        font-size: 32px;
+    } 
+
 }

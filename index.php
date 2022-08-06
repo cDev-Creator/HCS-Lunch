@@ -16,8 +16,13 @@
 </head>
 
 <body>
+<div class="top">
+<img src="logo.png" class="centerImg" alt="HCS Logo" width="230" height="70">
+</div>
+</div>
     <div id="loginContainer">
         <h1 id="title">Lunchroom Login</h1>
+       
         <form id="loginForm" action="login.php" method="POST">
             <div class="txtField">
                 <input type="text" id="username" name="username" placeholder="Username" required>
@@ -27,10 +32,13 @@
             </div>
             <div id="errorMsg"></div>  
             <button type="submit" id="loginsubmit" name="loginsubmit">Login</button>
-        </form>
+        </form>  
     </div>
-
+   
+ 
+  
 </body>
+
 </html>
 
 <script>

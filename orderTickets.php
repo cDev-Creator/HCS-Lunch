@@ -1,8 +1,12 @@
 <?php
 session_start();
 include("conn.php");
+define('TIMEZONE', 'America/Chicago');
+date_default_timezone_set(TIMEZONE);
+
+$date = date("Y-m-d"); 
 $result = $conn->query ("SELECT name,grade, GROUP_CONCAT(item, ' — ', quantity SEPARATOR '</br>') AS item 
-FROM allorders WHERE DATE(dates) = DATE(NOW()) GROUP BY name");
+FROM allorders WHERE dates = '$date' GROUP BY name");
 if(!isset($_SESSION['user'])){
     header("Location:index.php");
 }

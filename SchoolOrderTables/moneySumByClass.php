@@ -68,7 +68,8 @@
 
 <?php 
 include("../conn.php");
-$result = $conn->query("SELECT grade, item, quantity, price FROM allorders WHERE DATE(dates) = DATE(NOW()) ORDER BY grade, item ASC "); 
+$date = date("Y-m-d"); 
+$result = $conn->query("SELECT grade, item, quantity, price FROM allorders WHERE dates = '$date' ORDER BY grade, item ASC "); 
 
 $finalTotal = 0;
 $officeTotal = 0;

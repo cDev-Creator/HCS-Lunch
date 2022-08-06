@@ -1,8 +1,12 @@
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <?php
 include("../conn.php");
-$result = $conn->query("SELECT ID, grade, name, item, quantity, price FROM allorders WHERE grade='$grades' AND DATE(dates) = DATE(NOW()) "); 
+$date = date("Y-m-d"); 
+echo $date;
+$result = $conn->query("SELECT ID, grade, name, item, quantity, dates, price, inserted FROM allorders WHERE grade = '$grades' AND dates = '$date'"); 
+$grades = $_SESSION["grade"] = $_POST['grade'] ?? $_SESSION["grade"];
+
+echo $grades;
 ?>
 
 <!DOCTYPE html> 
@@ -11,10 +15,10 @@ $result = $conn->query("SELECT ID, grade, name, item, quantity, price FROM allor
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/orderTable.css">
 </head>
 <script src="https://kit.fontawesome.com/fa7c02709f.js" crossorigin="anonymous"></script>
 <body> 
+
 	<table id="classOrderTable"> 
 	<thead>
 		</tr> 
@@ -28,14 +32,15 @@ $result = $conn->query("SELECT ID, grade, name, item, quantity, price FROM allor
 		</tr> 
 	<thead>
 		
+
         <?php $total = 0;?>
 		<?php while($rows = $result->fetch_assoc())
 		{ 
-		?> 
 
-	<tbody>
-		<tr>
-            <td data-label='grade'><?php echo $rows['grade']; ?></td> 
+		echo '<tr id="'.(($rows['inserted'] == 1) ? 'addedFromOtherClass' : 'addedFromSameClass'). '">'.$row['inserted'].''
+		?>
+            <td data-label='grade' id="gradess"><?php echo $rows['grade']; ?></td> 
+
             <td data-label='name'><?php echo $rows['name']; ?></td> 
             <td data-label='item'><?php echo $rows['item']; ?></td> 
             <td data-label='quantity'><?php echo $rows['quantity']; ?></td> 
@@ -51,9 +56,7 @@ $result = $conn->query("SELECT ID, grade, name, item, quantity, price FROM allor
 				</button>
 				</form>
 		    </td>
-
-		</tr> 
-          
+		</tr>  
 	<?php 
     
         } 
