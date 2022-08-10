@@ -26,6 +26,10 @@
         <td>3 Day Preschool</td>
     </tr>
    
+    <tr id="kindergartenMoneySum">
+        <td>Kindergarten</td>
+    </tr>
+
     <tr id="firstMoneySum">
         <td>1st Grade</td>
     </tr>
@@ -75,6 +79,7 @@ $finalTotal = 0;
 $officeTotal = 0;
 $twoDayTotal = 0;
 $threeDayTotal = 0;
+$kindergartenTotal = 0;
 $firstTotal = 0;
 $secondTotal = 0;
 $thirdTotal = 0;
@@ -95,6 +100,9 @@ while($rows = $result->fetch_assoc()) {
 
     elseif ($rows['grade'] == '03 Day Preschool'):
         $threeDayTotal = $threeDayTotal + floatval($rows["price"]);
+
+    elseif ($rows['grade'] == 'Kindergarten'):
+        $kindergartenTotal = $kindergartenTotal + floatval($rows["price"]);
 
     elseif ($rows['grade'] == '1st Grade'):
         $firstTotal = $firstTotal + floatval($rows["price"]);
@@ -123,7 +131,7 @@ while($rows = $result->fetch_assoc()) {
     endif;
 
     $finalTotal = $eighthTotal + $seventhTotal + $sixthTotal + $fifthTotal + $fourthTotal + $thirdTotal
-    + $secondTotal + $firstTotal +  $threeDayTotal + $twoDayTotal + $officeTotal;
+    + $secondTotal + $firstTotal + $kindergartenTotal + $threeDayTotal + $twoDayTotal + $officeTotal;
 }
 ?>
 
@@ -145,6 +153,9 @@ while($rows = $result->fetch_assoc()) {
 
     let threeDay =  <?php echo number_format((float)$threeDayTotal, 2, '.', ''); ?>;
     addMoneySummary('threeDayMoneySum', threeDay);
+
+    let kindergarten =  <?php echo number_format((float)$kindergartenTotal, 2, '.', ''); ?>;
+    addMoneySummary('kindergartenMoneySum', kindergarten);
 
     let first =  <?php echo number_format((float)$firstTotal, 2, '.', ''); ?>;
     addMoneySummary('firstMoneySum', first);

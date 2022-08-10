@@ -32,6 +32,7 @@
             <option value="Office Staff">Office Staff</option>
             <option value="02 Day Preschool">2 Day Preschool</option>
             <option value="03 Day Preschool">3 Day Preschool</option>
+            <option value="Kindergarten">Kindergarten</option>
             <option value="1st Grade">1st Grade</option> 
             <option value="2nd Grade">2nd Grade</option>  
             <option value="3rd Grade">3rd Grade</option>  

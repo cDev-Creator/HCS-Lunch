@@ -105,6 +105,10 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
         <td class="gradeTd">3 Day Preschool</td>
     </tr>
 
+    <tr id="kindergarten">
+        <td class="gradeTd">Kindergarten</td>
+    </tr>
+
     <tr id="first">
         <td class="gradeTd">1st Grade</td>
     </tr>
@@ -155,7 +159,10 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 		{
             addItemsFromDB($rows, 'Office Staff', $list, 'office');
             addItemsFromDB($rows, '02 Day Preschool', $list, 'twoDay');
-            addItemsFromDB($rows, '03 Day Preschool', $list,'threeDay');   
+            addItemsFromDB($rows, '03 Day Preschool', $list,'threeDay');
+
+            addItemsFromDB($rows, 'Kindergarten', $list,'kindergartenGrade');  
+            
             addItemsFromDB($rows, '1st Grade', $list, 'firstGrade');
             addItemsFromDB($rows, '2nd Grade', $list,'secondGrade');   
             addItemsFromDB($rows, '3rd Grade', $list,'thirdGrade');
@@ -214,6 +221,9 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     addOrdersToRow('officeStaff', 'office');
     addOrdersToRow('twoDayPk', 'twoDay');
     addOrdersToRow('threeDayPk', 'threeDay');
+
+    addOrdersToRow('kindergarten', 'kindergartenGrade');
+    
     addOrdersToRow('first', 'firstGrade');
     addOrdersToRow('second', 'secondGrade');
     addOrdersToRow('third', 'thirdGrade');
@@ -225,7 +235,7 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 
     var table = document.getElementById("mainTable")
             
-    function addFirstShiftTotals(r1,r2,r3,r4,r5,r6,r7,r8,cell1) {
+    function addFirstShiftTotals(r1,r2,r3,r4,r5,r6,r7,r8,r9,cell1) {
         const total = Array();
         total.push(table.rows[r1].cells[cell1].innerText);
         total.push(table.rows[r2].cells[cell1].innerText);
@@ -235,6 +245,7 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
         total.push(table.rows[r6].cells[cell1].innerText);
         total.push(table.rows[r7].cells[cell1].innerText);
         total.push(table.rows[r8].cells[cell1].innerText);
+        total.push(table.rows[r9].cells[cell1].innerText);
 
         var arrayOfNumbers = total.map(Number);
         var sum = 0;
@@ -249,7 +260,7 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     function reverseOrderFirst() {
         for (var i = menuItemsLength-1; i>=0; i--) {
             let col = i + 1;
-            addFirstShiftTotals(2,3,4,5,6,7,8,9,col);
+            addFirstShiftTotals(2,3,4,5,6,7,8,9,10,col);
         }
     }
     reverseOrderFirst();
@@ -273,7 +284,7 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     function reverseOrderSecond() {
         for (var i = menuItemsLength-1; i>=0; i--) {
             let col2 = i + 1;
-            addSecondShiftTotals(12,13,14,col2);
+            addSecondShiftTotals(13,14,15,col2);
         }
     }
     reverseOrderSecond();
@@ -284,8 +295,8 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     let menuItemSchoolQuantitiesArr = Array();
     function menuItemSchoolQuantities() {
         for (var i=1; i <= menuItemsLength; i++) {
-        let firstShiftTotals =table.rows[10].cells[i].innerText;
-        let secondShiftTotals = table.rows[15].cells[i].innerText;
+        let firstShiftTotals =table.rows[11].cells[i].innerText;
+        let secondShiftTotals = table.rows[16].cells[i].innerText;
         let firstShiftTotalsInt = parseInt(firstShiftTotals);
         let secondShiftTotalsInt = parseInt(secondShiftTotals);
 
