@@ -41,7 +41,7 @@ $result = $conn->query("SELECT * FROM names ORDER BY grade, firstName ASC");
 <p id="studentToDiffClassMsg"><p>
 
 
-<form name="lunch-form" id="lunch-form" method="post" action="ordersDB.php?p=<?php echo $p ?>"> 
+<form name="lunch-form" id="lunch-form" method="post" action="ordersDB.php?p=<?php echo $p?>"> 
 <select name="allNames" id="allStudents" class="dropdown">
 <option value='' selected='selected'>--All Students--</option>;
 <?php

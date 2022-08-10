@@ -48,7 +48,8 @@ echo $grades;
             <?php $total = $total + floatval($rows["price"]);?>
             <td data-label='total'><?php echo '$',number_format((float)$total, 2, '.', ''); ?></td>
 			<td data-label='delete' id="deleteOrderLabel"> 
-				<form id="deleteBtnForm"action="deleteProcess.php" method="post">
+				
+				<form id="deleteBtnForm" action="deleteProcess.php?p=<?php echo $p?>" method="post">
 				<input type="hidden" name="ID" value="<?php echo $rows['ID'] ?>">
 				<button id="deleteStuOrder" type="submit" name="delete">
 				<i class="fa-solid fa-trash-can fa-lg"></i>

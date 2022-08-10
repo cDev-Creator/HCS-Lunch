@@ -1,5 +1,9 @@
 <?php
 include("../conn.php");
+/* session_start(); */
+if(isset($_GET['p'])){
+    $p = $_GET['p'];
+}
 
 if(isset($_POST['delete']))
 {
@@ -10,7 +14,7 @@ if(isset($_POST['delete']))
     if($query_run)
     {
         echo '<script> alert("Data Deleted"); </script>';
-        header("location:orderLunch.php");
+        header("location:orderLunch.php?p=".$p);
     }
     else
     {
