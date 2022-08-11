@@ -7,7 +7,7 @@ $password=$_POST['password'];
 if($conn->connect_error){
     die("Error connecting : ".$conn->connect_error);
 } else {
-    $stmt = $conn->prepare("select * from loginform where username = ? LIMIT 1");
+    $stmt = $conn->prepare("SELECT * from loginform where username = ? LIMIT 1");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt_result = $stmt->get_result();
@@ -18,6 +18,8 @@ if($conn->connect_error){
         if ($status === 1) {
         if($data['password'] === $password){
             $_SESSION['user']=$_POST['username'];
+
+            $_SESSION['test']=$data['status'];
             $p = urlencode("epBNsTp581Y");
             header("location: HomePage/officeStaffAccess.php?p=".$p);
 
@@ -27,11 +29,14 @@ if($conn->connect_error){
             die;
         }
         } elseif($status === 0) {
+
             if($data['password'] === $password){
                 $p = urlencode("nHb8fN6m6mY");
                 header("location: HomePage/teacherAccess.php?p=".$p);
                 $_SESSION['user']=$_POST['username'];
-    
+
+                $_SESSION['test']=$data['status'];
+
             } else {
                 $message = urlencode("*The password you entered is incorrect.");
                 header("Location:index.php?message=".$message);

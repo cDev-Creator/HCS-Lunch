@@ -10,10 +10,11 @@ if(isset($_GET['message'])){
 if(isset($_GET['messages'])){
     $messages = $_GET['messages'];
 }
-
 if(isset($_GET['p'])){
     $p = $_GET['p'];
 }
+
+
 if(!isset($_SESSION['user'])){
     header("Location:../index.php");
 }
@@ -60,6 +61,7 @@ while($rows = $result->fetch_assoc())
 $resultSet = $conn->query("SELECT firstName, lastName, grade FROM names");
 $result = $conn->query("SELECT * FROM names WHERE grade='$grades' order by firstName ASC ");
 ?>
+
 <select name="names" id="students" class="dropdown">
 <option value='' selected='selected'><?php echo'--'.$grades,' Students--'?></option>;
 <?php
@@ -159,4 +161,11 @@ require('classOrderTable.php');
         a.href = "../HomePage/teacherAccess.php?p=nHb8fN6m6mY"
     })
     }
+
+    let grade = "<?php echo $grades; ?>";
+    let titles = "<?php echo $title; ?>";
+    if (grade == "Office Ordering") {
+        document.getElementById('students').style.display = 'none';
+        document.getElementById('quantities').style.gridColumn = 'span 2';
+    } 
 </script>

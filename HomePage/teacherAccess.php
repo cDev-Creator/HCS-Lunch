@@ -37,7 +37,7 @@ if(!isset($_SESSION['user'])){
                 <div>
                     <select name="grade" id="grade" class="dropdown" required>
                         <option value="" selected="selected">--Select Class--</option>  
-                        <option value="Office Staff">Office Staff</option>  
+                        <option value="Office Staff">Office Staff</option>
                         <option value="02 Day Preschool">2 Day Preschool</option>
                         <option value="03 Day Preschool">3 Day Preschool</option>
                         <option value="Kindergarten">Kindergarten</option>

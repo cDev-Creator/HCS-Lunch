@@ -1,5 +1,9 @@
 <?php
     include("../conn.php");
+    session_start();
+
+   /*  $usernameSession = $_SESSION['user']; */
+
     if(isset($_GET['p'])){
         $p = $_GET['p'];
     }
@@ -34,7 +38,7 @@
 
     if(!empty($_POST['names']) || !empty($_POST['allNames']))  {
         header("location:orderLunch.php?p=".$p);
-        $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`,`inserted`) VALUES ('$grade', '$name','$item', '$quantities', '$mealCost', '$inserted')";
+        $qry = "INSERT INTO `allorders`(`grade`,`name`,`item`,`quantity`,`price`,`inserted`, `user`) VALUES ('$grade', '$name','$item', '$quantities', '$mealCost', '$inserted', '$usernameSession')";
          $insert = mysqli_query($conn, $qry);
 
     

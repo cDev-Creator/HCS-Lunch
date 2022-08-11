@@ -3,10 +3,10 @@ session_start();
 if(isset($_GET['p'])){
     $p = $_GET['p'];
 }
+
 if(!isset($_SESSION['user'])){
    header("Location:../index.php");
 }
-
 ?>
 <script src="https://kit.fontawesome.com/fa7c02709f.js" crossorigin="anonymous"></script>
 <!DOCTYPE html>
@@ -44,7 +44,8 @@ if(!isset($_SESSION['user'])){
     
                 <select name="grade" id="grade" class="dropdown" required>
                     <option value="" selected="selected">--Select Class--</option>  
-                    <option value="Office Staff">Office Staff</option>  
+                    <option value="Office Staff">Office Staff</option> 
+                    <option value="Office Ordering">Office Ordering</option>  
                     <option value="02 Day Preschool">2 Day Preschool</option>
                     <option value="03 Day Preschool">3 Day Preschool</option>
                     <option value="Kindergarten">Kindergarten</option>
