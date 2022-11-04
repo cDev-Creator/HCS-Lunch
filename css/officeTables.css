@@ -1,6 +1,6 @@
 :root {
     --main: #ffffff;
-    --secondary: #349b5c;
+    --secondary: #349b5b76;
     --grey: #f3f3f3;
     --dark:#333333;
 }
@@ -20,8 +20,6 @@ body {
 #menuTblHeader, .gradeTd{
     line-height:1.2;
 }
-
-
 
 #mainTable{
     margin-left: auto;

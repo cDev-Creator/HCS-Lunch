@@ -152,6 +152,10 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     <tr id="secondShiftTotal">
         <td class="gradeTd">2nd Shift Total</td>
     </tr>
+
+    <tr id="grandTotal">
+        <td class="gradeTd">Grand Total</td>
+    </tr>
     
         <?php 
    
@@ -252,7 +256,7 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
         for (var i = 0; i < arrayOfNumbers.length; i++) {
             sum += arrayOfNumbers[i]
         }
-        const firstTotal = document.getElementById("firstShiftTotal");
+        const firstTotal = document.getElementById("firstShiftTotal");        
         let cell = firstTotal.insertCell(1);
         cell.innerText = sum;   
     }
@@ -292,8 +296,8 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
 
 ////////////////////////////////*  FOR FOOD SUMMARY TABLE */////////////////////////
   
-    let menuItemSchoolQuantitiesArr = Array();
-    function menuItemSchoolQuantities() {
+let menuItemSchoolQuantitiesArr = Array();
+function menuItemSchoolQuantities() {
         for (var i=1; i <= menuItemsLength; i++) {
         let firstShiftTotals =table.rows[11].cells[i].innerText;
         let secondShiftTotals = table.rows[16].cells[i].innerText;
@@ -310,6 +314,12 @@ var td2 = document.querySelectorAll('.td2');
 for(var i=0; i<td2.length;i++){
   td2[i].textContent = menuItemSchoolQuantitiesArr[i];
 }
+
+for (let i = 0; i < menuItemsLength; i++) {
+        let grandTotal = document.getElementById('grandTotal');
+        let cell = grandTotal.insertCell(i + 1);
+        cell.innerText = menuItemSchoolQuantitiesArr[i];      
+    }  
 
 /////////////////////////////////////* AMOUNT OF MONEY PER ITEM *//////////////////////////
 
@@ -346,6 +356,9 @@ function menuItemSchoolTotals(){
         for(var i=0; i<td4.length;i++){
         td4[i].textContent = totalCostDecimalArr[i];
     }
+
 }
 menuItemSchoolTotals()
+
+
 </script>

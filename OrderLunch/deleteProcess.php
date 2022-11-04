@@ -7,14 +7,6 @@ if(isset($_SESSION['p'])){
 }
 
 
-if(isset($_GET['p'])){
-    $p = $_GET['p'];
-} else {
-    echo 'error';
-}
-
-
-
 if(isset($_POST['delete']))
 {
     $ID = $_POST['ID'];

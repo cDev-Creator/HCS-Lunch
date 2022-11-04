@@ -3,6 +3,7 @@
     --secondary: #349b5c;
     --grey: #f3f3f3;
     --dark:#333333;
+    --purple: #cdc7dd;
 }
 
 *{
@@ -59,7 +60,6 @@ body{
 
 #classOrderTable tr#addedFromOtherClass{
     background-color:rgba(43, 0, 255, 0.281);
-
 }
 
 #classOrderTable tr:nth-child(even){
@@ -115,6 +115,7 @@ body{
     border-radius: 5px;
 }
 
+
 #logoutBtn,.backBtn {
     border-radius: 50px;
 }
@@ -160,6 +161,38 @@ body{
 #quantities:focus{
     border:1px solid #bbbbbb;
 }
+
+#allOrderTotals{
+    margin-top: 30px;
+    width: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#allOrderTotals div {
+    background-color: var(--grey);
+    width: 200px;
+    text-align: center;
+}
+
+#allOrderTotals div:nth-child(1) {
+    color:var(--secondary);
+    font-size: 18px;
+    padding: 15px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+#allOrderTotals div:nth-child(2) {
+    color:var(--purple);
+    font-size: 18px;
+    padding-top: 0px !important;
+    padding: 15px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
 
 #logoutBtn,.backBtn {
     display: block;

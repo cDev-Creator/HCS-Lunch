@@ -67,13 +67,33 @@ $resultOffice = $conn->query("SELECT ID, grade, name, item, quantity, dates, pri
 					</form>
 				</td>
 			</tr> 
+
+
 		<?php 
 		} 
 	}
 
+
+
+
+
+
 	if($addedfrom == 1 && $grades == "Office Staff"){
 		test($resultOffice);
 		test($resultTeacher);
+		?>
+		<script type="text/javascript">
+		function run(){
+			var element = document.getElementById("addedFromOtherClass");
+			element.removeAttribute('id');
+		}
+
+	<?php
+		echo "run();";
+	?>
+	</script>
+	<?php
+			
 	}
 	else{
 		test($resultTeacher);
@@ -86,3 +106,16 @@ $resultOffice = $conn->query("SELECT ID, grade, name, item, quantity, dates, pri
 
 </body> 
 </html>
+
+<script>
+
+	function run1(){
+		var elms = document.querySelectorAll("[id='addedFromOtherClass']");
+ 		for(var i = 0; i < elms.length; i++) {
+		console.log(elms[i]);
+		console.log('ratssss');
+		}
+	}
+	run1();
+
+</script>

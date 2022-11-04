@@ -7,7 +7,6 @@ if(isset($_GET['p'])){
 if(!isset($_SESSION['user'])){
    header("Location:../index.php");
 }
-
 ?>
 
 <!DOCTYPE html>

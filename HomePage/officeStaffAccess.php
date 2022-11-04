@@ -7,6 +7,7 @@ if(isset($_GET['p'])){
 if(!isset($_SESSION['user'])){
    header("Location:../index.php");
 }
+
 ?>
 <script src="https://kit.fontawesome.com/fa7c02709f.js" crossorigin="anonymous"></script>
 <!DOCTYPE html>
