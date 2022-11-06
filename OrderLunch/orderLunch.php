@@ -163,11 +163,11 @@ require('classOrderTable.php');
     let grade = "<?php echo $grades; ?>";
     let titles = "<?php echo $title; ?>";
     if (grade == "Office Ordering") {
+
+        document.getElementById('orderLunchTitle').innerHTML = 'Special Orders';
         document.getElementById('students').style.display = 'none';
         document.getElementById('quantities').style.gridColumn = 'span 2';
     } 
-
-  
 
 </script>
 
