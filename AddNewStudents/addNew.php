@@ -15,7 +15,7 @@ if(isset($_GET['message'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/officeTables.css">
 </head>
 
 <body>
@@ -27,26 +27,26 @@ if(isset($_GET['message'])){
 
 <div class="modal-bg">
             <!-- <form method='POST' action="OrderLunch/orderLunch.php" id="form" class="modal-content"> -->
-        <form method='POST' action="graduationSubmit.php" id="form" class="modal-content">
+        <form method='POST' action="graduationSubmit.php" id="graduationForm" class="modal-content">
             <div class="closeBtn" id="closeBtn"><i class="fa-solid fa-xmark fa-lg"></i></div>
-        
+            
             <div>
-                <h4>Please enter your credentials: </h4>
+                <p id="msgGrad" >Please enter your credentials to confirm: </p>
+                <p id="warningGrad"><span style="color:#FF0000">WARNING</span> all students will be added to the following grade.</p>
             </div>
-            <div>
+            <div class="textFieldGrad">
                 <input type="text" id="username" name="username" placeholder="Username" required>
             </div>
              
-            <div>
+            <div class="textFieldGrad">
                 <input type="password" id="password" name="password" placeholder="Password" required>
             </div>
 
-            <div id="errorMsg"></div>  
+            <div style="color:#FF0000" id="errorMsg"></div>  
 
             <div>
-                <button type="submit" id="submitGraduation" name="submit">Graduation</button>
+                <button type="submit" id="submitGraduation" name="submit">Confirm</button>
             </div>
-
         </form>
     </div>  
 </body>
