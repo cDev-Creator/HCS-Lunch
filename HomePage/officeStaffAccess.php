@@ -70,4 +70,4 @@ if(!isset($_SESSION['user'])){
   
 </body>
 </html>
-<script src="modal.js"></script>   
+<script src="../HomePage/modal.js"></script>   

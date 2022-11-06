@@ -25,8 +25,10 @@ $result = $conn->query("SELECT id, firstName, lastName, grade FROM names ORDER B
 		{ 
 		?> 
 		
+		
         <form action="updateStudent.php" method="post">
-            <td name='grade'><?php echo $rows['grade']; ?></td> 
+
+            <td name='grade'><?php echo $rows['grade']; ?></td>
             <td><?php echo $rows['firstName']." ".$rows['lastName']; ?>
         </form>
 

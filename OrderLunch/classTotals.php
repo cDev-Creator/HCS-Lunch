@@ -27,8 +27,4 @@ $classTotal2 = 0;
 </div>
 <script> 
     let grades = "<?php $grades; ?>"
-
-    if(grades = 'Special Orders') {
-        console.log('asdadsd');
-    }
 </script>

@@ -149,13 +149,13 @@ require('classOrderTable.php');
 
     if(p == 'epBNsTp581Y') {
         goBackBtn.addEventListener("click", function(){
-            console.log("asdasdasdasd");
+            
         a.href = "../HomePage/officeStaffAccess.php?p=epBNsTp581Y"
     })
     }
     else if(p == 'nHb8fN6m6mY') {
         goBackBtn.addEventListener("click", function(){
-            console.log("asdasdasdasd");
+          
         a.href = "../HomePage/teacherAccess.php?p=nHb8fN6m6mY"
     })
     }

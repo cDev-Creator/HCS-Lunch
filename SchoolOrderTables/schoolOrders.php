@@ -64,7 +64,6 @@ function addItemsFromDB($rows,$grade,$list,$gradeClass) {
     for ($x = -1; $x < $menuItemsLength-1; $x++)  {
         $num = $x+1;
         $className = 'item'.$num;
-        echo $className;
         getItemQuantity($rows, $list, $arr,$num,$grade,$className,$gradeClass);
     }
 }
