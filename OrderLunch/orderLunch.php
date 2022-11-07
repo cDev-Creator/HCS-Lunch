@@ -172,7 +172,8 @@ require('classOrderTable.php');
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-	
+
+
 <script>
     window.onload = function() {
     let allStudentsItem = sessionStorage.getItem("allStudentsItem");  
@@ -181,7 +182,7 @@ require('classOrderTable.php');
     let studentsItem= sessionStorage.getItem("studentsItem");  
     $('#students').val(studentsItem);
     }
-
+    
     $('#allStudents').change(function() { 
         let allStudentsVal = $(this).val();
         sessionStorage.setItem("allStudentsItem", allStudentsVal);
@@ -190,6 +191,35 @@ require('classOrderTable.php');
     $('#students').change(function() { 
     let studentsVal = $(this).val();
         sessionStorage.setItem("studentsItem", studentsVal);
+        document.cookie = "myJavascriptVar = " + studentsVal; 
     })
 
 </script> 
+
+<?php
+$studentsVal= $_COOKIE['myJavascriptVar'];
+$nameExplo = explode("-",$studentsVal);
+$name = array_values($nameExplo)[0];
+$date = date("Y-m-d"); 
+$currStudentTotal = $conn->query("SELECT name, price FROM allorders WHERE name ='$name' AND dates='$date'"); 
+$total = 0;
+
+echo $name;
+echo "<br>";
+echo "<br>";
+$rows = [];
+$allTotals = [];
+while($row = $currStudentTotal->fetch_assoc()){
+    $total = $total + floatval($rows["price"]);
+    $total = $total + floatval($rows["price"]);
+
+    $rows[] = $row['price'];
+    $floats = array_map('floatval', $rows);
+
+    $arrSum = array_sum($floats);
+    $totalsFormated = number_format($arrSum, 2, '.', '');
+    array_push($allTotals, $totalsFormated);
+}
+$rat = end($allTotals);
+echo '$'.$rat;
+?>
