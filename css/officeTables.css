@@ -130,12 +130,12 @@ body {
     background-color:transparent;
 }
 
-.fa-trash-can:hover, .fa-user-pen:hover {
+.fa-trash-can:hover, .fa-user-pen:hover, .fa-pencil:hover {
     cursor: pointer;
     color: #333333cd;
 }
 
-.fa-trash-can, .fa-user-pen {
+.fa-trash-can, .fa-user-pen, .fa-pencil {
     color: var(--dark);
 }
 
@@ -257,4 +257,91 @@ body {
     border: none;
     background: none;
     outline: none;
+}
+
+/* add new menus items / display all menu items */
+
+#menuItemsTable {
+    border: 1px solid var(--dark);
+    width:600px; 
+    line-height:40px;
+    border-collapse: collapse;
+    margin-top:10px;
+    margin-bottom: 50px;
+}
+
+#menusTitle {
+    margin-top: 20px;
+}
+
+#udateMenuForm,#deleteMenuItem {
+    margin-bottom: 0px !important;
+}
+
+#menuItemsTable td,#menuItemsTable th {
+    border: 1px solid var(--dark);
+}
+
+#menuItemsTable td, #menuItemsTable button{
+    text-align: center;
+    margin-right: 10px;
+}
+
+#menuItemsTable button{
+    border: none;
+    background-color:transparent;
+}
+
+#menuItemsTable tr:nth-child(odd){
+	background-color: var(--grey);
+}
+
+#deleteMenuItemBtn, #updateMenuBtn, #addNewMenuItemBtn, #backToHomeBtn{
+    padding:8px 12px;
+    color: var(--dark);
+    background-color:#eeeeee;
+    border: 1px solid #dddddd;
+    cursor: pointer;
+    border-radius: 10px;
+    outline: none;
+}
+
+#addNewMenuItemBtn:hover, #backToHomeBtn:hover, #submitNewItem:hover, #updateMenuData:hover, #cancelUpdateBtn:hover {
+    background-color:#e3e3e3;
+}
+
+#addNewMenuItemBtn a, #backToHomeBtn a, #cancelUpdateBtn a {
+    text-decoration: none;
+    color: var(--dark);
+}
+
+
+#createMenuItem, #updateMenu {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+#createMenuItem {
+    gap:20px;
+}
+
+#updateMenu input, #updateMenu button, #updateMenu select {
+    margin-left:15px;
+}
+
+#createMenuItem input,#updateMenu input,#updateMenu select, #submitNewItem, #updateMenuData, #cancelUpdateBtn, .dropdown {
+    padding:30px;
+    padding:8px 12px;
+    color: var(--dark);
+    background-color:#eeeeee;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    outline: none;
+}
+.dropdown, #submitNewItem, #updateMenu select, #updateMenuData, #cancelUpdateBtn {
+    cursor: pointer;
+}
+
+.dropdown option, #updateMenu option{
+    background-color:var(--main);
 }
