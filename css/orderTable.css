@@ -163,7 +163,7 @@ body{
 }
 
 #allOrderTotals{
-    margin-top: 30px;
+    margin-top: 20px;
     width: 100%;
     display: inline-flex;
     flex-direction: column;
@@ -203,6 +203,12 @@ body{
 #logoutBtn a {
     text-decoration: none;
     color: var(--dark);
+}
+
+#currStuTotal {
+    display:none;
+    color: var(--dark);
+    text-align: center;
 }
 
 /* Responsive */
