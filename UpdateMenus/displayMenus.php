@@ -1,31 +1,68 @@
 <?php
 include("../conn.php");
-$result = $conn->query("SELECT ID, item, price FROM 54pizza ORDER BY item ASC"); 
+require("rotateMenu.php");
+
 ?>
 <script src="https://kit.fontawesome.com/fa7c02709f.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!DOCTYPE html> 
 <html> 
-	<head>
-        <link rel="stylesheet" href="../css/officeTables.css">
-    </head>
+<head>
+    <link rel="stylesheet" href="../css/officeTables.css">
+</head>
 
-	<body> 
-    <div class="btnsAddNew">
+<body> 
+
+<div class="btnsAddNew">
         <button id="backToHome"><a href="../HomePage/officeStaffAccess.php?p=epBNsTp581Y">Back</a></button>
         <button id="addNewMenuItem"><a href='createMenuItem.php'>New Menu Item</a></button>
-    </div>
+</div>
 
-	<table id="menuItemsTable" align="center"> 
+
+<form action="" method="post" class="tabs">
+	<input type="submit" class="tab" name="restaurant1" value="54 Pizza">
+	<input type="submit" class="tab" name="restaurant2" value="Chick-fil-A">
+	<input type="submit" class="tab" name="restaurant3" value="Ritzy's">
+	<input type="submit" class="tab" name="restaurant4" value="Arby's">
+	<input type="submit" class="tab" name="restaurant5" value="Great Harvest">
+</form>
+
+<?php 
+$restaurant = '54pizza';
+
+if (isset($_POST['restaurant1'])) {
+    $restaurant = '54pizza';
+}
+
+if (isset($_POST['restaurant2'])) {
+    $restaurant = 'chickfila';
+}
+
+if (isset($_POST['restaurant3'])) {
+    $restaurant = 'ritzys';
+}
+if (isset($_POST['restaurant4'])) {
+    $restaurant = 'arbys';
+}
+
+if (isset($_POST['restaurant5'])) {
+    $restaurant = 'greatharvest';
+}		
+?>
+<table id="menuItemsTable" align="center"> 
 	<tr> 
-		<th colspan="7"><h2>Menu Items</h2></th> 
+		<th colspan="7" ><h2 id="menusTitle" >Menu Items</h2></th> 
 		</tr>
             <th> Item </th> 
             <th> Price </th> 
             <th> Update </th> 
             <th> Delete </th>
 		</tr> 
-		
-        <?php $total = 0;?>
+
+        <?php
+		$result = $conn->query("SELECT ID, item, price FROM $restaurant ORDER BY item ASC"); 
+		$total = 0;
+		?>
 		<?php while($rows = $result->fetch_assoc())
 		{ 
 		?> 
@@ -36,16 +73,16 @@ $result = $conn->query("SELECT ID, item, price FROM 54pizza ORDER BY item ASC");
 
         </form>
 			<td> 
-				<form action="updateMenu.php" method="post">
+				<form id="udateMenuForm" action="updateMenu.php" method="post">
 				<input type="hidden" name="ID" value="<?php echo $rows['ID'] ?>">
 				<button type="submit" id="updateMenuBtn" name="update">
-					<i class="fa-solid fa-user-pen fa-lg"></i>
+					<i class="fa-solid fa-pencil fa-lg"></i>
 				</button> 
 				</form>
 		    </td>
 
 			<td> 
-				<form action="deleteMenuItem.php" method="post">
+				<form id="deleteMenuItem" action="deleteMenuItem.php" method="post">
 				<input type="hidden" name="ID" value="<?php echo $rows['ID'] ?>">
 				<button type="submit" id="deleteMenuItemBtn" name="deleteItem">
 					<i class="fa-solid fa-trash-can fa-lg"></i>
