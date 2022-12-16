@@ -1,4 +1,8 @@
 <?php
+session_start();
+include("../conn.php");
+$restaurant = $_SESSION['restaurant'];
+
 include('../conn.php');
 $item = $_POST["item"];
 $price = $_POST["price"];
@@ -7,7 +11,7 @@ if (mysqli_connect_errno()) {
     die("Connection error: " . mysqli_connect_error());
 }           
         
-$sql = "INSERT INTO 54pizza (item, price)
+$sql = "INSERT INTO $restaurant (item, price)
         VALUES (?, ?)";
 
 $stmt = mysqli_stmt_init($conn);

@@ -1,3 +1,9 @@
+<?php
+session_start();
+$restaurant = $_SESSION['restaurant'];
+echo "<h2 id='addNewMsg'>Add new menu item to {$restaurant}:</h2>";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
