@@ -10,9 +10,11 @@
 </head>
 <body>
     <?php
+    session_start();
     include("../conn.php");
+    $restaurant = $_SESSION['restaurant'];
     $ID = $_POST['ID'];
-    $query = "SELECT * FROM 54pizza WHERE ID='$ID' ";
+    $query = "SELECT * FROM $restaurant WHERE ID='$ID' ";
     $query_run = mysqli_query($conn, $query);
 
     if($query_run)
@@ -37,7 +39,7 @@
                     $item = $_POST['item'];
                     $price = $_POST['price'];
 
-                    $query = "UPDATE 54pizza SET item='$item', price='$price' WHERE ID='$ID'";
+                    $query = "UPDATE $restaurant SET item='$item', price='$price' WHERE ID='$ID'";
                     $query_run = mysqli_query($conn, $query);
                     if($query_run)
                     {

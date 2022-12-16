@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("../conn.php");
 require("rotateMenu.php");
 
@@ -15,7 +16,7 @@ require("rotateMenu.php");
 
 <div class="btnsAddNew">
         <button id="backToHome"><a href="../HomePage/officeStaffAccess.php?p=epBNsTp581Y">Back</a></button>
-        <button id="addNewMenuItem"><a href='createMenuItem.php'>New Menu Item</a></button>
+        <button id="addNewMenuItemBtn"><a href='createMenuItem.php'>New Menu Item</a></button>
 </div>
 
 
@@ -28,6 +29,7 @@ require("rotateMenu.php");
 </form>
 
 <?php 
+/* default restaurant */
 $restaurant = '54pizza';
 
 if (isset($_POST['restaurant1'])) {
@@ -47,7 +49,11 @@ if (isset($_POST['restaurant4'])) {
 
 if (isset($_POST['restaurant5'])) {
     $restaurant = 'greatharvest';
-}		
+}	
+
+$_SESSION['restaurant'] = $restaurant;
+
+/* echo $_SESSION['restaurant'] */
 ?>
 <table id="menuItemsTable" align="center"> 
 	<tr> 
