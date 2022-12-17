@@ -1,6 +1,8 @@
 <?php
+error_reporting(0);
 session_start();
 include("../conn.php");
+$restaurant = $_SESSION['restaurant'];
 ?>
 
 <script src="https://kit.fontawesome.com/fa7c02709f.js" crossorigin="anonymous"></script>
@@ -11,15 +13,13 @@ include("../conn.php");
     <link rel="stylesheet" href="../css/officeTables.css">
 </head>
 
-<body> 
-
 <div class="btnsAddNew">
-        <button id="backToHome"><a href="../HomePage/officeStaffAccess.php?p=epBNsTp581Y">Back</a></button>
+        <button id="backToHome" name="backToHome"><a href="../HomePage/officeStaffAccess.php?p=epBNsTp581Y">Back</a></button>
         <button id="addNewMenuItemBtn"><a href='createMenuItem.php'>New Menu Item</a></button>
 </div>
 
 <form action="" method="post" class="tabs">
-	<input type="submit" class="tab" name="restaurant1" value="54 Pizza">
+	<input type="submit" class="tab active" name="restaurant1" value="54 Pizza">
 	<input type="submit" class="tab" id="rat" name="restaurant2" value="Chick-fil-A">
 	<input type="submit" class="tab" name="restaurant3" value="Ritzy's">
 	<input type="submit" class="tab" name="restaurant4" value="Arby's">
@@ -29,38 +29,35 @@ include("../conn.php");
 <?php
 if (isset($_POST['restaurant1'])) {
 	$restaurant = '54pizza';
+	$_SESSION['restaurant'] = $restaurant;
 }
 
 else if (isset($_POST['restaurant2'])) {
 	$restaurant = 'chickfila';
+	$_SESSION['restaurant'] = $restaurant;
 }
 
 else if (isset($_POST['restaurant3'])) {
 	$restaurant = 'ritzys';
+	$_SESSION['restaurant'] = $restaurant;
 }
 
 else if (isset($_POST['restaurant4'])) {
 	$restaurant = 'arbys';
+	$_SESSION['restaurant'] = $restaurant;
 }
 
 else if (isset($_POST['restaurant5'])) {
     $restaurant = 'greatharvest';
+	$_SESSION['restaurant'] = $restaurant;
 }
 
-else {
+else if($restaurant === null ){
 	$restaurant = '54pizza';
+    $_SESSION['restaurant'] = '54pizza';
 }
-
-$_SESSION['restaurant'] = $restaurant;
-$restaurantTest = $_SESSION['test'];
-/* echo $restaurantTest; */
-
-if(!isset($_POST['restaurant1']) && !isset($_POST['restaurant2'])  && !isset($_POST['restaurant3']) 
-&& !isset($_POST['restaurant4']) && !isset($_POST['restaurant5'])) {
-	$restaurant = $restaurantTest;
-}
-
 ?>
+
 <table id="menuItemsTable" align="center"> 
 	<tr> 
 		<th colspan="7" ><h2 id="menusTitle" >Menu Items</h2></th> 
@@ -109,3 +106,4 @@ if(!isset($_POST['restaurant1']) && !isset($_POST['restaurant2'])  && !isset($_P
 	</table> 
 </body> 
 </html>
+
