@@ -3,6 +3,7 @@ session_start();
 include("../conn.php");
 $restaurant = $_SESSION['restaurant'];
 
+echo $restaurant;
 include('../conn.php');
 $item = $_POST["item"];
 $price = $_POST["price"];
@@ -27,5 +28,5 @@ mysqli_stmt_bind_param($stmt, "ss",
 
 mysqli_stmt_execute($stmt);
 
-header("location:displayMenus.php");
+header("location:menuRotation.php");
 ?>
