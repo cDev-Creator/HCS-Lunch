@@ -2,7 +2,6 @@
 include("../conn.php");
 session_start();
 $restaurant = $_SESSION['restaurant'];
-
 if(isset($_POST['deleteItem']))
 {
     $ID = $_POST['ID'];
@@ -11,7 +10,7 @@ if(isset($_POST['deleteItem']))
 
     if($query_run)
     {
-        header("location:displayMenus.php");
+        header("location:menuRotation.php");
     }
 }
 ?>

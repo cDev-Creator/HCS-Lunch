@@ -13,10 +13,8 @@
     session_start();
     include("../conn.php");
     $restaurant = $_SESSION['restaurant'];
-
-    $_SESSION['test'] = $restaurant;
-
     $ID = $_POST['ID'];
+
     $query = "SELECT * FROM $restaurant WHERE ID='$ID' ";
     $query_run = mysqli_query($conn, $query);
 
@@ -33,7 +31,7 @@
             <input type="number" name="price" step="0.01" placeholder="Price" value="<?php echo $row['price'] ?>"  required>
                   
             <button id="updateMenuData" type="submit" name="updated"> Update</button>
-            <button id="cancelUpdateBtn"><a href="displayMenus.php">Cancel</a></button>
+            <button id="cancelUpdateBtn"><a href="menuRotation.php">Cancel</a></button>
             </form>
 
             <?php
@@ -47,7 +45,7 @@
                     if($query_run)
                     {
 
-                        header("location:displayMenus.php");
+                        header("location:menuRotation.php");
                         echo '<script> alert("Data Updated"); </script>';
                     }
                     else
