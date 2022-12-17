@@ -13,6 +13,9 @@
     session_start();
     include("../conn.php");
     $restaurant = $_SESSION['restaurant'];
+
+    $_SESSION['test'] = $restaurant;
+
     $ID = $_POST['ID'];
     $query = "SELECT * FROM $restaurant WHERE ID='$ID' ";
     $query_run = mysqli_query($conn, $query);
@@ -43,6 +46,7 @@
                     $query_run = mysqli_query($conn, $query);
                     if($query_run)
                     {
+
                         header("location:displayMenus.php");
                         echo '<script> alert("Data Updated"); </script>';
                     }

@@ -1,9 +1,8 @@
 <?php
 session_start();
 include("../conn.php");
-require("rotateMenu.php");
-
 ?>
+
 <script src="https://kit.fontawesome.com/fa7c02709f.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!DOCTYPE html> 
@@ -19,41 +18,48 @@ require("rotateMenu.php");
         <button id="addNewMenuItemBtn"><a href='createMenuItem.php'>New Menu Item</a></button>
 </div>
 
-
 <form action="" method="post" class="tabs">
 	<input type="submit" class="tab" name="restaurant1" value="54 Pizza">
-	<input type="submit" class="tab" name="restaurant2" value="Chick-fil-A">
+	<input type="submit" class="tab" id="rat" name="restaurant2" value="Chick-fil-A">
 	<input type="submit" class="tab" name="restaurant3" value="Ritzy's">
 	<input type="submit" class="tab" name="restaurant4" value="Arby's">
 	<input type="submit" class="tab" name="restaurant5" value="Great Harvest">
 </form>
 
-<?php 
-/* default restaurant */
-$restaurant = '54pizza';
-
+<?php
 if (isset($_POST['restaurant1'])) {
-    $restaurant = '54pizza';
+	$restaurant = '54pizza';
 }
 
-if (isset($_POST['restaurant2'])) {
-    $restaurant = 'chickfila';
+else if (isset($_POST['restaurant2'])) {
+	$restaurant = 'chickfila';
 }
 
-if (isset($_POST['restaurant3'])) {
-    $restaurant = 'ritzys';
-}
-if (isset($_POST['restaurant4'])) {
-    $restaurant = 'arbys';
+else if (isset($_POST['restaurant3'])) {
+	$restaurant = 'ritzys';
 }
 
-if (isset($_POST['restaurant5'])) {
+else if (isset($_POST['restaurant4'])) {
+	$restaurant = 'arbys';
+}
+
+else if (isset($_POST['restaurant5'])) {
     $restaurant = 'greatharvest';
-}	
+}
+
+else {
+	$restaurant = '54pizza';
+}
 
 $_SESSION['restaurant'] = $restaurant;
+$restaurantTest = $_SESSION['test'];
+/* echo $restaurantTest; */
 
-/* echo $_SESSION['restaurant'] */
+if(!isset($_POST['restaurant1']) && !isset($_POST['restaurant2'])  && !isset($_POST['restaurant3']) 
+&& !isset($_POST['restaurant4']) && !isset($_POST['restaurant5'])) {
+	$restaurant = $restaurantTest;
+}
+
 ?>
 <table id="menuItemsTable" align="center"> 
 	<tr> 
