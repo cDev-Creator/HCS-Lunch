@@ -29,7 +29,7 @@ unset($_SESSION['restaurant']);
     <button class="mainBtns"><h2><a href="../SchoolOrderTables/schoolOrders.php">School Orders</a></h2></button> 
     <button class="mainBtns"><h2><a href="../orderTickets.php">Lunch Tickets</a></h2></button>
     <button class="mainBtns"><h2><a href="../AddNewStudents/addNew.php">Students / Staff</a></h2></button>
-    <button class="mainBtns"><h2><a href="../UpdateMenus/menuRotation.php">Display Menus</a></h2></button>
+    <button class="mainBtns"><h2><a href="../UpdateMenus/menuRotation.php">Update Menus</a></h2></button>
     <button class="logout"><h2><a href="../OrderLunch/logout.php">
     <i class="fa-solid fa-right-from-bracket fa-xl"></i>
     </a><h2>
