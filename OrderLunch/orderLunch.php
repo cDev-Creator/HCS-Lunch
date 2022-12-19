@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <?php
 session_start();
 error_reporting(0);
@@ -30,7 +31,7 @@ $title = "Lunch Orders for ".$grades;
     <title>HCS Lunch Testing</title>
 </head>
 <body>
-    
+ 
 <!-- STUDENTS FROM OTHER CLASSES  -->
 <?php
 $result = $conn->query("SELECT * FROM names ORDER BY firstName ASC"); 
@@ -134,8 +135,6 @@ $weekday = "Monday";
 
     let studentsItem= sessionStorage.getItem("studentsItem");  
     $('#students').val(studentsItem);
-
-
     }
     
     $('#allStudents').change(function() { 
@@ -152,17 +151,19 @@ $weekday = "Monday";
 </script> 
 
 <?php
+require('classTotals.php');
 $studentsVal= $_COOKIE['myJavascriptVar'];
 $nameExplo = explode("-",$studentsVal);
 $name = array_values($nameExplo)[0];
+
+$gradeExplo = explode($studentsVal,"-");
+$stuGrade = array_values($gradeExplo)[1];
 $date = date("Y-m-d"); 
 $currStudentTotal = $conn->query("SELECT name, price FROM allorders WHERE name ='$name' AND dates='$date'"); 
 $total = 0;
-
-echo "<br>";
-
 $rows = [];
 $allTotals = [];
+
 while($row = $currStudentTotal->fetch_assoc()){
     $total = $total + floatval($rows["price"]);
     $total = $total + floatval($rows["price"]);
@@ -174,20 +175,17 @@ while($row = $currStudentTotal->fetch_assoc()){
     $totalsFormated = number_format($arrSum, 2, '.', '');
     array_push($allTotals, $totalsFormated);
 }
-
-require('classTotals.php');
-require('classOrderTable.php');
-
 $currStuTotal = end($allTotals);
 echo '<div id="currStuTotal">',$name,' owes $'.$currStuTotal,'</div>';
 
-if($studentsVal != null){
+if($studentsVal != null && $grades == $stuGrade){
     echo "<script type='text/javascript'>
     var x = document.getElementById('currStuTotal');
     x.style.display = 'grid';
     </script>";
 }
 
+require('classOrderTable.php');
 ?>
 
 <button id="goBackBtn" class="backBtn"><a id='a'>Go Back</a></button>
