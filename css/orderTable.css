@@ -13,7 +13,8 @@
 body{
     background-color:rgb(255, 255, 255);
 	margin:0;
-	padding:20px;
+	padding-top:20px;
+    padding-bottom:20px;
 	font-family: sans-serif;
     color: var(--dark);
 }
@@ -49,13 +50,12 @@ body{
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
+    margin-top: 20px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
     border-collapse: collapse;
     justify-content: center;
 }
-
 
 
 #classOrderTable tr#addedFromOtherClass{
@@ -162,8 +162,8 @@ body{
     border:1px solid #bbbbbb;
 }
 
-#allOrderTotals{
-    margin-top: 20px;
+#allOrderTotals {
+    /* margin-top: 20px; */
     width: 100%;
     display: inline-flex;
     flex-direction: column;
@@ -207,8 +207,14 @@ body{
 
 #currStuTotal {
     display:none;
-    color: var(--dark);
+    /* background-color: #7979797f; */
+    background-color: #5a5a5a22;
+    color: #0000005f;
     text-align: center;
+    font-size: 18px;
+    padding: 15px; 
+    margin-top: 30px;
+   /*  border-radius: 20px; */
 }
 
 /* Responsive */

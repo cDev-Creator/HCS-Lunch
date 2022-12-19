@@ -79,7 +79,7 @@ define('TIMEZONE', 'America/Chicago');
 date_default_timezone_set(TIMEZONE);
 $mydate=getdate(date("U"));
 /* $weekday = "$mydate[weekday]"; */
-$weekday = "Thursday";
+$weekday = "Monday";
      ////////////////////////// GO BACK AND MAKE ARRAY DYNAMICALLY CREATED INSTEAD OF HARD CODED/////////////////////////////////////////
     $restaurants = array("54pizza", "chickfila", "ritzys", "arbys",  "greatharvest");
 
@@ -174,19 +174,20 @@ while($row = $currStudentTotal->fetch_assoc()){
     $totalsFormated = number_format($arrSum, 2, '.', '');
     array_push($allTotals, $totalsFormated);
 }
+
+require('classTotals.php');
+require('classOrderTable.php');
+
 $currStuTotal = end($allTotals);
-echo '<div id="currStuTotal">',$name ,' owes $'.$currStuTotal,'</div>';
+echo '<div id="currStuTotal">',$name,' owes $'.$currStuTotal,'</div>';
 
 if($studentsVal != null){
     echo "<script type='text/javascript'>
     var x = document.getElementById('currStuTotal');
     x.style.display = 'grid';
-
     </script>";
 }
 
-require('classTotals.php');
-require('classOrderTable.php');
 ?>
 
 <button id="goBackBtn" class="backBtn"><a id='a'>Go Back</a></button>
@@ -218,8 +219,7 @@ require('classOrderTable.php');
 
     let grade = "<?php echo $grades; ?>";
     let titles = "<?php echo $title; ?>";
-    if (grade == "Office Ordering") {
-
+    if (grade === "Office Staff") {
         document.getElementById('orderLunchTitle').innerHTML = 'Special Orders';
         document.getElementById('students').style.display = 'none';
         document.getElementById('quantities').style.gridColumn = 'span 2';
