@@ -140,6 +140,7 @@ $weekday = "Monday";
     $('#allStudents').change(function() { 
         let allStudentsVal = $(this).val();
         sessionStorage.setItem("allStudentsItem", allStudentsVal);
+        document.cookie = "allStudentsCookie = " + allStudentsVal; 
     });
 
     $('#students').change(function() { 
@@ -151,14 +152,30 @@ $weekday = "Monday";
 </script> 
 
 <?php
-require('classTotals.php');
-$studentsVal= $_COOKIE['myJavascriptVar'];
-$nameExplo = explode("-",$studentsVal);
-$name = array_values($nameExplo)[0];
 
-$gradeExplo = explode($studentsVal,"-");
-$stuGrade = array_values($gradeExplo)[1];
+require('classTotals.php');
+
+if ($grades == "Special Orders") {
+    $studentsVal= $_COOKIE['allStudentsCookie'];
+    $nameExplo = explode("~",$studentsVal);
+    $name = array_values($nameExplo)[0];
+    $gradeExplo = explode("~",$studentsVal);
+    $stuGrade = array_values($gradeExplo)[1];
+ }
+ else{
+    $studentsVal= $_COOKIE['myJavascriptVar'];
+    $nameExplo = explode("~",$studentsVal);
+    $name = array_values($nameExplo)[0];
+    $gradeExplo = explode("~",$studentsVal);
+    $stuGrade = array_values($gradeExplo)[1];
+ }
+
 $date = date("Y-m-d"); 
+
+if($studentsVal != null ) {
+    $name = array_values($nameExplo)[0];
+}
+
 $currStudentTotal = $conn->query("SELECT name, price FROM allorders WHERE name ='$name' AND dates='$date'"); 
 $total = 0;
 $rows = [];
@@ -178,7 +195,7 @@ while($row = $currStudentTotal->fetch_assoc()){
 $currStuTotal = end($allTotals);
 echo '<div id="currStuTotal">',$name,' owes $'.$currStuTotal,'</div>';
 
-if($studentsVal != null && $grades == $stuGrade){
+if($studentsVal != null && $stuGrade == $grades || $studentsVal != null && $grades == "Special Orders" ){
     echo "<script type='text/javascript'>
     var x = document.getElementById('currStuTotal');
     x.style.display = 'grid';
