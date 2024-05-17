@@ -272,6 +272,13 @@ body {
 
 #menusTitle {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#updateMenuForm {
+    padding-top: 20px;
+    padding-left: 5px;
 }
 
 #udateMenuForm,#deleteMenuItem {
@@ -296,7 +303,7 @@ body {
 	background-color: var(--grey);
 }
 
-#deleteMenuItemBtn, #updateMenuBtn, #addNewMenuItemBtn, #backToHomeBtn{
+#deleteMenuItemBtn, #updateMenuBtn, #addNewMenuItemBtn, #backToHomeBtn {
     padding:8px 12px;
     color: var(--dark);
     background-color:#eeeeee;
@@ -323,6 +330,11 @@ body {
 }
 #createMenuItem {
     gap:20px;
+}
+
+#addNewMsg {
+    margin-top: 50px;
+    text-align: center;
 }
 
 #updateMenu input, #updateMenu button, #updateMenu select {
@@ -352,15 +364,26 @@ body {
     display: flex;
     justify-content:center;
     align-items:center;
+    min-width: 600px;
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
   
-.tab {
-    cursor: pointer;
+.tab{
+    background-color:var(--dark);
+    border: none;
+    color:var(--grey);
     height:50px;
     width:120px;
+    text-align: center;
+    text-decoration: none;
     font-size: 16px;
+    margin: 0px;
+    cursor: pointer;
+}
 
+.tab:hover {
+    background-color:#333333ce;
+    transition: 0.3s;
 }
