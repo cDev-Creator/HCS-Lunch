@@ -4,10 +4,14 @@ session_start();
 include("../conn.php");
 $restaurant = $_SESSION['restaurant'];
 
+
+$activeTabValue = $_SESSION['activeTabValue'];
+
 $restaurantNamesTable = $conn->query("SELECT ID, restaurantName FROM restaurants ORDER BY ID"); 
 if ($restaurantNamesTable->num_rows > 0) {
     while ($row = $restaurantNamesTable->fetch_assoc()) {
         $restaurantNames[] = $row['restaurantName'];
+		$restaurantID[] = $row['ID'];
     }
 }
 
@@ -16,6 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($restaurantNames as $index => $restaurantName) {
         if (isset($_POST['restaurant' . ($index + 1)])) {
             $activeTabValue = $restaurantName; 
+			$_SESSION['activeTabValue'] = $activeTabValue;
+			$_SESSION['restaurantID'] = $restaurantID[$index];
             break; 
         }
 
@@ -24,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if (empty($activeTabValue) && !empty($restaurantNames)) {
     $activeTabValue = $restaurantNames[0];
+	$_SESSION['restaurantID'] = $restaurantID[0];
 }
 ?>
 
@@ -40,18 +47,16 @@ if (empty($activeTabValue) && !empty($restaurantNames)) {
         <button id="addNewMenuItemBtn"><a href='createMenuItem.php'>New Menu Item</a></button>
 </div>
 
-<form action="updateMenu.php" method="post" class="tabs">
+<form action="" method="post" class="tabs">
     <?php
     // loop through restaurant names to generate submit buttons
     for ($i = 0; $i < count($restaurantNames) && $i < 5; $i++) {
         $isActive = ($restaurantNames[$i] === $activeTabValue) ? 'active' : '';
+		echo '<input type="hidden" name="ID" value="' . $restaurantID[$i] . '">';
         echo '<input type="submit" class="tab ' . $isActive . '" name="restaurant' . ($i + 1) . '" value="' . $restaurantNames[$i] . '">';
-        echo '<input type="hidden" name="ID"  value="' . $rows['ID'] . '">';
-        echo '<button type="submit" name="update" id="updateRestaurantBtn"><i class="fa-solid fa-pencil fa-lg"></i></button>';
     }
     ?>
 </form>
-
 <?php
 
 if (isset($_POST['restaurant1'])) {
@@ -87,8 +92,19 @@ echo $activeRestaurant
 ?>
 
 <table id="menuItemsTable" align="center"> 
-	<tr> 
-		<th colspan="7" ><h2 id="menusTitle" >Menu Items <?php echo $activeTabValue ?></h2></th> 
+<tr> 
+    <th colspan="7">
+        <h2 id="menusTitle">
+            Menu Items - <?php echo $activeTabValue ?>
+            <form id="updateMenuForm" action="updateRestaurant.php" method="post" style="display: inline;">
+                <input type="hidden" name="ID" value="<?php echo $_SESSION['restaurantID']; ?>">
+                <button type="submit" id="" name="update" style="background: none; border: none; cursor: pointer;">
+                    <i class="fa-solid fa-pencil fa-lg"></i>
+                </button>
+            </form>
+        </h2>
+    </th> 
+</tr>
 		</tr>
             <th> Item </th> 
             <th> Price </th> 
