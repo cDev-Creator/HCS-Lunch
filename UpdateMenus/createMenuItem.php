@@ -1,27 +1,3 @@
-<?php
-session_start();
-$restaurant = $_SESSION['restaurant'];
-$restaurantText;
-
-if($restaurant === "54pizza") {
-    $restaurantText = "54 Pizza";
-}
-else if($restaurant === "chickfila") {
-    $restaurantText = "Chick-fil-A";
-}
-else if($restaurant === "ritzys") {
-    $restaurantText = "Ritzy's";
-}
-else if($restaurant === "arbys") {
-    $restaurantText = "Arby's";
-}
-else if($restaurant === "greatharvest") {
-    $restaurantText = "Great Harvest";
-}
-echo "<h2 id='addNewMsg'>Add a new menu item to {$restaurantText}</h2>";
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
