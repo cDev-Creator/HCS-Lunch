@@ -323,12 +323,12 @@ body {
 }
 
 
-#createMenuItem, #updateMenu {
+#createMenuItem, #updateMenu, #updateRestaurants {
     display: flex;
     justify-content: center;
     margin-top: 50px;
 }
-#createMenuItem {
+#createMenuItem, #updateRestaurants {
     gap:20px;
 }
 
@@ -341,7 +341,8 @@ body {
     margin-left:15px;
 }
 
-#createMenuItem input,#updateMenu input,#updateMenu select, #submitNewItem, #updateMenuData, #cancelUpdateBtn, .dropdown {
+#createMenuItem input,#updateMenu input,#updateMenu select,
+#updateRestaurants input, #submitNewItem, #updateMenuData, #cancelUpdateBtn, .dropdown {
     padding:30px;
     padding:8px 12px;
     color: var(--dark);
