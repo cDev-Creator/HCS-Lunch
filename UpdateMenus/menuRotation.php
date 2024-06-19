@@ -54,7 +54,7 @@ if (empty($activeTabValue) && !empty($restaurantNames)) {
         $isActive = ($restaurantNames[$i] === $activeTabValue) ? 'active' : '';
 		echo '<input type="hidden" name="ID" value="' . $restaurantID[$i] . '">';
         echo '<input type="submit" class="tab ' . $isActive . '" name="restaurant' . ($i + 1) . '" value="' . $restaurantNames[$i] . '">';
-    }
+	}
     ?>
 </form>
 <?php
@@ -88,14 +88,16 @@ else if($restaurant === null){
 	$restaurant = '54pizza';
     $_SESSION['restaurant'] = '54pizza';
 }
-echo $activeRestaurant
+
 ?>
 
 <table id="menuItemsTable" align="center"> 
 <tr> 
     <th colspan="7">
         <h2 id="menusTitle">
-            Menu Items - <?php echo $activeTabValue ?>
+  
+			Menu Items 
+	
             <form id="updateMenuForm" action="updateRestaurant.php" method="post" style="display: inline;">
                 <input type="hidden" name="ID" value="<?php echo $_SESSION['restaurantID']; ?>">
                 <button type="submit" id="" name="update" style="background: none; border: none; cursor: pointer;">
